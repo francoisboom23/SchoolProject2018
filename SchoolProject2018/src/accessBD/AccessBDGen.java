@@ -1,3 +1,5 @@
+//FETCH AVANT TOUS CHANGEMENTS SOUS PEINE DE MORT!
+
 package accessBD;
 
 import java.sql.*;
