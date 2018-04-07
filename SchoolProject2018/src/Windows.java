@@ -13,9 +13,9 @@ public class Windows extends JFrame{
 	private JMenuBar menuBar;
 	private JMenu file, list, insert, delete, help;
 	private JMenuItem welcome,quit,InsertNewInstall,listInstall,deleteInstall,listPreInstall,listSoftSection,wiki,about;
-	String nomBD="dbinstallations";
-	String username="root";
-	String password="Tigrou007";
+	private String nomBD="dbinstallations";
+	private String username="root";
+	private String password="Tigrou007";
 	
 	public Windows(){
 //general
