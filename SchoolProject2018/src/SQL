@@ -19,6 +19,23 @@ Select NomPrenom from responsablereseaux; /*lister les responsables réseaux */
       select DateValidation from installation where installation.Validation like 'A prevoir';
  
  /*-----------------------------------------------------------------------------------------------------------------------*/
+ 
+ /* lister la table installation */
+ 
+ select * from installation;
+ 
+ /*-----------------------------------------------------------------------------------------------------------------------*/
+ 
+ /* Afficher les installation par le fournisseur 'Priminfo' afin de la supprimer */
+ 
+ select Designation from fournisseur;
+ select * from Installation inst
+ join software soft 
+ on inst.CodeSoftware = soft.CodeSoftware
+ join fournisseur four
+ on four.CodeFourn = soft.CodeFourn
+ where four.Designation like 'Priminfo';
+ 
   
   /* avant dernier point */
    
