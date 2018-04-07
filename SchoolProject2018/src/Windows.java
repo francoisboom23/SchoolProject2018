@@ -73,22 +73,22 @@ public class Windows extends JFrame{
 		setVisible(true);
 	}
 	
-	//close program function
+//close program function
 	class WindowClose extends WindowAdapter {
 		public void windowClosing(WindowEvent w) {
 			System.exit(0);
 		}
 	};
 	
-	 //listener menu
-		private class menuListener implements ActionListener{
-			public void actionPerformed (ActionEvent e) {
-				if(e.getSource() == quit) {
-					System.exit(0);
-				}
-				if(e.getSource() == about){
-					About f2 = new About();
-				}
+//listener menu
+	private class menuListener implements ActionListener{
+		public void actionPerformed (ActionEvent e) {
+			if(e.getSource() == quit) {
+				System.exit(0);
+			}
+			if(e.getSource() == about){
+				About f2 = new About();
 			}
 		}
+	}
 }
