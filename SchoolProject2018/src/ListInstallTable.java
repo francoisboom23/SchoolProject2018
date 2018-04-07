@@ -8,7 +8,7 @@ import accessBD.TableModelGen;
 public class ListInstallTable extends JPanel{
 	static final private String nomBD="dbinstallations";
 	static final private String username="root";
-	static final private String password="GHT1vlo9";
+	static final private String password="Tigrou007";
 	private Connection connect;
 	
 	ListInstallTable(){
