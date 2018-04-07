@@ -14,7 +14,7 @@ public class About extends JFrame{
 		setResizable(false);
 		setLayout(new GridLayout(1,1,5,5));
 //content
-		author = new JLabel("<html><body><p align=\"center\">Version 1.0<br><br>Authors:<br>Curé Vincent<br>Devilez François</p></body></html>");
+		author = new JLabel/*demander a madame*/("<html><body><p align=\"center\">Version 1.0<br><br>Authors:<br>Curé Vincent<br>Devilez François</p></body></html>");
 		author.setHorizontalAlignment(SwingConstants.CENTER);
 		add(author);
 		

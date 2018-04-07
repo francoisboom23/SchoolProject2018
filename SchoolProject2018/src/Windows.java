@@ -9,8 +9,7 @@ public class Windows extends JFrame{
 	private Container cont;
 	private JMenuBar menuBar;
 	private JMenu file, list, insert, delete, help;
-	private JMenuItem home,quit,InsertNewInstall,listInstall,deleteInstall,listPreInstall,listSoftSection,wiki,about;
-	
+	private JMenuItem welcome,quit,InsertNewInstall,listInstall,deleteInstall,listPreInstall,listSoftSection,wiki,about;
 	
 	public Windows(){
 //general
@@ -43,7 +42,7 @@ public class Windows extends JFrame{
 		menuListener menuLi = new menuListener();
 		
 //menuItem
-		home = new JMenuItem("home");
+		welcome = new JMenuItem("welcome");
 		quit = new JMenuItem("quit");
 		InsertNewInstall = new JMenuItem("Insert a new install");
 		listInstall = new JMenuItem("list all installed software");
@@ -53,7 +52,7 @@ public class Windows extends JFrame{
 		wiki = new JMenuItem("wiki");
 		about = new JMenuItem("about this program");
 		//add
-		file.add(home);
+		file.add(welcome);
 		file.addSeparator();
 		file.add(quit);
 		list.add(listInstall);
@@ -65,10 +64,11 @@ public class Windows extends JFrame{
 		help.addSeparator();
 		help.add(about);
 		//listener
-		home.addActionListener(menuLi);
+		welcome.addActionListener(menuLi);
 		quit.addActionListener(menuLi);
 		wiki.addActionListener(menuLi);
 		about.addActionListener(menuLi);
+		listInstall.addActionListener(menuLi);
 		
 //close program
 		WindowClose w = new WindowClose();
@@ -91,20 +91,28 @@ public class Windows extends JFrame{
 				System.exit(0);
 			}
 			if(e.getSource() == wiki){
-				try {
-					  Desktop desktop = java.awt.Desktop.getDesktop();
-					  URI oURL = new URI("http://www.google.com");
-					  desktop.browse(oURL);
-					} catch (Exception a) {
-					  a.printStackTrace();
+				try {//demander a madame
+					Desktop desktop = Desktop.getDesktop();
+					desktop.browse(new URI("http://www.google.com"));
+					} 
+				catch (Exception exceptWeb) {
+					exceptWeb.printStackTrace();
 					}
 			}
 			if(e.getSource() == about){
 				About f1 = new About();
 			}
-			if(e.getSource() == home){
+			if(e.getSource() == welcome){
 				Windows.this.dispose();
-				Home f1 = new Home();
+				Home f2 = new Home();
+			}
+			if(e.getSource() == listInstall){
+				//change le panel par un autre
+				cont.removeAll();
+				ListInstallTable listinstalltable = new ListInstallTable ();
+				cont.add(listinstalltable);
+				cont.repaint();
+				Windows.this.setVisible(true);
 			}
 		}
 	}
