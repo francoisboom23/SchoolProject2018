@@ -1,4 +1,7 @@
 import javax.swing.*;
+
+import accessBD.AccessBDGen;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.net.*;
@@ -10,6 +13,9 @@ public class Windows extends JFrame{
 	private JMenuBar menuBar;
 	private JMenu file, list, insert, delete, help;
 	private JMenuItem welcome,quit,InsertNewInstall,listInstall,deleteInstall,listPreInstall,listSoftSection,wiki,about;
+	String nomBD="dbinstallations";
+	String username="root";
+	String password="Tigrou007";
 	
 	public Windows(){
 //general
@@ -117,3 +123,11 @@ public class Windows extends JFrame{
 		}
 	}
 }
+
+
+//try {
+//	connect = AccessBDGen.connecter(nomBD, username, password);
+//}
+//catch(SQLException e) {
+//	
+//}
