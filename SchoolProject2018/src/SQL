@@ -19,7 +19,7 @@ Select NomPrenom from responsablereseaux; /*lister les responsables réseaux */
       select DateValidation from installation where installation.Validation like 'A prevoir';
  
  /*-----------------------------------------------------------------------------------------------------------------------*/
- 
+ a
  /* lister la table installation */
  
  select * from installation;
