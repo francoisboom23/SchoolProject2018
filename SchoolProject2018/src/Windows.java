@@ -27,9 +27,10 @@ public class Windows extends JFrame{
 		
 		try {
 			connect = AccessBDGen.connecter(nomBD, username, password);
+			System.out.println("connecté");
 		}
 		catch(SQLException e) {
-			
+			System.out.println("non connecté");
 		}
 		
 //menubar
