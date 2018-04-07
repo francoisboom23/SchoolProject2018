@@ -16,5 +16,34 @@ Select NomPrenom from responsablereseaux; /*lister les responsables réseaux */
    
    TROUVABLE EN FAISANT select * from installation;
    */
+      select DateValidation from installation where installation.Validation like 'A prevoir';
+ 
+ /*-----------------------------------------------------------------------------------------------------------------------*/
+  
+  /* avant dernier point */
    
-   select DateValidation from installation where installation.Validation like 'A prevoir';
+   select * from software;
+      select * from typepc;
+
+   select CodeSoftware from softwarepreinstalle soft join typepc pc where soft.IdTypePC = pc.IdTypePC and pc.Description like'Athlon II X3';
+   
+   select Nom 
+   from software soft 
+   join softwarepreinstalle softpre 
+   on soft.CodeSoftware = softpre.CodeSoftware
+   join typepc pc 
+   on softpre.IdTypePC = pc.IdTypePC
+   where pc.Description like 'Celeron 530'; /* JCOMBOBOX DES TYPES DE PC */
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------*/   
+/* dernier point , JCOMBOB POUR LES SECTIONS */
+
+select * from section ;
+
+select Nom from software soft 
+join utilisationsoftware uti 
+on soft.CodeSoftware = uti.CodeSoftware
+join anneeetude annee
+on uti.IdAnneeEtude = annee.IdAnneeEtude
+join section sect
+on annee.CodeSection = sect.CodeSection
+where sect.Libelle like 'Informatique de gestion';
