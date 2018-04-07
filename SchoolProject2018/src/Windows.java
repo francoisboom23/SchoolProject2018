@@ -6,8 +6,8 @@ import java.awt.event.*;
 public class Windows extends JFrame{
 	private Container cont;
 	private JMenuBar menuBar;
-	private JMenu home, list, insert, delete, help;
-	private JMenuItem InsertNewInstall, menuItem2, wiki, about;
+	private JMenu file, list, insert, delete, help;
+	private JMenuItem home,quit,InsertNewInstall,listInstall,deleteInstall,listPreInstall,listSoftSection,wiki,about;
 	
 	public Windows(){
 		//generale
@@ -20,21 +20,42 @@ public class Windows extends JFrame{
 		//menubar
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-		home = new JMenu("home");
+		file = new JMenu("file");
 		list = new JMenu("list");
 		insert = new JMenu("insert");
 		delete = new JMenu("delete");
 		help = new JMenu("help");
-		home.setMnemonic('H');
+		file.setMnemonic('F');
 		list.setMnemonic('L');
 		insert.setMnemonic('I');
 		delete.setMnemonic('D');
 		help.setMnemonic('H');
-		menuBar.add(home);
+		menuBar.add(file);
 		menuBar.add(list);
 		menuBar.add(insert);
 		menuBar.add(delete);
 		menuBar.add(help);
+		
+		//menuItem
+		home = new JMenuItem("home");
+		quit = new JMenuItem("quit");
+		InsertNewInstall = new JMenuItem("Insert a new install");
+		listInstall = new JMenuItem("list all installed software");
+		deleteInstall = new JMenuItem("delete an install");
+		listPreInstall = new JMenuItem("list pre-installed software");
+		listSoftSection = new JMenuItem("list installed software for a specific section");
+		wiki = new JMenuItem("wiki");
+		about = new JMenuItem("about");
+		
+		file.add(home);
+		file.add(quit);
+		list.add(listInstall);
+		list.add(listPreInstall);
+		list.add(listSoftSection);
+		insert.add(InsertNewInstall);
+		delete.add(deleteInstall);
+		help.add(wiki);
+		help.add(about);
 		
 		//close program
 		WindowClose w = new WindowClose();
@@ -43,7 +64,7 @@ public class Windows extends JFrame{
 		setVisible(true);
 	}
 	
-	//close program
+	//close program function
 	class WindowClose extends WindowAdapter {
 		public void windowClosing(WindowEvent w) {
 			System.exit(0);
