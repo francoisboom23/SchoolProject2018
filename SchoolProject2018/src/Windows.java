@@ -1,8 +1,9 @@
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.*;
+
 //OS, software, responsable réseau
+
 public class Windows extends JFrame{
 	private Container cont;
 	private JMenuBar menuBar;
@@ -10,14 +11,14 @@ public class Windows extends JFrame{
 	private JMenuItem home,quit,InsertNewInstall,listInstall,deleteInstall,listPreInstall,listSoftSection,wiki,about;
 	
 	public Windows(){
-		//generale
-		super("Super Calculator 2030");
+//general
+		super("IESN Calculator Student Pro DVD Architect 2048");
 		cont = getContentPane();
 		setBounds(710,290,500,500);
 		setResizable(false);
-		cont.setLayout(null);
+		setLayout(null);
 		
-		//menubar
+//menubar
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		file = new JMenu("file");
@@ -25,6 +26,7 @@ public class Windows extends JFrame{
 		insert = new JMenu("insert");
 		delete = new JMenu("delete");
 		help = new JMenu("help");
+		//add
 		file.setMnemonic('F');
 		list.setMnemonic('L');
 		insert.setMnemonic('I');
@@ -35,8 +37,10 @@ public class Windows extends JFrame{
 		menuBar.add(insert);
 		menuBar.add(delete);
 		menuBar.add(help);
+		//listener
+		menuListener menuLi = new menuListener();
 		
-		//menuItem
+//menuItem
 		home = new JMenuItem("home");
 		quit = new JMenuItem("quit");
 		InsertNewInstall = new JMenuItem("Insert a new install");
@@ -45,9 +49,10 @@ public class Windows extends JFrame{
 		listPreInstall = new JMenuItem("list pre-installed software");
 		listSoftSection = new JMenuItem("list installed software for a specific section");
 		wiki = new JMenuItem("wiki");
-		about = new JMenuItem("about");
-		
+		about = new JMenuItem("about this program");
+		//add
 		file.add(home);
+		file.addSeparator();
 		file.add(quit);
 		list.add(listInstall);
 		list.add(listPreInstall);
@@ -55,9 +60,13 @@ public class Windows extends JFrame{
 		insert.add(InsertNewInstall);
 		delete.add(deleteInstall);
 		help.add(wiki);
+		help.addSeparator();
 		help.add(about);
+		//listener
+		quit.addActionListener(menuLi);
+		about.addActionListener(menuLi);
 		
-		//close program
+//close program
 		WindowClose w = new WindowClose();
 		this.addWindowListener(w);
 		
@@ -70,4 +79,16 @@ public class Windows extends JFrame{
 			System.exit(0);
 		}
 	};
+	
+	 //listener menu
+		private class menuListener implements ActionListener{
+			public void actionPerformed (ActionEvent e) {
+				if(e.getSource() == quit) {
+					System.exit(0);
+				}
+				if(e.getSource() == about){
+					About f2 = new About();
+				}
+			}
+		}
 }
