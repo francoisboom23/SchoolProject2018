@@ -12,10 +12,6 @@ public class Windows extends JFrame{
 	private JMenuBar menuBar;
 	private JMenu file, list, insert, delete, help;
 	private JMenuItem welcome,quit,InsertNewInstall,listInstall,deleteInstall,listPreInstall,listSoftSection,wiki,about;
-	private String nomBD="dbinstallations";
-	private String username="root";
-	private String password="Tigrou007";
-	private Connection connect;
 	
 	public Windows(){
 //general
@@ -24,14 +20,6 @@ public class Windows extends JFrame{
 		setBounds(710,290,500,500);
 		setResizable(false);
 		setLayout(null);
-		
-		try {
-			connect = AccessBDGen.connecter(nomBD, username, password);
-			System.out.println("connecté");
-		}
-		catch(SQLException e) {
-			System.out.println("non connecté");
-		}
 		
 //menubar
 		menuBar = new JMenuBar();
