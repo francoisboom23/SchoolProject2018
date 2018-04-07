@@ -1,10 +1,9 @@
 import javax.swing.*;
-
-import accessBD.AccessBDGen;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.net.*;
+import java.sql.*;
+import accessBD.*;
 
 //OS, software, responsable réseau
 
@@ -13,9 +12,10 @@ public class Windows extends JFrame{
 	private JMenuBar menuBar;
 	private JMenu file, list, insert, delete, help;
 	private JMenuItem welcome,quit,InsertNewInstall,listInstall,deleteInstall,listPreInstall,listSoftSection,wiki,about;
-	String nomBD="dbinstallations";
-	String username="root";
-	String password="Tigrou007";
+	private String nomBD="dbinstallations";
+	private String username="root";
+	private String password="Tigrou007";
+	private Connection connect;
 	
 	public Windows(){
 //general
@@ -24,6 +24,13 @@ public class Windows extends JFrame{
 		setBounds(710,290,500,500);
 		setResizable(false);
 		setLayout(null);
+		
+		try {
+			connect = AccessBDGen.connecter(nomBD, username, password);
+		}
+		catch(SQLException e) {
+			
+		}
 		
 //menubar
 		menuBar = new JMenuBar();
@@ -123,11 +130,3 @@ public class Windows extends JFrame{
 		}
 	}
 }
-
-
-//try {
-//	connect = AccessBDGen.connecter(nomBD, username, password);
-//}
-//catch(SQLException e) {
-//	
-//}
