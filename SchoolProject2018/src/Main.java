@@ -2,7 +2,7 @@
 
 public class Main {
 	public static void main(String[] args) {
-		Windows f1 = new Windows();
+		Home f1 = new Home();
 		System.out.println("hourra ca marche");
 		System.out.println("plus de password");
 	}
