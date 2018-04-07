@@ -2,31 +2,39 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.*;
-
+//OS, software, responsable réseau
 public class Windows extends JFrame{
 	private Container cont;
 	private JMenuBar menuBar;
-	private JMenu menu1, menu2, menu3;
-	private JMenuItem menuItem1, menuItem2, menuItem3;
+	private JMenu home, list, insert, delete, help;
+	private JMenuItem InsertNewInstall, menuItem2, wiki, about;
 	
 	public Windows(){
 		//generale
 		super("Super Calculator 2030");
+		cont = getContentPane();
 		setBounds(710,290,500,500);
 		setResizable(false);
+		cont.setLayout(null);
 		
-		//menu
+		//menubar
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-		menuItem1 = new JMenu("application");
-		menuItem2 = new JMenu("Etudiant");
-		menuItem3 = new JMenu("Informations");
-		menuItem1.setMnemonic('A');
-		menuItem2.setMnemonic('E');
-		menuItem3.setMnemonic('I');
-		menuBar.add(menuItem1);
-		menuBar.add(menuItem2);
-		menuBar.add(menuItem3);
+		home = new JMenu("home");
+		list = new JMenu("list");
+		insert = new JMenu("insert");
+		delete = new JMenu("delete");
+		help = new JMenu("help");
+		home.setMnemonic('H');
+		list.setMnemonic('L');
+		insert.setMnemonic('I');
+		delete.setMnemonic('D');
+		help.setMnemonic('H');
+		menuBar.add(home);
+		menuBar.add(list);
+		menuBar.add(insert);
+		menuBar.add(delete);
+		menuBar.add(help);
 		
 		//close program
 		WindowClose w = new WindowClose();
