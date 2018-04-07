@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.net.*;
 
 //OS, software, responsable réseau
 
@@ -9,6 +10,7 @@ public class Windows extends JFrame{
 	private JMenuBar menuBar;
 	private JMenu file, list, insert, delete, help;
 	private JMenuItem home,quit,InsertNewInstall,listInstall,deleteInstall,listPreInstall,listSoftSection,wiki,about;
+	
 	
 	public Windows(){
 //general
@@ -63,7 +65,9 @@ public class Windows extends JFrame{
 		help.addSeparator();
 		help.add(about);
 		//listener
+		home.addActionListener(menuLi);
 		quit.addActionListener(menuLi);
+		wiki.addActionListener(menuLi);
 		about.addActionListener(menuLi);
 		
 //close program
@@ -86,8 +90,21 @@ public class Windows extends JFrame{
 			if(e.getSource() == quit) {
 				System.exit(0);
 			}
+			if(e.getSource() == wiki){
+				try {
+					  Desktop desktop = java.awt.Desktop.getDesktop();
+					  URI oURL = new URI("http://www.google.com");
+					  desktop.browse(oURL);
+					} catch (Exception a) {
+					  a.printStackTrace();
+					}
+			}
 			if(e.getSource() == about){
-				About f2 = new About();
+				About f1 = new About();
+			}
+			if(e.getSource() == home){
+				Windows.this.dispose();
+				Home f1 = new Home();
 			}
 		}
 	}
