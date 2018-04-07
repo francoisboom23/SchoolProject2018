@@ -1,1 +1,20 @@
+use dbinstallations;
 
+select * from installation;
+
+/* POUR LE PREMIER POINT A AFFICHER EN JCOMBOBOX*/
+
+select CodeSoftware from installation; /*lister les codes software pour que l'utilisateurs choisisses*/
+select CodeOS from installation; /*lister les codes des os pour l'utilisateurs */
+Select NomPrenom from responsablereseaux; /*lister les responsables réseaux */
+
+/* VALEUR DES CHAMPS VALIDATIONS */
+
+/* 1) A prevoir
+   2) Terminee
+   3) En cours 
+   
+   TROUVABLE EN FAISANT select * from installation;
+   */
+   
+   select DateValidation from installation where installation.Validation like 'A prevoir';
