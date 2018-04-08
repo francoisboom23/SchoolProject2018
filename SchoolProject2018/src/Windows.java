@@ -12,6 +12,10 @@ public class Windows extends JFrame{
 	private JMenuBar menuBar;
 	private JMenu file, list, insert, delete, help;
 	private JMenuItem welcome,quit,InsertNewInstall,listInstall,deleteInstall,listPreInstall,listSoftSection,wiki,about;
+	private Connection connect;
+	static final private String nomBD="dbinstallations";
+	static final private String username="root";
+	static final private String password="Tigrou007";
 	
 	public Windows(){
 //general
@@ -20,6 +24,9 @@ public class Windows extends JFrame{
 		setBounds(710,290,500,500);
 		setResizable(false);
 		setLayout(null);
+		
+//connection SQL
+		connection();
 		
 //menubar
 		menuBar = new JMenuBar();
@@ -72,7 +79,7 @@ public class Windows extends JFrame{
 		about.addActionListener(menuLi);
 		listInstall.addActionListener(menuLi);
 		
-//close program
+//close program & SQL connection
 		WindowClose w = new WindowClose();
 		this.addWindowListener(w);
 		
@@ -82,6 +89,10 @@ public class Windows extends JFrame{
 //close program function
 	class WindowClose extends WindowAdapter {
 		public void windowClosing(WindowEvent w) {
+			try {
+				connect.close();
+			}
+			catch(SQLException e) { }
 			System.exit(0);
 		}
 	};
@@ -111,11 +122,17 @@ public class Windows extends JFrame{
 			if(e.getSource() == listInstall){
 				//change le panel par un autre
 				cont.removeAll();
-				ListInstallTable listinstalltable = new ListInstallTable ();
+				ListInstallTable listinstalltable = new ListInstallTable (connect);
 				cont.add(listinstalltable);
 				cont.repaint();
 				Windows.this.setVisible(true);
 			}
 		}
+	}
+	private void connection() {
+		try {
+			connect = AccessBDGen.connecter(nomBD, username, password);
+		}
+		catch(SQLException e) { }
 	}
 }
