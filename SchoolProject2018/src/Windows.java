@@ -133,8 +133,8 @@ public class Windows extends JFrame{
 			if(e.getSource() == listPreInstall){
 				//change le panel par un autre
 				cont.removeAll();
-				ListPreInstalledSoft listPreINstall = new ListPreInstalledSoft (connect);
-				cont.add(listPreINstall);
+				PanelPreInstalledSoft PanelInstalled = new PanelPreInstalledSoft (connect);
+				cont.add(PanelInstalled);
 				cont.repaint();
 				Windows.this.setVisible(true);
 			}

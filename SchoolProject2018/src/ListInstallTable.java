@@ -22,5 +22,6 @@ public class ListInstallTable extends JPanel{
 		 	this.add(scroll);
 			}
 		catch(SQLException e) {	}
+		setVisible(true);
 	}
 }

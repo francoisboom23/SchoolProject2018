@@ -13,20 +13,18 @@ public class ListPreInstalledSoft extends JPanel{
 	private JComboBox combox;
 	private JButton refresh;
 	private String sqlRequest;
-
+	
 	public ListPreInstalledSoft(Connection connect) {
 //generale
 		setBounds(0,0,500,500);
-
 //controls
 		PreInstalledSoftLabel = new JLabel("PC type:");
 		PreInstalledSoftLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		combox = new JComboBox();
 		refresh = new JButton("refresh");
-		this.add(PreInstalledSoftLabel);
-		this.add(combox);
-		this.add(refresh);
-		TablePreInstalledSoft listinstalltable = new TablePreInstalledSoft (connect,sqlRequest);
+		add(PreInstalledSoftLabel);
+		add(combox);
+		add(refresh);
 //listener controls
 		Butlistener a = new Butlistener();
 		refresh.addActionListener(a);
@@ -53,5 +51,8 @@ public class ListPreInstalledSoft extends JPanel{
 				System.out.println(sqlRequest);
 			}
 		}
+	}
+	public String getSQL() {
+		return sqlRequest;
 	}
 }
