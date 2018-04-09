@@ -10,7 +10,7 @@ public class ListPreInstalledSoftBySection extends JPanel{
 	
 	private JLabel PreInstalledSoftBySection;
 	private JComboBox Combox;
-	private JButton AfficherList;
+	private JCheckBox AfficherList;
 	private String Section;
 	private String SqlRequest;
 	private JTable tableau2;
@@ -21,15 +21,15 @@ public class ListPreInstalledSoftBySection extends JPanel{
 		PreInstalledSoftBySection = new JLabel ("Section :");
 		PreInstalledSoftBySection.setHorizontalAlignment(SwingConstants.RIGHT);
 		Combox = new JComboBox();
-		AfficherList= new JButton ("Afficher la table :");
+		AfficherList= new JCheckBox ("Afficher la table :");
 		this.add(PreInstalledSoftBySection);
 		this.add(Combox);
 		this.add(AfficherList);
 		
 
 
-		MyItemlist a = new MyItemlist();
-		AfficherList.addItemListener(a);
+		ItemList e = new ItemList();
+		AfficherList.addItemListener(e);
 		//SQL database
 				fillCombobox(connect);
 				AfficherList(connect);
@@ -37,7 +37,7 @@ public class ListPreInstalledSoftBySection extends JPanel{
 		//fill combobox
 			private void fillCombobox(Connection connect) {
 				try {
-					PreparedStatement prepStat = connect.prepareStatement("select Libelle from section;");
+					PreparedStatement prepStat = connect.prepareStatement("SELECT Libelle FROM Section;");
 					TableModelGen table2 = AccessBDGen.creerTableModel(prepStat);
 
 					for(int i=0; i <= table2.getRowCount()-1; i++) {
@@ -51,6 +51,7 @@ public class ListPreInstalledSoftBySection extends JPanel{
 			void AfficherList(Connection connect){
 
 				setBounds(10,10,500,500);
+				
 				
 				try {
 					PreparedStatement prepStat = connect.prepareStatement("select Nom from software soft \r\n" + 
@@ -72,27 +73,30 @@ public class ListPreInstalledSoftBySection extends JPanel{
 				
 				
 				catch(SQLException e) {	}
+			}
+				
+				private class ItemList implements ItemListener{
+					
+				
+					public void itemStateChanged(ItemEvent e){
+						if(e.getSource()==AfficherList){
+							
+							if(e.getStateChange()==ItemEvent.SELECTED){
+								tableau2.setVisible(true);
+							}
+								else{
+									tableau2.setVisible(false);
+								}
+						}
 
 			}
-			
-			private class MyItemlist implements ItemListener{
-				
-				public void itemStateChanged(ItemEvent e){
-					if(e.getSource()==AfficherList){
-						
-						if(e.getStateChange()==ItemEvent.SELECTED){
-							tableau2.setVisible(true);
-						}
-							else{
-							tableau2.setVisible(false);
-							}
 				}
-		}
+}
+			
+			
 		
 
-			}
-}
-/*aled*/
+			
 			
 			
 
