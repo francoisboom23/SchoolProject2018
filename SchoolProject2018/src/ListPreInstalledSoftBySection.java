@@ -54,14 +54,7 @@ public class ListPreInstalledSoftBySection extends JPanel{
 				
 				
 				try {
-					PreparedStatement prepStat = connect.prepareStatement("select Nom from software soft \r\n" + 
-							"join utilisationsoftware uti \r\n" + 
-							"on soft.CodeSoftware = uti.CodeSoftware\r\n" + 
-							"join anneeetude annee\r\n" + 
-							"on uti.IdAnneeEtude = annee.IdAnneeEtude\r\n" + 
-							"join section sect\r\n" + 
-							"on annee.CodeSection = sect.CodeSection\r\n" + 
-							"where sect.Libelle like 'Informatique de gestion';");
+					PreparedStatement prepStat = connect.prepareStatement("SELECT Nom FROM Software Soft JOIN UtilisationSoftware Uti ON Soft.CodeSoftware = Uti.CodeSoftware JOIN AnneeEtude Annee ON Uti.IdAnneeEtude = Annee.IdAnneeEtude JOIN Section Sect ON Annee.CodeSection = Sect.CodeSection WHERE Sect.Libelle LIKE 'Informatique de gestion';");
 					TableModelGen table = AccessBDGen.creerTableModel(prepStat);
 				 	this.tableau2 = new JTable(table);
 				 	tableau2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
