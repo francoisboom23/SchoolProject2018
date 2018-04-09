@@ -1,5 +1,6 @@
 //FETCH AVANT TOUS CHANGEMENTS SOUS PEINE DE MORT!
 
+import java.awt.Frame;
 import java.awt.event.*;
 import java.sql.*;
 import javax.swing.*;
@@ -14,10 +15,13 @@ public class ListPreInstalledSoft extends JPanel {
 	private JButton refresh;
 	private String sqlRequest="select DISTINCT Nom from Software soft join SoftwarePreinstalle softpr on soft.CodeSoftware = softpr.CodeSoftware join TypePC pc on softpr.IdTypePC = pc.IdTypePC;";
 	private JTable tableau2;
+	private JScrollPane scroll;
+	private Connection connect;
 	
 	public ListPreInstalledSoft(Connection connect) {
 //generale
 		setBounds(0,0,500,500);
+		this.connect=connect;
 //controls
 		PreInstalledSoftLabel = new JLabel("PC type:");
 		PreInstalledSoftLabel.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -31,7 +35,7 @@ public class ListPreInstalledSoft extends JPanel {
 		refresh.addActionListener(a);
 //SQL database
 		fillCombobox(connect);
-		DisplayList(connect);
+		DisplayList();
 }
 //fill combobox
 	private void fillCombobox(Connection connect) {
@@ -46,7 +50,7 @@ public class ListPreInstalledSoft extends JPanel {
 		catch(SQLException e) {	}		
 	}
 //display table
-	void DisplayList(Connection connect){
+	private void DisplayList(){
 		setBounds(0,0,500,500);
 		try {
 			PreparedStatement prepStat = connect.prepareStatement(sqlRequest);
@@ -54,18 +58,18 @@ public class ListPreInstalledSoft extends JPanel {
 			tableau2 = new JTable(table);
 		 	tableau2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		 	JScrollPane scroll = new JScrollPane (tableau2) ;
-		 	this.add(scroll);
-		 	tableau2.setVisible(false);
+		 	add(scroll);
+		 	//tableau2.setVisible(false);
+		 	
 			}	
 		catch(SQLException e) {	}
 	}
-	//listener refresh button
+//listener refresh button
 		private class Butlistener implements ActionListener{
 			public void actionPerformed( ActionEvent a){
 				if(a.getSource()==refresh){
 					sqlRequest = "select Nom from Software soft join SoftwarePreinstalle softpr on soft.CodeSoftware = softpr.CodeSoftware join TypePC pc on softpr.IdTypePC = pc.IdTypePC where pc.Description like '"+(String)combox.getSelectedItem()+"';";
 					System.out.println(sqlRequest);
-					tableau2.setVisible(true);			
 				}
 			}
 		}
