@@ -6,7 +6,7 @@ select * from installation;
 
 select CodeSoftware from installation; /*lister les codes software pour que l'utilisateurs choisisses*/
 select CodeOS from installation; /*lister les codes des os pour l'utilisateurs */
-Select NomPrenom from responsablereseaux; /*lister les responsables réseaux */
+Select NomPrenom from responsablereseaux; /*lister les responsables rï¿½seaux */
 
 /* VALEUR DES CHAMPS VALIDATIONS */
 
@@ -39,6 +39,7 @@ Select NomPrenom from responsablereseaux; /*lister les responsables réseaux */
   
   /* avant dernier point */
    
+SELECT Description FROM dbinstallations.TypePC;
 
    select Nom 
    from software soft 

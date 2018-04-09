@@ -1,6 +1,8 @@
 eclipse.preferences.version=1
 encoding//src/About.java=UTF-8
+encoding//src/ListPreInstalledSoft.java=UTF-8
 encoding//src/Main.java=UTF-8
+encoding//src/SQL=UTF-8
 encoding//src/Windows.java=UTF-8
 encoding//src/accessBD/AccessBDGen.java=UTF-8
 encoding//src/accessBD/TableModelGen.java=UTF-8
