@@ -50,7 +50,7 @@ public class ListPreInstalledSoftBySection extends JPanel{
 			
 			void AfficherList(Connection connect){
 
-				setBounds(10,10,500,500);
+				setBounds(0,0,500,500);
 				
 				
 				try {
