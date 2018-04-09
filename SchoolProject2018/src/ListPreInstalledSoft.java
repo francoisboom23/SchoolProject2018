@@ -55,10 +55,9 @@ public class ListPreInstalledSoft extends JPanel {
 		 	tableau2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		 	JScrollPane scroll = new JScrollPane (tableau2) ;
 		 	this.add(scroll);
-		 	tableau2.setVisible(true);
+		 	tableau2.setVisible(false);
 			}	
 		catch(SQLException e) {	}
-		setVisible(true);
 	}
 	//listener refresh button
 		private class Butlistener implements ActionListener{
@@ -66,7 +65,7 @@ public class ListPreInstalledSoft extends JPanel {
 				if(a.getSource()==refresh){
 					sqlRequest = "select Nom from Software soft join SoftwarePreinstalle softpr on soft.CodeSoftware = softpr.CodeSoftware join TypePC pc on softpr.IdTypePC = pc.IdTypePC where pc.Description like '"+(String)combox.getSelectedItem()+"';";
 					System.out.println(sqlRequest);
-//					tableau2.setVisible(true);			
+					tableau2.setVisible(true);			
 				}
 			}
 		}
