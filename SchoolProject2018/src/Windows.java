@@ -80,6 +80,7 @@ public class Windows extends JFrame{
 		wiki.addActionListener(menuLi);
 		about.addActionListener(menuLi);
 		listInstall.addActionListener(menuLi);
+		listPreInstall.addActionListener(menuLi);
 		
 //close program & SQL connection
 		WindowClose w = new WindowClose();
@@ -129,6 +130,14 @@ public class Windows extends JFrame{
 				cont.repaint();
 				Windows.this.setVisible(true);
 			}
+			if(e.getSource() == listPreInstall){
+				//change le panel par un autre
+				cont.removeAll();
+				ListPreInstalledSoft listPreINstall = new ListPreInstalledSoft (connect);
+				cont.add(listPreINstall);
+				cont.repaint();
+				Windows.this.setVisible(true);
+			}
 		}
 	}
 //connection to DB
@@ -136,6 +145,8 @@ public class Windows extends JFrame{
 		try {
 			connect = AccessBDGen.connecter(nomBD, username, password);
 		}
-		catch(SQLException e) { }
+		catch(SQLException e) {
+			JOptionPane.showMessageDialog(null, "<html><body><p align=\\\"center\\\">Impossible to connect to DataBase<br>Username or password incorrect</p></body></html>", "failed to connect to DataBase", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }
