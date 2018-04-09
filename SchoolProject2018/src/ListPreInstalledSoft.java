@@ -8,7 +8,7 @@ import javax.swing.*;
 import accessBD.AccessBDGen;
 import accessBD.TableModelGen;
 
-public class ListPreInstalledSoft extends JPanel{
+public class ListPreInstalledSoft extends JPanel {
 	
 	private JLabel PreInstalledSoftLabel;
 	private JComboBox combox;
