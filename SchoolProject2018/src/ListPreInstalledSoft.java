@@ -12,7 +12,8 @@ public class ListPreInstalledSoft extends JPanel {
 	private JLabel PreInstalledSoftLabel;
 	private JComboBox combox;
 	private JButton refresh;
-	private String sqlRequest;
+	private String sqlRequest="select DISTINCT Nom from Software soft join SoftwarePreinstalle softpr on soft.CodeSoftware = softpr.CodeSoftware join TypePC pc on softpr.IdTypePC = pc.IdTypePC;";
+	private JTable tableau2;
 	
 	public ListPreInstalledSoft(Connection connect) {
 //generale
@@ -30,6 +31,7 @@ public class ListPreInstalledSoft extends JPanel {
 		refresh.addActionListener(a);
 //SQL database
 		fillCombobox(connect);
+		DisplayList(connect);
 }
 //fill combobox
 	private void fillCombobox(Connection connect) {
@@ -43,16 +45,29 @@ public class ListPreInstalledSoft extends JPanel {
 			}
 		catch(SQLException e) {	}		
 	}
-//listener refresh button
-	private class Butlistener implements ActionListener{
-		public void actionPerformed( ActionEvent a){
-			if(a.getSource()==refresh){
-				sqlRequest = "select Nom from Software soft join SoftwarePreinstalle softpr on soft.CodeSoftware = softpre.CodeSoftware join TypePC pc on softpre.IdTypePC = pc.IdTypePC where pc.Description like '"+(String)combox.getSelectedItem()+"';";
-				System.out.println(sqlRequest);
+//display table
+	void DisplayList(Connection connect){
+		setBounds(0,0,500,500);
+		try {
+			PreparedStatement prepStat = connect.prepareStatement(sqlRequest);
+			TableModelGen table = AccessBDGen.creerTableModel(prepStat);
+			tableau2 = new JTable(table);
+		 	tableau2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		 	JScrollPane scroll = new JScrollPane (tableau2) ;
+		 	this.add(scroll);
+		 	tableau2.setVisible(true);
+			}	
+		catch(SQLException e) {	}
+		setVisible(true);
+	}
+	//listener refresh button
+		private class Butlistener implements ActionListener{
+			public void actionPerformed( ActionEvent a){
+				if(a.getSource()==refresh){
+					sqlRequest = "select Nom from Software soft join SoftwarePreinstalle softpr on soft.CodeSoftware = softpr.CodeSoftware join TypePC pc on softpr.IdTypePC = pc.IdTypePC where pc.Description like '"+(String)combox.getSelectedItem()+"';";
+					System.out.println(sqlRequest);
+//					tableau2.setVisible(true);			
+				}
 			}
 		}
-	}
-	public String getSQL() {
-		return sqlRequest;
-	}
 }
