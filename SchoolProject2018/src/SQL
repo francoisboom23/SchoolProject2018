@@ -39,11 +39,7 @@ Select NomPrenom from responsablereseaux; /*lister les responsables réseaux */
   
   /* avant dernier point */
    
-   select * from software;
-      select * from typepc;
 
-   select CodeSoftware from softwarepreinstalle soft join typepc pc where soft.IdTypePC = pc.IdTypePC and pc.Description like'Athlon II X3';
-   
    select Nom 
    from software soft 
    join softwarepreinstalle softpre 
@@ -54,7 +50,6 @@ Select NomPrenom from responsablereseaux; /*lister les responsables réseaux */
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------*/   
 /* dernier point , JCOMBOB POUR LES SECTIONS */
 
-select * from section ;
 
 select Nom from software soft 
 join utilisationsoftware uti 
