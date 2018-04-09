@@ -1,3 +1,5 @@
+//FETCH AVANT TOUS CHANGEMENTS SOUS PEINE DE MORT!
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -86,7 +88,7 @@ public class Windows extends JFrame{
 		setVisible(true);
 	}
 	
-//close program function
+//close program
 	class WindowClose extends WindowAdapter {
 		public void windowClosing(WindowEvent w) {
 			try {
@@ -129,6 +131,7 @@ public class Windows extends JFrame{
 			}
 		}
 	}
+//connection to DB
 	private void connection() {
 		try {
 			connect = AccessBDGen.connecter(nomBD, username, password);
