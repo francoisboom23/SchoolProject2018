@@ -1,6 +1,5 @@
 //FETCH AVANT TOUS CHANGEMENTS SOUS PEINE DE MORT!
 
-import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 import javax.swing.*;
@@ -8,11 +7,12 @@ import javax.swing.*;
 import accessBD.AccessBDGen;
 import accessBD.TableModelGen;
 
-public class ListInstallTable extends JPanel{
+public class TablePreInstalledSoft extends JPanel{
 	
-	ListInstallTable(Connection connect){
+	private JLabel lol;
+	
+	TablePreInstalledSoft(Connection connect,String sqlRequest){
 		setBounds(0,0,500,500);
-		
 		try {
 			PreparedStatement prepStat = connect.prepareStatement("select * from Installation;");
 			TableModelGen table = AccessBDGen.creerTableModel(prepStat);
@@ -22,6 +22,8 @@ public class ListInstallTable extends JPanel{
 		 	this.add(scroll);
 			}
 		catch(SQLException e) {	}
-		setVisible(true);
+//		JLabel lol = new JLabel("lol");
+//		add(lol);
+//		setVisible(true);
 	}
 }
