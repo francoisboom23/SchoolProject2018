@@ -42,12 +42,12 @@ Select NomPrenom from responsablereseaux; /*lister les responsables r�seaux */
 SELECT Description FROM dbinstallations.TypePC;
 
    select Nom 
-   from software soft 
-   join softwarepreinstalle softpre 
+   from Software soft 
+   join SoftwarePreinstalle softpre 
    on soft.CodeSoftware = softpre.CodeSoftware
-   join typepc pc 
+   join TypePC pc 
    on softpre.IdTypePC = pc.IdTypePC
-   where pc.Description like 'Celeron 530'; /* JCOMBOBOX DES TYPES DE PC */
+   where pc.Description like 'Celeron 530'; /* JCOMBOBOX DES TYPES DE PC */ ->>>>>> Faire attention a la case, chez moi c'est important alors que chez toi non
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------*/   
 /* dernier point , JCOMBOB POUR LES SECTIONS */
 

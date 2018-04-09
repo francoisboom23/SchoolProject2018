@@ -12,37 +12,47 @@ public class ListPreInstalledSoft extends JPanel{
 	
 	private JLabel PreInstalledSoftLabel;
 	private JComboBox combox;
-	private String[] table= {"lol","mdr","test"};
-	
+	private JButton refresh;
+	private String pcSelect;
+	private String sqlRequest;
+
 	public ListPreInstalledSoft(Connection connect) {
+//generale
 		setBounds(0,0,500,500);
-		
+
+//controls
+		PreInstalledSoftLabel = new JLabel("PC type:");
+		PreInstalledSoftLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		combox = new JComboBox();
+		refresh = new JButton("refresh");
+		this.add(PreInstalledSoftLabel);
+		this.add(combox);
+		this.add(refresh);
+//listener controls
+		Butlistener a = new Butlistener();
+		refresh.addActionListener(a);
+//SQL database
+		fillCombobox(connect);
+}
+//fill combobox
+	private void fillCombobox(Connection connect) {
 		try {
 			PreparedStatement prepStat = connect.prepareStatement("SELECT Description FROM dbinstallations.TypePC;");
 			TableModelGen table2 = AccessBDGen.creerTableModel(prepStat);
-			
-			
-//			while(String.valueOf(table2.getValueAt(1, 0))!=null) {
-//				table[i]=String.valueOf(table2.getValueAt(i, 0));
-//				combox.addItem(String.valueOf(table2.getValueAt(1, 0)));
-//				System.out.println(String.valueOf(table2.getValueAt(i, 0)));
-//				i++;
-//			}
-			for(int i=0; i <= table2.getRowCount()-1; i++) {
-				System.out.println(String.valueOf(table2.getValueAt(i, 0)));
-				combox.addItem(String.valueOf(table2.getValueAt(i, 0)));
 
+			for(int i=0; i <= table2.getRowCount()-1; i++) {
+				combox.addItem(table2.getValueAt(i, 0));
+				}
 			}
-//			table[1]=String.valueOf(table2.getValueAt(0, 0));
-//			PreInstalledSoftLabel = new JLabel(String.valueOf(table2.getValueAt(1, 0)));
-//			PreInstalledSoftLabel = new JLabel(String.valueOf(table2.getRowCount())); -> 5
+		catch(SQLException e) {	}		
+	}
+//listener refresh button
+	private class Butlistener implements ActionListener{
+		public void actionPerformed( ActionEvent a){
+			if(a.getSource()==refresh){
+				sqlRequest = "select Nom from Software soft join SoftwarePreinstalle softpr on soft.CodeSoftware = softpre.CodeSoftware join TypePC pc on softpre.IdTypePC = pc.IdTypePC where pc.Description like '"+(String)combox.getSelectedItem()+"';";
+				System.out.println(sqlRequest);
 			}
-		catch(SQLException e) {	}
-		
-		PreInstalledSoftLabel = new JLabel("Type de PC:");
-		PreInstalledSoftLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		combox = new JComboBox(table);
-		this.add(PreInstalledSoftLabel);
-		this.add(combox);
+		}
 	}
 }

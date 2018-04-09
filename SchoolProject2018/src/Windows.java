@@ -14,7 +14,7 @@ public class Windows extends JFrame{
 	private JMenuBar menuBar;
 	private JMenu file, list, insert, delete, help;
 	private JMenuItem welcome,quit,InsertNewInstall,listInstall,deleteInstall,listPreInstall,listSoftSection,wiki,about;
-	private Connection connect;
+	private static Connection connect;
 	static final private String nomBD="dbinstallations";
 	static final private String username="root";
 	static final private String password="Tigrou007";
@@ -148,5 +148,8 @@ public class Windows extends JFrame{
 		catch(SQLException e) {
 			JOptionPane.showMessageDialog(null, "<html><body><p align=\\\"center\\\">Impossible to connect to DataBase<br>Username or password incorrect</p></body></html>", "failed to connect to DataBase", JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	public static Connection getConnect() {
+		return connect;
 	}
 }
