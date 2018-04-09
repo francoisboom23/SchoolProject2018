@@ -8,6 +8,8 @@ import accessBD.TableModelGen;
 
 public class ListInstallTable extends JPanel{
 	
+	Connection connect2;
+	
 	ListInstallTable(Connection connect){
 		setBounds(0,0,500,500);
 		
