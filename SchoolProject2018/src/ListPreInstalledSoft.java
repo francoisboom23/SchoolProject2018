@@ -1,6 +1,5 @@
 //FETCH AVANT TOUS CHANGEMENTS SOUS PEINE DE MORT!
 
-import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 import javax.swing.*;
@@ -13,7 +12,6 @@ public class ListPreInstalledSoft extends JPanel{
 	private JLabel PreInstalledSoftLabel;
 	private JComboBox combox;
 	private JButton refresh;
-	private String pcSelect;
 	private String sqlRequest;
 
 	public ListPreInstalledSoft(Connection connect) {
@@ -28,6 +26,7 @@ public class ListPreInstalledSoft extends JPanel{
 		this.add(PreInstalledSoftLabel);
 		this.add(combox);
 		this.add(refresh);
+		TablePreInstalledSoft listinstalltable = new TablePreInstalledSoft (connect,sqlRequest);
 //listener controls
 		Butlistener a = new Butlistener();
 		refresh.addActionListener(a);
