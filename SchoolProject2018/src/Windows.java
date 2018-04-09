@@ -122,7 +122,7 @@ public class Windows extends JFrame{
 			if(e.getSource() == listInstall){
 				//change le panel par un autre
 				cont.removeAll();
-				ListInstallTable listinstalltable = new ListInstallTable (getConnection());
+				ListInstallTable listinstalltable = new ListInstallTable (connect);
 				cont.add(listinstalltable);
 				cont.repaint();
 				Windows.this.setVisible(true);
@@ -134,8 +134,5 @@ public class Windows extends JFrame{
 			connect = AccessBDGen.connecter(nomBD, username, password);
 		}
 		catch(SQLException e) { }
-	}
-	public Connection getConnection() {
-		return connect;
 	}
 }
