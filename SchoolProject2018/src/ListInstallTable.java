@@ -14,9 +14,9 @@ public class ListInstallTable extends JPanel{
 		try {
 			PreparedStatement prepStat = connect.prepareStatement("select * from Installation;");
 			TableModelGen table = AccessBDGen.creerTableModel(prepStat);
-		 	JTable interventionTable = new JTable(table);
-		 	interventionTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		 	JScrollPane defilant = new JScrollPane (interventionTable) ;
+		 	JTable table2 = new JTable(table);
+		 	table2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		 	JScrollPane defilant = new JScrollPane (table2) ;
 		 	this.add(defilant);
 			}
 		catch(SQLException e) {	}
