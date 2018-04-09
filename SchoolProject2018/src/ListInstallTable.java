@@ -8,14 +8,11 @@ import accessBD.TableModelGen;
 
 public class ListInstallTable extends JPanel{
 	
-	private String sqlInstruction;
-	
 	ListInstallTable(Connection connect){
 		setBounds(0,0,500,500);
 		
 		try {
-			sqlInstruction = "select * from Installation;";
-			PreparedStatement prepStat = connect.prepareStatement(sqlInstruction);
+			PreparedStatement prepStat = connect.prepareStatement("select * from Installation;");
 			TableModelGen table = AccessBDGen.creerTableModel(prepStat);
 		 	JTable interventionTable = new JTable(table);
 		 	interventionTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
