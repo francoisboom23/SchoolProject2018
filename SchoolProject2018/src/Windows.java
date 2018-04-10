@@ -82,6 +82,7 @@ public class Windows extends JFrame{
 		listInstall.addActionListener(menuLi);
 		listPreInstall.addActionListener(menuLi);
 		listSoftSection.addActionListener(menuLi);
+		InsertNewInstall.addActionListener(menuLi);
 		
 //close program & SQL connection
 		WindowClose w = new WindowClose();
@@ -143,6 +144,13 @@ public class Windows extends JFrame{
 				cont.removeAll();
 				ListPreInstalledSoftBySection listPreInstalledSection = new ListPreInstalledSoftBySection (connect,Windows.this);
 				cont.add(listPreInstalledSection);
+				cont.repaint();
+				Windows.this.setVisible(true);
+			}
+			if(e.getSource() == InsertNewInstall) {
+				cont.removeAll();
+				insertNewInstall insertNew = new insertNewInstall (connect);
+				cont.add(insertNew);
 				cont.repaint();
 				Windows.this.setVisible(true);
 			}
