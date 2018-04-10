@@ -134,7 +134,7 @@ public class Windows extends JFrame{
 			if(e.getSource() == listPreInstall){
 				//change le panel par un autre
 				cont.removeAll();
-				ListPreInstalledSoft listPreInstalledType= new ListPreInstalledSoft (connect);
+				ListPreInstalledSoft listPreInstalledType= new ListPreInstalledSoft (connect,Windows.this);
 				cont.add(listPreInstalledType);
 				cont.repaint();
 				Windows.this.setVisible(true);
@@ -156,5 +156,14 @@ public class Windows extends JFrame{
 		catch(SQLException e) {
 			JOptionPane.showMessageDialog(null, "<html><body><p align=\\\"center\\\">Impossible to connect to DataBase<br>Username or password incorrect</p></body></html>", "failed to connect to DataBase", JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	public Container getCont(){
+		return cont;
+	}
+	public Connection getConnect() {
+		return connect;
+	}
+	public Windows getWin() {
+		return this;
 	}
 }

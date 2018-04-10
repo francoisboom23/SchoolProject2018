@@ -1,5 +1,6 @@
 //FETCH AVANT TOUS CHANGEMENTS SOUS PEINE DE MORT!
 
+import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.event.*;
 import java.sql.*;
@@ -14,14 +15,12 @@ public class ListPreInstalledSoft extends JPanel {
 	private JComboBox combox;
 	private JButton refresh;
 	private String sqlRequest="select DISTINCT Nom from Software soft join SoftwarePreinstalle softpr on soft.CodeSoftware = softpr.CodeSoftware join TypePC pc on softpr.IdTypePC = pc.IdTypePC;";
-	private JTable tableau2;
-	private JScrollPane scroll;
-	private Connection connect;
+	private Windows parent;
 	
-	public ListPreInstalledSoft(Connection connect) {
+	public ListPreInstalledSoft(Connection connect,Windows win) {
 //generale
 		setBounds(0,0,500,500);
-		this.connect=connect;
+		parent=win;
 //controls
 		PreInstalledSoftLabel = new JLabel("PC type:");
 		PreInstalledSoftLabel.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -35,34 +34,17 @@ public class ListPreInstalledSoft extends JPanel {
 		refresh.addActionListener(a);
 //SQL database
 		fillCombobox(connect);
-		DisplayList();
 }
 //fill combobox
 	private void fillCombobox(Connection connect) {
 		try {
 			PreparedStatement prepStat = connect.prepareStatement("SELECT Description FROM dbinstallations.TypePC;");
 			TableModelGen table2 = AccessBDGen.creerTableModel(prepStat);
-
 			for(int i=0; i <= table2.getRowCount()-1; i++) {
 				combox.addItem(table2.getValueAt(i, 0));
 				}
 			}
 		catch(SQLException e) {	}		
-	}
-//display table
-	private void DisplayList(){
-		setBounds(0,0,500,500);
-		try {
-			PreparedStatement prepStat = connect.prepareStatement(sqlRequest);
-			TableModelGen table = AccessBDGen.creerTableModel(prepStat);
-			tableau2 = new JTable(table);
-		 	tableau2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		 	JScrollPane scroll = new JScrollPane (tableau2) ;
-		 	add(scroll);
-		 	//tableau2.setVisible(false);
-		 	
-			}	
-		catch(SQLException e) {	}
 	}
 //listener refresh button
 		private class Butlistener implements ActionListener{
@@ -70,6 +52,14 @@ public class ListPreInstalledSoft extends JPanel {
 				if(a.getSource()==refresh){
 					sqlRequest = "select Nom from Software soft join SoftwarePreinstalle softpr on soft.CodeSoftware = softpr.CodeSoftware join TypePC pc on softpr.IdTypePC = pc.IdTypePC where pc.Description like '"+(String)combox.getSelectedItem()+"';";
 					System.out.println(sqlRequest);
+					TableInstalledSoft f2 = new TableInstalledSoft(parent.getConnect(), sqlRequest);
+					ListPreInstalledSoft listPreInstalledType= new ListPreInstalledSoft (parent.getConnect(),parent.getWin());
+					parent.getCont().removeAll();
+					parent.getCont().setLayout(new FlowLayout());
+					parent.getCont().add(listPreInstalledType);
+					parent.getCont().add(f2);
+					parent.getCont().repaint();
+					parent.getCont().setVisible(true);
 				}
 			}
 		}
