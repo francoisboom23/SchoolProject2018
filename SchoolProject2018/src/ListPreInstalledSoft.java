@@ -1,7 +1,9 @@
 //FETCH AVANT TOUS CHANGEMENTS SOUS PEINE DE MORT!
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Frame;
+import java.awt.GridLayout;
 import java.awt.event.*;
 import java.sql.*;
 import javax.swing.*;
@@ -55,9 +57,9 @@ public class ListPreInstalledSoft extends JPanel {
 					TableInstalledSoft f2 = new TableInstalledSoft(parent.getConnect(), sqlRequest);
 					ListPreInstalledSoft listPreInstalledType= new ListPreInstalledSoft (parent.getConnect(),parent.getWin());
 					parent.getCont().removeAll();
-					parent.getCont().setLayout(new FlowLayout());
-					parent.getCont().add(listPreInstalledType);
-					parent.getCont().add(f2);
+					parent.getCont().setLayout(new BorderLayout());
+					parent.getCont().add(listPreInstalledType,BorderLayout.NORTH);
+					parent.getCont().add(f2,BorderLayout.CENTER);
 					parent.getCont().repaint();
 					parent.getCont().setVisible(true);
 				}
