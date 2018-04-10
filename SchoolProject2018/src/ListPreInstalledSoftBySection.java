@@ -12,12 +12,16 @@ public class ListPreInstalledSoftBySection extends JPanel{
 	private JComboBox Combox;
 	private JCheckBox AfficherList;
 	private String Section;
-	private String SqlRequest;
+	private String SqlInstruction;
+	private Windows parent;
+
 	private JTable tableau2;
 	
-	public ListPreInstalledSoftBySection (Connection connect) {
+	public ListPreInstalledSoftBySection (Connection connect, Windows win) {
 		
 		setBounds(0,0,500,500);
+		parent=win;
+		
 		PreInstalledSoftBySection = new JLabel ("Section :");
 		PreInstalledSoftBySection.setHorizontalAlignment(SwingConstants.RIGHT);
 		Combox = new JComboBox();
@@ -25,14 +29,13 @@ public class ListPreInstalledSoftBySection extends JPanel{
 		this.add(PreInstalledSoftBySection);
 		this.add(Combox);
 		this.add(AfficherList);
-		
+
 
 
 		ItemList e = new ItemList();
 		AfficherList.addItemListener(e);
 		//SQL database
 				fillCombobox(connect);
-				AfficherList(connect);
 		}
 		//fill combobox
 			private void fillCombobox(Connection connect) {
@@ -42,48 +45,38 @@ public class ListPreInstalledSoftBySection extends JPanel{
 
 					for(int i=0; i <= table2.getRowCount()-1; i++) {
 						Combox.addItem(table2.getValueAt(i, 0));
+						
 						}
 					}
 				catch(SQLException e) {	}		
 			}
 			
-			
-			void AfficherList(Connection connect){
 
-				setBounds(0,0,500,500);
+			private class ItemList implements ItemListener{
 				
-				
-				try {
-					PreparedStatement prepStat = connect.prepareStatement("SELECT Nom FROM Software Soft JOIN UtilisationSoftware Uti ON Soft.CodeSoftware = Uti.CodeSoftware JOIN AnneeEtude Annee ON Uti.IdAnneeEtude = Annee.IdAnneeEtude JOIN Section Sect ON Annee.CodeSection = Sect.CodeSection WHERE Sect.Libelle LIKE 'Informatique de gestion';");
-					TableModelGen table = AccessBDGen.creerTableModel(prepStat);
-				 	this.tableau2 = new JTable(table);
-				 	tableau2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-				 	JScrollPane scroll = new JScrollPane (tableau2) ;
-				 	this.add(scroll);
-				 	tableau2.setVisible(false);
 
-					}
-				
-				
-				catch(SQLException e) {	}
-			}
-				
-				private class ItemList implements ItemListener{
-					
-				
-					public void itemStateChanged(ItemEvent e){
-						if(e.getSource()==AfficherList){
-							
-							if(e.getStateChange()==ItemEvent.SELECTED){
-								tableau2.setVisible(true);
+				public void itemStateChanged(ItemEvent e){
+					if(e.getSource()==AfficherList){
+						if(e.getStateChange()==ItemEvent.SELECTED){
+							SqlInstruction="SELECT Nom FROM Software Soft JOIN UtilisationSoftware Uti ON Soft.CodeSoftware = Uti.CodeSoftware JOIN AnneeEtude Annee on Uti.IdAnneeEtude = Annee.IdAnneeEtude JOIN Section Sect ON Annee.CodeSection = Sect.CodeSection WHERE Sect.Libelle LIKE '"+(String)Combox.getSelectedItem()+"';";
+							System.out.println(SqlInstruction);
+							TableInstalledSoft f2 = new TableInstalledSoft(parent.getConnect(), SqlInstruction);
+							ListPreInstalledSoft listPreInstalledType= new ListPreInstalledSoft (parent.getConnect(),parent.getWin());
+							parent.getCont().removeAll();
+							parent.getCont().setLayout(new BorderLayout());
+							parent.getCont().add(listPreInstalledType,BorderLayout.NORTH);
+							parent.getCont().add(f2,BorderLayout.CENTER);
+							parent.getCont().repaint();
+							parent.getCont().setVisible(true);
+							System.out.println("pute");
+
 							}
-								else{
-									tableau2.setVisible(false);
-								}
-						}
+							
+					}
 
+		}
 			}
-				}
+
 }
 			
 			

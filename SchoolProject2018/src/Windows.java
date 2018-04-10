@@ -141,7 +141,7 @@ public class Windows extends JFrame{
 			}
 			if(e.getSource() == listSoftSection) {
 				cont.removeAll();
-				ListPreInstalledSoftBySection listPreInstalledSection = new ListPreInstalledSoftBySection (connect);
+				ListPreInstalledSoftBySection listPreInstalledSection = new ListPreInstalledSoftBySection (connect,Windows.this);
 				cont.add(listPreInstalledSection);
 				cont.repaint();
 				Windows.this.setVisible(true);

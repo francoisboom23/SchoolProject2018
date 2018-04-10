@@ -52,7 +52,7 @@ public class ListPreInstalledSoft extends JPanel {
 		private class Butlistener implements ActionListener{
 			public void actionPerformed( ActionEvent a){
 				if(a.getSource()==refresh){
-					sqlRequest = "select Nom from Software soft join SoftwarePreinstalle softpr on soft.CodeSoftware = softpr.CodeSoftware join TypePC pc on softpr.IdTypePC = pc.IdTypePC where pc.Description like '"+(String)combox.getSelectedItem()+"';";
+					sqlRequest = "SELECT Nom FROM Software soft JOIN SoftwarePreinstalle softpr ON soft.CodeSoftware = softpr.CodeSoftware JOIN TypePC pc ON softpr.IdTypePC = pc.IdTypePC WHERE pc.Description LIKE '"+(String)combox.getSelectedItem()+"';";
 					System.out.println(sqlRequest);
 					TableInstalledSoft f2 = new TableInstalledSoft(parent.getConnect(), sqlRequest);
 					ListPreInstalledSoft listPreInstalledType= new ListPreInstalledSoft (parent.getConnect(),parent.getWin());
@@ -62,6 +62,7 @@ public class ListPreInstalledSoft extends JPanel {
 					parent.getCont().add(f2,BorderLayout.CENTER);
 					parent.getCont().repaint();
 					parent.getCont().setVisible(true);
+					System.out.println("pute");
 				}
 			}
 		}
