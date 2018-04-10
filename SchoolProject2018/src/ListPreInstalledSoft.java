@@ -13,10 +13,10 @@ public class ListPreInstalledSoft extends JPanel {
 	private JLabel PreInstalledSoftLabel;
 	private JComboBox combox;
 	private JButton refresh;
-	private String sqlRequest;//="select DISTINCT Nom from Software soft join SoftwarePreinstalle softpr on soft.CodeSoftware = softpr.CodeSoftware join TypePC pc on softpr.IdTypePC = pc.IdTypePC;";
+	private String sqlRequest;
 	private Windows parent;
 	
-	public ListPreInstalledSoft(Connection connect,Windows win,String select) {
+	public ListPreInstalledSoft(Connection connect,Windows win) {
 //generale
 		setBounds(0,0,500,500);
 		parent=win;
@@ -24,8 +24,7 @@ public class ListPreInstalledSoft extends JPanel {
 		PreInstalledSoftLabel = new JLabel("PC type:");
 		PreInstalledSoftLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		combox = new JComboBox();
-		//combox.addItem("");
-		//combox.setSelectedItem(select);
+		combox.addItem("");
 		refresh = new JButton("refresh");
 		add(PreInstalledSoftLabel);
 		add(combox);
@@ -48,22 +47,31 @@ public class ListPreInstalledSoft extends JPanel {
 		catch(SQLException e) {	}		
 	}
 //listener refresh button
-		private class Butlistener implements ActionListener{
-			public void actionPerformed( ActionEvent a){
-				if(a.getSource()==refresh){
-					sqlRequest = "SELECT Nom FROM Software soft JOIN SoftwarePreinstalle softpr ON soft.CodeSoftware = softpr.CodeSoftware JOIN TypePC pc ON softpr.IdTypePC = pc.IdTypePC WHERE pc.Description LIKE '"+(String)combox.getSelectedItem()+"';";
-					TableInstalledSoft f2 = new TableInstalledSoft(parent.getConnect(), sqlRequest);
-					ListPreInstalledSoft listPreInstalledType= new ListPreInstalledSoft (parent.getConnect(),parent.getWin(),(String)combox.getSelectedItem());
-					listPreInstalledType.SetBox((String)combox.getSelectedItem());
-					parent.getCont().removeAll();
-					parent.getCont().setLayout(new BorderLayout());
-					parent.getCont().add(listPreInstalledType,BorderLayout.NORTH);
-					parent.getCont().add(f2,BorderLayout.CENTER);
-					parent.getCont().repaint();
-					parent.getCont().setVisible(true);
+	private class Butlistener implements ActionListener{
+		public void actionPerformed( ActionEvent a){
+			if(a.getSource()==refresh){
+				if((String)combox.getSelectedItem()=="") {
+					sqlRequest="";
+					JOptionPane.showMessageDialog(null, "<html><body><p align=\\\"center\\\">invalid selection</p></body></html>", "error", JOptionPane.ERROR_MESSAGE);
 				}
+				else {
+					sqlRequest = "SELECT Nom FROM Software soft JOIN SoftwarePreinstalle softpr ON soft.CodeSoftware = softpr.CodeSoftware JOIN TypePC pc ON softpr.IdTypePC = pc.IdTypePC WHERE pc.Description LIKE '"+(String)combox.getSelectedItem()+"';";
+					System.out.println(sqlRequest);
+				}
+				//System.out.println(sqlRequest);
+				TableInstalledSoft f2 = new TableInstalledSoft(parent.getConnect(), sqlRequest);
+				ListPreInstalledSoft listPreInstalledType= new ListPreInstalledSoft (parent.getConnect(),parent.getWin());
+				listPreInstalledType.SetBox((String)combox.getSelectedItem());
+				parent.getCont().removeAll();
+				parent.getCont().setLayout(new BorderLayout());
+				parent.getCont().add(listPreInstalledType,BorderLayout.NORTH);
+				parent.getCont().add(f2,BorderLayout.CENTER);
+				parent.getCont().repaint();
+				parent.getCont().setVisible(true);
 			}
 		}
+	}
+//set combobox default selection same as selected refresh
 	public void SetBox(String selection){
 		combox.setSelectedItem(selection);
 	}
