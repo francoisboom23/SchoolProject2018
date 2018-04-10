@@ -17,6 +17,7 @@ public class TableInstalledSoft extends JPanel{
 			TableModelGen table = AccessBDGen.creerTableModel(prepStat);
 		 	JTable table2 = new JTable(table);
 		 	table2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		 	table2.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
 		 	JScrollPane scroll = new JScrollPane (table2) ;
 		 	this.add(scroll);
 			}

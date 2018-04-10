@@ -9,7 +9,7 @@ import accessBD.AccessBDGen;
 import accessBD.TableModelGen;
 
 public class ListInstallTable extends JPanel{
-	
+
 	ListInstallTable(Connection connect){
 		setBounds(0,0,500,500);
 		
