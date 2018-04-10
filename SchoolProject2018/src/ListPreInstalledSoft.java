@@ -1,9 +1,6 @@
 //FETCH AVANT TOUS CHANGEMENTS SOUS PEINE DE MORT!
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Frame;
-import java.awt.GridLayout;
 import java.awt.event.*;
 import java.sql.*;
 import javax.swing.*;
@@ -16,10 +13,10 @@ public class ListPreInstalledSoft extends JPanel {
 	private JLabel PreInstalledSoftLabel;
 	private JComboBox combox;
 	private JButton refresh;
-	private String sqlRequest="select DISTINCT Nom from Software soft join SoftwarePreinstalle softpr on soft.CodeSoftware = softpr.CodeSoftware join TypePC pc on softpr.IdTypePC = pc.IdTypePC;";
+	private String sqlRequest;//="select DISTINCT Nom from Software soft join SoftwarePreinstalle softpr on soft.CodeSoftware = softpr.CodeSoftware join TypePC pc on softpr.IdTypePC = pc.IdTypePC;";
 	private Windows parent;
 	
-	public ListPreInstalledSoft(Connection connect,Windows win) {
+	public ListPreInstalledSoft(Connection connect,Windows win,String select) {
 //generale
 		setBounds(0,0,500,500);
 		parent=win;
@@ -27,6 +24,8 @@ public class ListPreInstalledSoft extends JPanel {
 		PreInstalledSoftLabel = new JLabel("PC type:");
 		PreInstalledSoftLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		combox = new JComboBox();
+		//combox.addItem("");
+		//combox.setSelectedItem(select);
 		refresh = new JButton("refresh");
 		add(PreInstalledSoftLabel);
 		add(combox);
@@ -53,17 +52,19 @@ public class ListPreInstalledSoft extends JPanel {
 			public void actionPerformed( ActionEvent a){
 				if(a.getSource()==refresh){
 					sqlRequest = "SELECT Nom FROM Software soft JOIN SoftwarePreinstalle softpr ON soft.CodeSoftware = softpr.CodeSoftware JOIN TypePC pc ON softpr.IdTypePC = pc.IdTypePC WHERE pc.Description LIKE '"+(String)combox.getSelectedItem()+"';";
-					System.out.println(sqlRequest);
 					TableInstalledSoft f2 = new TableInstalledSoft(parent.getConnect(), sqlRequest);
-					ListPreInstalledSoft listPreInstalledType= new ListPreInstalledSoft (parent.getConnect(),parent.getWin());
+					ListPreInstalledSoft listPreInstalledType= new ListPreInstalledSoft (parent.getConnect(),parent.getWin(),(String)combox.getSelectedItem());
+					listPreInstalledType.SetBox((String)combox.getSelectedItem());
 					parent.getCont().removeAll();
 					parent.getCont().setLayout(new BorderLayout());
 					parent.getCont().add(listPreInstalledType,BorderLayout.NORTH);
 					parent.getCont().add(f2,BorderLayout.CENTER);
 					parent.getCont().repaint();
 					parent.getCont().setVisible(true);
-					System.out.println("pute");
 				}
 			}
 		}
+	public void SetBox(String selection){
+		combox.setSelectedItem(selection);
+	}
 }

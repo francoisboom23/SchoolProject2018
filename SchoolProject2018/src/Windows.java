@@ -134,7 +134,7 @@ public class Windows extends JFrame{
 			if(e.getSource() == listPreInstall){
 				//change le panel par un autre
 				cont.removeAll();
-				ListPreInstalledSoft listPreInstalledType= new ListPreInstalledSoft (connect,Windows.this);
+				ListPreInstalledSoft listPreInstalledType= new ListPreInstalledSoft (connect,Windows.this,"Celeron 530");
 				cont.add(listPreInstalledType);
 				cont.repaint();
 				Windows.this.setVisible(true);
