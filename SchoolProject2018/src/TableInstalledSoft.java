@@ -13,7 +13,6 @@ public class TableInstalledSoft extends JPanel{
 	
 	TableInstalledSoft(Connection connect,String sqlRequest){
 		setBounds(0,0,500,500);	
-		vincent = new JLabel("vincent");
 //		try {
 //			PreparedStatement prepStat = connect.prepareStatement(sqlRequest);
 //			TableModelGen table = AccessBDGen.creerTableModel(prepStat);
@@ -24,7 +23,7 @@ public class TableInstalledSoft extends JPanel{
 //		 	this.add(scroll);
 //			}
 //		catch(SQLException e) {	}
-		add(vincent);
+		add(vincent =new JLabel("vincent"));
 		setVisible(true);
 		}
 }
