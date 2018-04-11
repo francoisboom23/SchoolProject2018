@@ -31,7 +31,7 @@ public class buttonInsert extends JPanel{
 				pan.cleanTextField();
 			}
 			if(e.getSource()==validate) {
-				pan.addInstall(connect);
+				//pan.addInstall();
 				JOptionPane.showMessageDialog(null,"successfully added");
 				pan.cleanTextField();
 			}

@@ -1,5 +1,6 @@
 //FETCH AVANT TOUS CHANGEMENTS SOUS PEINE DE MORT!
 
+import java.awt.Color;
 import java.awt.Frame;
 import java.awt.event.*;
 import java.sql.*;
@@ -13,6 +14,7 @@ public class TableInstalledSoft extends JPanel{
 	
 	TableInstalledSoft(Connection connect,String sqlRequest){
 		setBounds(0,0,500,500);	
+		this.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
 //		try {
 //			PreparedStatement prepStat = connect.prepareStatement(sqlRequest);
 //			TableModelGen table = AccessBDGen.creerTableModel(prepStat);
