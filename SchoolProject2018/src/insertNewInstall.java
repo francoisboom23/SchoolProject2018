@@ -10,7 +10,7 @@ import accessBD.TableModelGen;
 
 public class insertNewInstall extends JPanel{
 //elements: idInstall, date install,type install, commentaires, durée install, ref procedure install,validation,date valid prevue, code soft(FK), matricule(FK),codeOS(FK)
-	//private JLabel dateInstall,commentaire,dureeInstall,refProc,codeSoft,Matricule,codeOS;
+
 	private JComboBox comboSoft,comboMatri,comboOS,comboType,comboValid;
 	private JTextField textDate,textCommentaire,textDuree,textRef,textDatePrevoir;
 	private String[] type = {"Type:","standart","custom"};
@@ -18,16 +18,9 @@ public class insertNewInstall extends JPanel{
 	
 	public insertNewInstall(Connection connect) {
 //generale
-		setBounds(0,0,500,500);
-		setLayout(new GridLayout(12,1,1,1));
-//content	
-//		dateInstall = new JLabel("install date:");
-//		commentaire = new JLabel("commentary:");
-//		dureeInstall = new JLabel("install time:");
-//		refProc = new JLabel("procedure reference:");
-//		codeSoft = new JLabel("software:");
-//		Matricule = new JLabel("matricule:");
-//		codeOS = new JLabel("OS:");
+		setBounds(0,0,500,400);
+		setLayout(new GridLayout(10,1,1,1));
+//initialization		
 		comboSoft = new JComboBox();
 		comboMatri = new JComboBox();
 		comboOS = new JComboBox();
@@ -35,7 +28,7 @@ public class insertNewInstall extends JPanel{
 		comboValid = new JComboBox(valid);
 		textDate = new JTextField("installation date:");
 		textCommentaire = new JTextField("commentaire:");
-		textDuree = new JTextField("installation time:");
+		textDuree = new JTextField("installation duration:");
 		textRef = new JTextField("installation reference:");
 		textDatePrevoir = new JTextField("to do:");
 		textDatePrevoir.setEnabled(false);
@@ -43,14 +36,13 @@ public class insertNewInstall extends JPanel{
 		comboMatri.addItem("Network Responsable:");
 		comboOS.addItem("OS:");
 		fillCombo(connect);
-		
-//		add(dateInstall);
-//		add(commentaire);
-//		add(dureeInstall);
-//		add(refProc);
-//		add(codeSoft);
-//		add(Matricule);
-//		add(codeOS);
+//tooltips
+		textDate.setToolTipText("installation date");
+		textCommentaire.setToolTipText("commentary");
+		textDuree.setToolTipText("installation duration");
+		textRef.setToolTipText("installation reference");
+		textDatePrevoir.setToolTipText("to do");
+//add
 		add(comboSoft);
 		add(comboMatri);
 		add(comboOS);
@@ -61,6 +53,19 @@ public class insertNewInstall extends JPanel{
 		add(textDuree);
 		add(textRef);
 		add(textDatePrevoir);
+//listener
+		mouse m = new mouse();
+		comboboxListener a = new comboboxListener();
+		textDate.addMouseListener(m);
+		textCommentaire.addMouseListener(m);
+		textDuree.addMouseListener(m);
+		textRef.addMouseListener(m);
+		textDatePrevoir.addMouseListener(m);
+		comboSoft.addActionListener(a);
+		comboMatri.addActionListener(a);
+		comboOS.addActionListener(a);
+		comboType.addActionListener(a);
+		comboValid.addActionListener(a);
 		
 		setVisible(true);
 	}
@@ -85,5 +90,62 @@ public class insertNewInstall extends JPanel{
 				}
 		}
 		catch(SQLException e) {	}
+	}
+//mouse listener
+	private class mouse implements MouseListener,MouseMotionListener{
+		public void mouseClicked(MouseEvent e) {
+			if(e.getSource()==textDate){
+				textDate.setText("");
+			}
+			if(e.getSource()==textCommentaire) {
+				textCommentaire.setText("");
+			}
+			if(e.getSource()==textDuree) {
+				textDuree.setText("");
+			}
+			if(e.getSource()==textRef) {
+				textRef.setText("");
+			}
+			if(e.getSource()==textDatePrevoir) {
+				textDatePrevoir.setText("");
+			}
+		}
+		public void mouseDragged(MouseEvent e) {
+			
+		}
+		public void mouseMoved(MouseEvent e) {
+		
+		}
+		public void mouseEntered(MouseEvent e) {
+			
+		}
+		public void mouseExited(MouseEvent e) {
+			
+		}
+		public void mousePressed(MouseEvent e) {
+			
+		}
+		public void mouseReleased(MouseEvent e) {
+			
+		}
+	}
+	private class comboboxListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource()==comboSoft){
+				comboSoft.removeItem("Software:");
+			}
+			if(e.getSource()==comboMatri) {
+				comboMatri.removeItem("Network Responsable:");
+			}
+			if(e.getSource()==comboOS) {
+				comboOS.removeItem("OS:");
+			}
+			if(e.getSource()==comboType) {
+				comboType.removeItem("Type:");
+			}
+			if(e.getSource()==comboValid) {
+				comboValid.removeItem("State:");
+			}
+		}
 	}
 }

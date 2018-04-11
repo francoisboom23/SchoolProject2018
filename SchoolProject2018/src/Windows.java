@@ -38,7 +38,7 @@ public class Windows extends JFrame{
 		insert = new JMenu("insert");
 		delete = new JMenu("delete");
 		help = new JMenu("help");
-		//add
+//add
 		file.setMnemonic('F');
 		list.setMnemonic('L');
 		insert.setMnemonic('I');
@@ -49,7 +49,7 @@ public class Windows extends JFrame{
 		menuBar.add(insert);
 		menuBar.add(delete);
 		menuBar.add(help);
-		//listener
+//listener
 		menuListener menuLi = new menuListener();
 		
 //menuItem
@@ -149,8 +149,11 @@ public class Windows extends JFrame{
 			}
 			if(e.getSource() == InsertNewInstall) {
 				cont.removeAll();
+				cont.setLayout(new BorderLayout());
 				insertNewInstall insertNew = new insertNewInstall (connect);
-				cont.add(insertNew);
+				buttonInsert but = new buttonInsert();
+				cont.add(but,BorderLayout.SOUTH);
+				cont.add(insertNew,BorderLayout.CENTER);
 				cont.repaint();
 				Windows.this.setVisible(true);
 			}
