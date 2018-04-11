@@ -12,7 +12,7 @@ public class ListPreInstalledSoftBySection extends JPanel{
 	
 	private JLabel PreInstalledSoftBySection;
 	private JComboBox Combox;
-	private JButton refresh,test;
+	private JButton refresh;
 	private String SqlInstruction;
 	private Windows parent;
 	
@@ -60,26 +60,16 @@ public class ListPreInstalledSoftBySection extends JPanel{
 					System.out.println(SqlInstruction);
 				}
 				//System.out.println(SqlInstruction);
-				/*TableInstalledSoft f2 = new TableInstalledSoft(parent.getConnect(), SqlInstruction);
+				TableInstalledSoft f2 = new TableInstalledSoft(parent.getConnect(), SqlInstruction);
 				ListPreInstalledSoftBySection listPreInstalledSection= new ListPreInstalledSoftBySection (parent.getConnect(),parent.getWin());
-				listPreInstalledSection.SetBox((String)Combox.getSelectedItem());*/
-
-
+				listPreInstalledSection.SetBox((String)Combox.getSelectedItem());
 				parent.getCont().removeAll();
 				parent.getCont().setLayout(new BorderLayout());
-				test = new JButton ("test");
-				parent.getCont().add(test,BorderLayout.CENTER);
-				/*parent.getCont().add(listPreInstalledSection,BorderLayout.NORTH);*/
-				/*parent.getCont().add(f2,BorderLayout.CENTER);*/
+				parent.getCont().add(listPreInstalledSection,BorderLayout.NORTH);
+				parent.getCont().add(f2,BorderLayout.CENTER);
 				parent.getCont().repaint();
 				parent.getCont().setVisible(true);
-
-			
-
-
-
 				}
-
 			} 	
 		}
 	
