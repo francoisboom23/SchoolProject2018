@@ -8,12 +8,14 @@ import javax.swing.*;
 public class buttonInsert extends JPanel{
 	private JButton validate, clean;
 	private insertNewInstall pan;
+	private Connection connect;
 	
 	public buttonInsert(insertNewInstall pan,Connection connect) {
 //generale
 		setBounds(150,380,200,50);
 		setLayout(new GridLayout(1,2,1,1));
 		this.pan=pan;
+		this.connect=connect;
 //initialization
 		validate = new JButton("validate");
 		clean = new JButton("clean textfield");
