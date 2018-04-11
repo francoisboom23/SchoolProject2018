@@ -148,7 +148,7 @@ public class Windows extends JFrame{
 			}
 			if(e.getSource() == InsertNewInstall) {
 				cont.removeAll();
-				cont.setLayout(new BorderLayout());
+				//cont.setLayout(new BorderLayout());
 				insertNewInstall insertNew = new insertNewInstall (connect);
 				buttonInsert but = new buttonInsert(insertNew,connect);
 				cont.add(insertNew,BorderLayout.CENTER);

@@ -1,6 +1,7 @@
 //FETCH AVANT TOUS CHANGEMENTS SOUS PEINE DE MORT!
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.*;
 import java.sql.*;
 import javax.swing.*;
@@ -19,6 +20,7 @@ public class ListPreInstalledSoft extends JPanel {
 	public ListPreInstalledSoft(Connection connect,Windows win) {
 //generale
 		setBounds(0,0,500,500);
+		this.setBorder(BorderFactory.createLineBorder(Color.red));
 		parent=win;
 //controls
 		PreInstalledSoftLabel = new JLabel("PC type:");
