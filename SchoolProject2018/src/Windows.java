@@ -23,7 +23,7 @@ public class Windows extends JFrame{
 //general
 		super("IESN Calculator Student Pro DVD Architect 2048");
 		cont = getContentPane();
-		setBounds(710,290,500,500);
+		setBounds(710,290,1920,1080);
 		setResizable(false);
 		setLayout(null);
 		
