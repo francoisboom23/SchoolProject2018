@@ -101,7 +101,6 @@ public class Windows extends JFrame{
 			System.exit(0);
 		}
 	};
-	
 //listener menu
 	private class menuListener implements ActionListener{
 		public void actionPerformed (ActionEvent e) {
@@ -151,9 +150,9 @@ public class Windows extends JFrame{
 				cont.removeAll();
 				cont.setLayout(new BorderLayout());
 				insertNewInstall insertNew = new insertNewInstall (connect);
-				buttonInsert but = new buttonInsert();
-				cont.add(but,BorderLayout.SOUTH);
+				buttonInsert but = new buttonInsert(insertNew);
 				cont.add(insertNew,BorderLayout.CENTER);
+				cont.add(but,BorderLayout.SOUTH);
 				cont.repaint();
 				Windows.this.setVisible(true);
 			}

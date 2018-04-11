@@ -30,7 +30,7 @@ public class insertNewInstall extends JPanel{
 		textCommentaire = new JTextField("commentaire:");
 		textDuree = new JTextField("installation duration:");
 		textRef = new JTextField("installation reference:");
-		textDatePrevoir = new JTextField("to do:");
+		textDatePrevoir = new JTextField("date planified:");
 		textDatePrevoir.setEnabled(false);
 		comboSoft.addItem("Software:");
 		comboMatri.addItem("Network Responsable:");
@@ -41,7 +41,7 @@ public class insertNewInstall extends JPanel{
 		textCommentaire.setToolTipText("commentary");
 		textDuree.setToolTipText("installation duration");
 		textRef.setToolTipText("installation reference");
-		textDatePrevoir.setToolTipText("to do");
+		textDatePrevoir.setToolTipText("date planified");
 //add
 		add(comboSoft);
 		add(comboMatri);
@@ -91,6 +91,14 @@ public class insertNewInstall extends JPanel{
 		}
 		catch(SQLException e) {	}
 	}
+//clean all jtextfield	
+	public void cleanTextField() {
+		textDate.setText("");
+		textCommentaire.setText("");
+		textDuree.setText("");
+		textRef.setText("");
+		textDatePrevoir.setText("");
+	}
 //mouse listener
 	private class mouse implements MouseListener,MouseMotionListener{
 		public void mouseClicked(MouseEvent e) {
@@ -106,7 +114,7 @@ public class insertNewInstall extends JPanel{
 			if(e.getSource()==textRef) {
 				textRef.setText("");
 			}
-			if(e.getSource()==textDatePrevoir) {
+			if(e.getSource()==textDatePrevoir && comboValid.getSelectedItem()=="planified") {
 				textDatePrevoir.setText("");
 			}
 		}
@@ -129,6 +137,7 @@ public class insertNewInstall extends JPanel{
 			
 		}
 	}
+//combobox listener	
 	private class comboboxListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource()==comboSoft){
@@ -145,6 +154,13 @@ public class insertNewInstall extends JPanel{
 			}
 			if(e.getSource()==comboValid) {
 				comboValid.removeItem("State:");
+				if(comboValid.getSelectedItem()=="planified") {
+					textDatePrevoir.setEnabled(true);
+				}
+				else {
+					textDatePrevoir.setEnabled(false);
+					textDatePrevoir.setText("date planified:");
+				}
 			}
 		}
 	}
