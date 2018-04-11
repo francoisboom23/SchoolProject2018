@@ -12,7 +12,7 @@ public class ListPreInstalledSoftBySection extends JPanel{
 	
 	private JLabel PreInstalledSoftBySection;
 	private JComboBox Combox;
-	private JButton refresh;
+	private JButton refresh,test;
 	private String SqlInstruction;
 	private Windows parent;
 	
@@ -29,7 +29,7 @@ public class ListPreInstalledSoftBySection extends JPanel{
 		this.add(PreInstalledSoftBySection);
 		this.add(Combox);
 		this.add(refresh);
-
+		
 		Butlistener a = new Butlistener();
 		refresh.addActionListener(a);
 //SQL database
@@ -48,6 +48,7 @@ public class ListPreInstalledSoftBySection extends JPanel{
 	}
 //listener refresh button
 	private class Butlistener implements ActionListener{
+		Connection connect;
 		public void actionPerformed( ActionEvent a){
 			if(a.getSource()==refresh){
 				if((String)Combox.getSelectedItem()=="") {
@@ -59,18 +60,29 @@ public class ListPreInstalledSoftBySection extends JPanel{
 					System.out.println(SqlInstruction);
 				}
 				//System.out.println(SqlInstruction);
-				TableInstalledSoft f2 = new TableInstalledSoft(parent.getConnect(), SqlInstruction);						
+				/*TableInstalledSoft f2 = new TableInstalledSoft(parent.getConnect(), SqlInstruction);
 				ListPreInstalledSoftBySection listPreInstalledSection= new ListPreInstalledSoftBySection (parent.getConnect(),parent.getWin());
-				listPreInstalledSection.SetBox((String)Combox.getSelectedItem());
+				listPreInstalledSection.SetBox((String)Combox.getSelectedItem());*/
+
+
 				parent.getCont().removeAll();
 				parent.getCont().setLayout(new BorderLayout());
-				parent.getCont().add(listPreInstalledSection,BorderLayout.NORTH);
-				parent.getCont().add(f2,BorderLayout.CENTER);
+				test = new JButton ("test");
+				parent.getCont().add(test,BorderLayout.CENTER);
+				/*parent.getCont().add(listPreInstalledSection,BorderLayout.NORTH);*/
+				/*parent.getCont().add(f2,BorderLayout.CENTER);*/
 				parent.getCont().repaint();
 				parent.getCont().setVisible(true);
-			}
+
+			
+
+
+
+				}
+
+			} 	
 		}
-	}
+	
 //set combobox default selection same as selected refresh
 	public void SetBox(String selection){
 		Combox.setSelectedItem(selection);
