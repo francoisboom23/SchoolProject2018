@@ -14,7 +14,6 @@ public class TableInstalledSoft extends JPanel{
 	
 	TableInstalledSoft(Connection connect,String sqlRequest){
 		setBounds(0,0,500,500);	
-		this.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
 		try {
 			PreparedStatement prepStat = connect.prepareStatement(sqlRequest);
 			TableModelGen table = AccessBDGen.creerTableModel(prepStat);
