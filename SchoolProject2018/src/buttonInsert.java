@@ -29,6 +29,7 @@ public class buttonInsert extends JPanel{
 	private class butListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource()==clean) {
+				pan.fillCombo(connect);
 				pan.cleanTextField();
 			}
 			if(e.getSource()==validate) {

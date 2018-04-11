@@ -70,8 +70,14 @@ public class insertNewInstall extends JPanel{
 		setVisible(true);
 	}
 //fill all combobox
-	private void fillCombo(Connection connect) {
+	public void fillCombo(Connection connect) {
 		try {
+			comboSoft.removeAll();
+			comboMatri.removeAll();
+			comboOS.removeAll();
+			comboSoft.addItem("Software:");
+			comboMatri.addItem("Network Responsable:");
+			comboOS.addItem("OS:");
 			PreparedStatement prepStatSoft = connect.prepareStatement("SELECT Nom FROM dbinstallations.Software;");
 			PreparedStatement prepStatMatri = connect.prepareStatement("SELECT NomPrenom FROM dbinstallations.ResponsableReseaux;");
 			PreparedStatement prepStatOS = connect.prepareStatement("SELECT Libelle FROM dbinstallations.OS;");
