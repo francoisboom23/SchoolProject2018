@@ -32,9 +32,9 @@ public class insertNewInstall extends JPanel{
 		textRef = new JTextField("installation reference:");
 		textDatePrevoir = new JTextField("date planified:");
 		textDatePrevoir.setEnabled(false);
-		comboSoft.addItem("Software:");
-		comboMatri.addItem("Network Responsable:");
-		comboOS.addItem("OS:");
+//		comboSoft.addItem("Software:");
+//		comboMatri.addItem("Network Responsable:");
+//		comboOS.addItem("OS:");
 		fillCombo(connect);
 //tooltips
 		textDate.setToolTipText("installation date");
@@ -72,9 +72,9 @@ public class insertNewInstall extends JPanel{
 //fill all combobox
 	public void fillCombo(Connection connect) {
 		try {
-			comboSoft.removeAll();
-			comboMatri.removeAll();
-			comboOS.removeAll();
+			comboSoft.removeAllItems();
+			comboMatri.removeAllItems();
+			comboOS.removeAllItems();
 			comboSoft.addItem("Software:");
 			comboMatri.addItem("Network Responsable:");
 			comboOS.addItem("OS:");

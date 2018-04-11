@@ -32,10 +32,9 @@ public class buttonInsert extends JPanel{
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource()==clean) {
 				pan.fillCombo(connect);
-				pan.cleanTextField();
 			}
 			if(e.getSource()==validate) {
-				//pan.addInstall();
+				pan.addInstall(connect);
 				JOptionPane.showMessageDialog(null,"successfully added");
 				pan.cleanTextField();
 			}
