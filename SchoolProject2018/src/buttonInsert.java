@@ -11,6 +11,7 @@ public class buttonInsert extends JPanel{
 	
 	public buttonInsert(insertNewInstall pan,Connection connect) {
 //generale
+		setBounds(150,380,200,50);
 		setLayout(new GridLayout(1,2,1,1));
 		this.pan=pan;
 //initialization

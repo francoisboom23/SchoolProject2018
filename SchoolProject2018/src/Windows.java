@@ -152,8 +152,8 @@ public class Windows extends JFrame{
 				//cont.setLayout(new BorderLayout());
 				insertNewInstall insertNew = new insertNewInstall (connect);
 				buttonInsert but = new buttonInsert(insertNew,connect);
-				cont.add(insertNew,BorderLayout.CENTER);
-				cont.add(but,BorderLayout.SOUTH);
+				cont.add(insertNew);
+				cont.add(but);
 				cont.repaint();
 				Windows.this.setVisible(true);
 			}
