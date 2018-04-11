@@ -1,6 +1,7 @@
 //FETCH AVANT TOUS CHANGEMENTS SOUS PEINE DE MORT!
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.*;
 import java.sql.*;
@@ -21,6 +22,7 @@ public class TableInstalledSoft extends JPanel{
 		 	table2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		 	table2.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
 		 	JScrollPane scroll = new JScrollPane (table2) ;
+		 	scroll.setPreferredSize(new Dimension(400, 200));//270,200
 		 	this.add(scroll);
 			}
 		catch(SQLException e) {	}
