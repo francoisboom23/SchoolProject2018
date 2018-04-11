@@ -97,7 +97,15 @@ public class insertNewInstall extends JPanel{
 		textCommentaire.setText("");
 		textDuree.setText("");
 		textRef.setText("");
-		textDatePrevoir.setText("");
+		if(comboValid.getSelectedItem()=="planified") {
+			textDatePrevoir.setText("");
+		}
+		else {
+			textDatePrevoir.setText("date planified:");
+		}
+	}
+	public void addInstall(Connection connect) {
+		
 	}
 //mouse listener
 	private class mouse implements MouseListener,MouseMotionListener{

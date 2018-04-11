@@ -150,7 +150,7 @@ public class Windows extends JFrame{
 				cont.removeAll();
 				cont.setLayout(new BorderLayout());
 				insertNewInstall insertNew = new insertNewInstall (connect);
-				buttonInsert but = new buttonInsert(insertNew);
+				buttonInsert but = new buttonInsert(insertNew,connect);
 				cont.add(insertNew,BorderLayout.CENTER);
 				cont.add(but,BorderLayout.SOUTH);
 				cont.repaint();

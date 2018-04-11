@@ -9,7 +9,7 @@ public class buttonInsert extends JPanel{
 	private JButton validate, clean;
 	private insertNewInstall pan;
 	
-	public buttonInsert(insertNewInstall pan) {
+	public buttonInsert(insertNewInstall pan,Connection connect) {
 //generale
 		setLayout(new GridLayout(1,2,1,1));
 		this.pan=pan;
@@ -31,6 +31,8 @@ public class buttonInsert extends JPanel{
 				pan.cleanTextField();
 			}
 			if(e.getSource()==validate) {
+				pan.addInstall(connect);
+				JOptionPane.showMessageDialog(null,"successfully added");
 				pan.cleanTextField();
 			}
 		}
