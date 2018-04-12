@@ -3,7 +3,13 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
+
 import javax.swing.*;
+
+import com.sun.glass.ui.CommonDialogs.Type;
 
 import accessBD.AccessBDGen;
 import accessBD.TableModelGen;
@@ -15,6 +21,7 @@ public class insertNewInstall extends JPanel{
 	private JTextField textDate,textCommentaire,textDuree,textRef,textDatePrevoir;
 	private String[] type = {"Type:","standart","custom"};
 	private String[] valid = {"State:","planified","work in progress","finished"};
+	private static Connection connect;
 	
 	public insertNewInstall(Connection connect) {
 //generale
@@ -111,6 +118,99 @@ public class insertNewInstall extends JPanel{
 		}
 	}
 	public void addInstall(Connection connect) {
+
+		try {
+			String SqlInstruction="INSERT INTO Installations values (?,?,?,?,?,?,?,?,?,?,?";
+			PreparedStatement myPrepStat = connect.prepareStatement(SqlInstruction);
+			
+			//IDTABLEINSTALL//
+			myPrepStat.setInt(1,idCount(connect));
+			
+			//COLONNE DATE//	
+			if(!textDate.getText().equals("")) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
+			java.util.Date date = sdf.parse(textDate.getText());
+			myPrepStat.setDate(2, new java.sql.Date(date.getTime()));
+			}
+			
+			//COLONNE TYPEINSTALL//
+			if(comboType.getSelectedItem().equals("standard")) {
+				myPrepStat.setBoolean(3, true);
+			}
+			else
+			{
+				myPrepStat.setBoolean(3, false);
+			}
+			
+			//COLONNE COMMENTAIRE//
+			
+			if(!textCommentaire.getText().equals("")) {
+				myPrepStat.setString(4,textCommentaire.getText());
+			}
+			else {
+				myPrepStat.setNull(4,Types.VARCHAR);
+			}
+			
+			//COLONNE DUREINSTALLE//
+			
+			if(!textDuree.getText().equals("")) {
+				int i =Integer.parseInt(textDuree.getText());
+				myPrepStat.setInt(5, i);
+
+			}
+			
+			//COLONNE REFPRO //
+			
+			if (!textRef.getText().equals("")) {
+				myPrepStat.setString(6, textRef.getText());
+			}
+			else {
+				myPrepStat.setNull(6, Types.VARCHAR);
+			}
+			
+			// COLONNE VALIDATION +dateprevoir //
+			
+			if(comboType.getSelectedItem().equals("planified")) {
+				myPrepStat.setString(7, (String) comboType.getSelectedItem());
+				myPrepStat.setNull(8, Types.DATE);
+			}
+			if(comboType.getSelectedItem().equals("work in progress")) {
+				myPrepStat.setString(7, (String) comboType.getSelectedItem());
+				
+				if(!textDatePrevoir.getText().equals("")) {
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
+					java.util.Date date = sdf.parse(textDatePrevoir.getText());
+					myPrepStat.setDate(8, new java.sql.Date(date.getTime()));	
+				}
+			}
+			if(comboType.getSelectedItem().equals("finished")) {
+				myPrepStat.setString(7, (String) comboType.getSelectedItem());
+				myPrepStat.setNull(8, Types.DATE);
+		}
+			
+			//COLONNECODESOFTWARE//
+			if(comboSoft.getSelectedItem().equals("Bob50")) {
+				myPrepStat.setString(9, "Bob001");
+			}
+			
+			//COLONNEADMINRESEAU//
+			if(comboMatri.getSelectedItem().equals("Alexandre Baligant")){
+				myPrepStat.setString(10, "AlBa");
+			}
+			
+			//COLONNETABLEOS//
+			if(comboOS.getSelectedItem().equals("Fedora 2012")) {
+				myPrepStat.setString(11, "Fedora");
+			}
+			
+		
+		int nbUpdatesLines = myPrepStat.executeUpdate();
+		
+		}
+			
+		 catch (SQLException | ParseException e) {
+		}
+		
 		
 	}
 //mouse listener
@@ -177,5 +277,22 @@ public class insertNewInstall extends JPanel{
 				}
 			}
 		}
+	}
+	
+	public static int idCount (Connection connect) {
+
+		int count =0;
+			try {
+				PreparedStatement prepStatSoft = connect.prepareStatement("SELECT * FROM dbinstallations.Software;");
+				TableModelGen table1 = AccessBDGen.creerTableModel(prepStatSoft);
+				for(int i=0; i <= table1.getRowCount()-1; i++) {
+					count +=1;
+					System.out.print(count);
+
+					}
+
+			} catch (SQLException e) {
+			}
+		return count;
 	}
 }
