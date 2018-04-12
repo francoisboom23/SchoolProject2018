@@ -78,13 +78,13 @@ public class insertNewInstall extends JPanel{
 	}
 //fill all combobox
 	public void fillCombo(Connection connect) {
+		comboSoft.removeAllItems();
+		comboMatri.removeAllItems();
+		comboOS.removeAllItems();
+		comboSoft.addItem("Software:");
+		comboMatri.addItem("Network Responsable:");
+		comboOS.addItem("OS:");
 		try {
-			comboSoft.removeAllItems();
-			comboMatri.removeAllItems();
-			comboOS.removeAllItems();
-			comboSoft.addItem("Software:");
-			comboMatri.addItem("Network Responsable:");
-			comboOS.addItem("OS:");
 			PreparedStatement prepStatSoft = connect.prepareStatement("SELECT Nom FROM dbinstallations.Software;");
 			PreparedStatement prepStatMatri = connect.prepareStatement("SELECT NomPrenom FROM dbinstallations.ResponsableReseaux;");
 			PreparedStatement prepStatOS = connect.prepareStatement("SELECT Libelle FROM dbinstallations.OS;");
