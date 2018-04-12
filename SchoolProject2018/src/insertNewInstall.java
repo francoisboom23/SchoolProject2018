@@ -120,7 +120,7 @@ public class insertNewInstall extends JPanel{
 	public void addInstall(Connection connect) {
 
 		try {
-			String SqlInstruction="INSERT INTO Installations values (?,?,?,?,?,?,?,?,?,?,?";
+			String SqlInstruction="INSERT INTO Installations values (?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement myPrepStat = connect.prepareStatement(SqlInstruction);
 			
 			//IDTABLEINSTALL//
