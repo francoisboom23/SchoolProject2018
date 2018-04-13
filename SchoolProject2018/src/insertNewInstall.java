@@ -78,8 +78,8 @@ public class insertNewInstall extends JPanel{
 //fill all combobox
 	public void fillCombo(Connection connect) {
 		comboSoft.removeAllItems();
-//		comboMatri.removeAllItems();
-//		comboOS.removeAllItems();
+		comboMatri.removeAllItems();
+		comboOS.removeAllItems();
 		comboSoft.addItem("Software:");
 		comboMatri.addItem("Network Responsable:");
 		comboOS.addItem("OS:");
@@ -105,10 +105,10 @@ public class insertNewInstall extends JPanel{
 	}
 //clean all jtextfield	
 	public void cleanTextField() {
-		textDate.setText("");
-		textCommentaire.setText("");
-		textDuree.setText("");
-		textRef.setText("");
+		textDate.setText("installation date:");
+		textCommentaire.setText("commentaire:");
+		textDuree.setText("installation duration:");
+		textRef.setText("installation reference:");
 		if(comboValid.getSelectedItem()=="planified") {
 			textDatePrevoir.setText("");
 		}
