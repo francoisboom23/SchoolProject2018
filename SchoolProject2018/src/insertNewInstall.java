@@ -18,7 +18,7 @@ public class insertNewInstall extends JPanel{
 
 	private JComboBox comboSoft,comboMatri,comboOS,comboType,comboValid;
 	private JTextField textDate,textCommentaire,textDuree,textRef,textDatePrevoir;
-	private String[] type = {"Type:","standart","custom"};
+	private String[] type = {"Type:","standard","custom"};
 	private String[] valid = {"State:","planified","work in progress","finished"};
 	private static Connection connect;
 	
@@ -115,11 +115,12 @@ public class insertNewInstall extends JPanel{
 		else {
 			textDatePrevoir.setText("date planified:");
 		}
+		System.out.println(comboValid.getSelectedItem());
 	}
 	public void addInstall(Connection connect) {
 
 		try {
-			String SqlInstruction="INSERT INTO Installation (IdInstallation, DateInstallation, TypeInstallation, Commentaires, DureeInstallation, RefProcedureInstalation, Validation, DateValidation, CodeSoftware, Matricule,CodeOS) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+			String SqlInstruction="INSERT INTO Installation (IdInstallation, DateInstallation, TypeInstallation, Commentaires, DureeInstallation, RefProcedureInstallation, Validation, DateValidation, CodeSoftware, Matricule,CodeOS) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 			//String SqlInstruction="INSERT INTO Installation VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
 			PreparedStatement myPrepStat = connect.prepareStatement(SqlInstruction);
@@ -173,25 +174,25 @@ public class insertNewInstall extends JPanel{
 			
 			// COLONNE VALIDATION +dateprevoir //
 			
-			if(comboType.getSelectedItem().equals("planified")) {
+			if(comboValid.getSelectedItem().equals("planified")) {
+				System.out.println(comboValid.getSelectedItem());
 				myPrepStat.setString(7, (String) comboType.getSelectedItem());
 				if(!textDatePrevoir.getText().equals("")) {
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
 					java.util.Date date = sdf.parse(textDatePrevoir.getText());
 					myPrepStat.setDate(8, new java.sql.Date(date.getTime()));	
+				}
 			}
-
-			}
-			if(comboType.getSelectedItem().equals("work in progress")) {
+			if(comboValid.getSelectedItem().equals("work in progress")) {
+				System.out.println(comboValid.getSelectedItem());
 				myPrepStat.setString(7, (String) comboType.getSelectedItem());
 				myPrepStat.setNull(8, Types.DATE);
-				
-
 			}
-			if(comboType.getSelectedItem().equals("finished")) {
+			if(comboValid.getSelectedItem().equals("finished")) {
+				System.out.println(comboValid.getSelectedItem());
 				myPrepStat.setString(7, (String) comboType.getSelectedItem());
 				myPrepStat.setNull(8, Types.DATE);
-		}
+			}
 			
 			//COLONNECODESOFTWARE//
 			if(comboSoft.getSelectedItem().equals("Bob50")) {
@@ -210,12 +211,12 @@ public class insertNewInstall extends JPanel{
 			
 		
 		int nbUpdatesLines = myPrepStat.executeUpdate();
+		
 		System.out.println("ok");
 		System.out.println(nbUpdatesLines);
 		}
 			
 		 catch (SQLException | ParseException e) {
-			 System.out.println("erreur");
 			 System.out.println(e.getMessage());
 		}
 		
@@ -293,7 +294,6 @@ public class insertNewInstall extends JPanel{
 			PreparedStatement prepStatSoft = connect.prepareStatement("SELECT * FROM dbinstallations.Installation;");
 			TableModelGen table1 = AccessBDGen.creerTableModel(prepStatSoft);
 			count=table1.getRowCount();
-			System.out.println(table1.getRowCount());
 		} 
 		catch (SQLException e) {}
 		return count;
