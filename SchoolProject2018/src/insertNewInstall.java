@@ -120,7 +120,7 @@ public class insertNewInstall extends JPanel{
 
 		try {
 			String SqlInstruction="INSERT INTO Installation (IdInstallation, DateInstallation, TypeInstallation, Commentaires, DureeInstallation, RefProcedureInstalation, Validation, DateValidation, CodeSoftware, Matricule,CodeOS) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-			//String SqlInstruction="INSERT INTO Installation VALUES (?,?,?,?,?,?,?,?,?,?,?)";//
+			//String SqlInstruction="INSERT INTO Installation VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
 			PreparedStatement myPrepStat = connect.prepareStatement(SqlInstruction);
 			
@@ -175,16 +175,18 @@ public class insertNewInstall extends JPanel{
 			
 			if(comboType.getSelectedItem().equals("planified")) {
 				myPrepStat.setString(7, (String) comboType.getSelectedItem());
-				myPrepStat.setNull(8, Types.DATE);
-			}
-			if(comboType.getSelectedItem().equals("work in progress")) {
-				myPrepStat.setString(7, (String) comboType.getSelectedItem());
-				
-			if(!textDatePrevoir.getText().equals("")) {
+				if(!textDatePrevoir.getText().equals("")) {
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
 					java.util.Date date = sdf.parse(textDatePrevoir.getText());
 					myPrepStat.setDate(8, new java.sql.Date(date.getTime()));	
 			}
+
+			}
+			if(comboType.getSelectedItem().equals("work in progress")) {
+				myPrepStat.setString(7, (String) comboType.getSelectedItem());
+				myPrepStat.setNull(8, Types.DATE);
+				
+
 			}
 			if(comboType.getSelectedItem().equals("finished")) {
 				myPrepStat.setString(7, (String) comboType.getSelectedItem());
