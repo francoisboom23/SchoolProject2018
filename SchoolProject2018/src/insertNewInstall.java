@@ -122,7 +122,7 @@ public class insertNewInstall extends JPanel{
 
 		try {
 			String SqlInstruction="INSERT INTO Installation (IdInstallation, DateInstallation, TypeInstallation, Commentaires, DureeInstallation, RefProcedureInstallation, Validation, DateValidation, CodeSoftware, Matricule,CodeOS) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-			//String SqlInstruction="INSERT INTO Installation VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+		//	String SqlInstruction="INSERT INTO Installation VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
 			PreparedStatement myPrepStat = connect.prepareStatement(SqlInstruction);
 			
@@ -199,16 +199,54 @@ public class insertNewInstall extends JPanel{
 			if(comboSoft.getSelectedItem().equals("Bob50")) {
 				myPrepStat.setString(9, "Bob001");
 			}
+			if(comboSoft.getSelectedItem().equals("NetBeans")) {
+				myPrepStat.setString(9, "NB02");
+			}
+			if(comboSoft.getSelectedItem().equals("Office 2013")) {
+				myPrepStat.setString(9, "Of13");
+			}
+			if(comboSoft.getSelectedItem().equals("Oracle 11g")) {
+				myPrepStat.setString(9, "Or11");
+			}
+			if(comboSoft.getSelectedItem().equals("Visual Studio")) {
+				myPrepStat.setString(9, "Vs12");
+			}
+			
 			
 			//COLONNEADMINRESEAU//
 			if(comboMatri.getSelectedItem().equals("Alexandre Baligant")){
 				myPrepStat.setString(10, "AlBa");
+			}
+			if(comboMatri.getSelectedItem().equals("André Van Kerrebroeck")){
+				myPrepStat.setString(10, "AVK");
+			}
+			if(comboMatri.getSelectedItem().equals("Marvin Gobin")){
+				myPrepStat.setString(10, "MarGob");
 			}
 			
 			//COLONNETABLEOS//
 			if(comboOS.getSelectedItem().equals("Fedora 2012")) {
 				myPrepStat.setString(11, "Fedora");
 			}
+			if(comboOS.getSelectedItem().equals("Linux Mint")) {
+				myPrepStat.setString(11, "Mint");
+			}
+			if(comboOS.getSelectedItem().equals("Red Hat 8 Linux EN")) {
+				myPrepStat.setString(11, "RedHat8");
+			}
+			if(comboOS.getSelectedItem().equals("Ubuntu 2012")) {
+				myPrepStat.setString(11, "Ubuntu");
+			}
+			if(comboOS.getSelectedItem().equals("Windows 7 Professional English")) {
+				myPrepStat.setString(11, "W7ProfEn");
+			}
+			if(comboOS.getSelectedItem().equals("Windows 10 Professional English")) {
+				myPrepStat.setString(11, "W8ProfEn");
+			}
+			if(comboOS.getSelectedItem().equals("Windows 8 Prof Français")) {
+				myPrepStat.setString(11, "W8ProfFr");
+			}
+			
 			
 		
 		int nbUpdatesLines = myPrepStat.executeUpdate();
