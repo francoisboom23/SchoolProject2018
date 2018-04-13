@@ -19,7 +19,7 @@ public class insertNewInstall extends JPanel{
 	private JComboBox comboSoft,comboMatri,comboOS,comboType,comboValid;
 	private JTextField textDate,textCommentaire,textDuree,textRef,textDatePrevoir;
 	private String[] type = {"Type:","standard","custom"};
-	private String[] valid = {"State:","planified","work in progress","finished"};
+	private String[] valid = {"State:","planified","working on","finished"};
 	private static Connection connect;
 	
 	public insertNewInstall(Connection connect) {
@@ -78,8 +78,8 @@ public class insertNewInstall extends JPanel{
 //fill all combobox
 	public void fillCombo(Connection connect) {
 		comboSoft.removeAllItems();
-		comboMatri.removeAllItems();
-		comboOS.removeAllItems();
+//		comboMatri.removeAllItems();
+//		comboOS.removeAllItems();
 		comboSoft.addItem("Software:");
 		comboMatri.addItem("Network Responsable:");
 		comboOS.addItem("OS:");
@@ -115,7 +115,6 @@ public class insertNewInstall extends JPanel{
 		else {
 			textDatePrevoir.setText("date planified:");
 		}
-		System.out.println(comboValid.getSelectedItem());
 	}
 //add in DB	
 	public void addInstall(Connection connect) {
@@ -184,15 +183,15 @@ public class insertNewInstall extends JPanel{
 					myPrepStat.setDate(8, new java.sql.Date(date.getTime()));	
 				}
 			}
-			if(comboValid.getSelectedItem().equals("work in progress")) {
+			if(comboValid.getSelectedItem().equals("working on")) {
 				System.out.println(comboValid.getSelectedItem());
 				myPrepStat.setString(7, (String) comboValid.getSelectedItem());
-				myPrepStat.setNull(8, Types.VARCHAR);
+				myPrepStat.setNull(8, Types.DATE);
 			}
 			if(comboValid.getSelectedItem().equals("finished")) {
 				System.out.println(comboValid.getSelectedItem());
 				myPrepStat.setString(7, (String) comboValid.getSelectedItem());
-				myPrepStat.setNull(8, Types.VARCHAR);
+				myPrepStat.setNull(8, Types.DATE);
 			}
 			
 			//COLONNECODESOFTWARE//
@@ -246,13 +245,7 @@ public class insertNewInstall extends JPanel{
 			if(comboOS.getSelectedItem().equals("Windows 8 Prof Français")) {
 				myPrepStat.setString(11, "W8ProfFr");
 			}
-			
-			
-		
 		int nbUpdatesLines = myPrepStat.executeUpdate();
-		
-		System.out.println("ok");
-		System.out.println(nbUpdatesLines);
 		}
 			
 		 catch (SQLException | ParseException e) {

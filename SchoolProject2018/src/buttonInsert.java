@@ -18,7 +18,7 @@ public class buttonInsert extends JPanel{
 		this.connect=connect;
 //initialization
 		validate = new JButton("validate");
-		clean = new JButton("clean textfield");
+		clean = new JButton("clean field");
 //add
 		add(validate);
 		add(clean);
