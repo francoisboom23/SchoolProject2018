@@ -43,12 +43,14 @@ public class insertNewInstall extends JPanel{
 //		comboMatri.addItem("Network Responsable:");
 //		comboOS.addItem("OS:");
 		fillCombo(connect);
-//tooltips
+//tooltips	
 		textDate.setToolTipText("installation date");
 		textCommentaire.setToolTipText("commentary");
 		textDuree.setToolTipText("installation duration");
 		textRef.setToolTipText("installation reference");
 		textDatePrevoir.setToolTipText("date planified");
+		
+
 //add
 		add(comboSoft);
 		add(comboMatri);
@@ -78,9 +80,9 @@ public class insertNewInstall extends JPanel{
 	}
 //fill all combobox
 	public void fillCombo(Connection connect) {
-		//comboSoft.removeAllItems();
-		//comboMatri.removeAllItems();
-	//	comboOS.removeAllItems();
+		comboSoft.removeAllItems();
+		comboMatri.removeAllItems();
+		comboOS.removeAllItems();
 		comboSoft.addItem("Software:");
 		comboMatri.addItem("Network Responsable:");
 		comboOS.addItem("OS:");
@@ -162,7 +164,10 @@ public class insertNewInstall extends JPanel{
 			
 			if(!textDuree.getText().equals("")) {
 				int i =Integer.parseInt(textDuree.getText());
-				myPrepStat.setInt(5, i);
+				myPrepStat.setInt(5, i);}
+				else {
+					JOptionPane.showMessageDialog(null," Insert a value");
+				
 
 			}
 			
