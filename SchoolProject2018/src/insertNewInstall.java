@@ -119,11 +119,12 @@ public class insertNewInstall extends JPanel{
 	public void addInstall(Connection connect) {
 
 		try {
-			String SqlInstruction="INSERT INTO Installations values (?,?,?,?,?,?,?,?,?,?,?)";
+			String SqlInstruction="INSERT INTO Installation VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement myPrepStat = connect.prepareStatement(SqlInstruction);
 			
 			//IDTABLEINSTALL//
-			myPrepStat.setInt(1,idCount(connect));
+			myPrepStat.setInt(1,idCount(connect)+1);
+
 			
 			//COLONNE DATE//	
 			if(!textDate.getText().equals("")) {
@@ -176,11 +177,11 @@ public class insertNewInstall extends JPanel{
 			if(comboType.getSelectedItem().equals("work in progress")) {
 				myPrepStat.setString(7, (String) comboType.getSelectedItem());
 				
-				if(!textDatePrevoir.getText().equals("")) {
+			if(!textDatePrevoir.getText().equals("")) {
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
 					java.util.Date date = sdf.parse(textDatePrevoir.getText());
 					myPrepStat.setDate(8, new java.sql.Date(date.getTime()));	
-				}
+			}
 			}
 			if(comboType.getSelectedItem().equals("finished")) {
 				myPrepStat.setString(7, (String) comboType.getSelectedItem());
@@ -204,10 +205,13 @@ public class insertNewInstall extends JPanel{
 			
 		
 		int nbUpdatesLines = myPrepStat.executeUpdate();
-		
+		System.out.println("ok");
+		System.out.println(nbUpdatesLines);
 		}
 			
 		 catch (SQLException | ParseException e) {
+			 System.out.println("erreur");
+			 System.out.println(e.getMessage());
 		}
 		
 		
@@ -277,20 +281,16 @@ public class insertNewInstall extends JPanel{
 			}
 		}
 	}
-	
+//counter id	
 	public static int idCount (Connection connect) {
-
-		int count =0;
-			try {
-				PreparedStatement prepStatSoft = connect.prepareStatement("SELECT * FROM dbinstallations.Installation;");
-				TableModelGen table1 = AccessBDGen.creerTableModel(prepStatSoft);
-				for(int i=0; i <= table1.getRowCount()-1; i++) {
-					count +=1;
-					System.out.println(count);
-					}
-				System.out.println(table1.getRowCount());
-			} catch (SQLException e) {
-			}
+		int count=0;
+		try {
+			PreparedStatement prepStatSoft = connect.prepareStatement("SELECT * FROM dbinstallations.Installation;");
+			TableModelGen table1 = AccessBDGen.creerTableModel(prepStatSoft);
+			count=table1.getRowCount();
+			System.out.println(table1.getRowCount());
+		} 
+		catch (SQLException e) {}
 		return count;
 	}
 }
