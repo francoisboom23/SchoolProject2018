@@ -283,12 +283,10 @@ public class insertNewInstall extends JPanel{
 
 		int count =0;
 			try {
-				PreparedStatement prepStatSoft = connect.prepareStatement("SELECT * FROM dbinstallations.Software;");
+				PreparedStatement prepStatSoft = connect.prepareStatement("SELECT * FROM dbinstallations.Installation;");
 				TableModelGen table1 = AccessBDGen.creerTableModel(prepStatSoft);
 				for(int i=0; i <= table1.getRowCount()-1; i++) {
 					count +=1;
-					System.out.print(count);
-
 					}
 
 			} catch (SQLException e) {
