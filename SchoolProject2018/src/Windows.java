@@ -118,7 +118,7 @@ public class Windows extends JFrame{
 					}
 			}
 			if(e.getSource() == about){
-				About f1 = new About();
+				About f1 = new About(Windows.this);
 			}
 			if(e.getSource() == welcome){
 				Windows.this.dispose();
@@ -149,7 +149,6 @@ public class Windows extends JFrame{
 			}
 			if(e.getSource() == InsertNewInstall) {
 				cont.removeAll();
-				//cont.setLayout(new BorderLayout());
 				insertNewInstall insertNew = new insertNewInstall (connect);
 				buttonInsert but = new buttonInsert(insertNew,connect);
 				cont.add(insertNew);
