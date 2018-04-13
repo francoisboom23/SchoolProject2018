@@ -119,7 +119,7 @@ public class insertNewInstall extends JPanel{
 	public void addInstall(Connection connect) {
 
 		try {
-			String SqlInstruction="INSERT INTO Installations values (?,?,?,?,?,?,?,?,?,?,?)";
+			String SqlInstruction="INSERT INTO Installation (IdInstallation, DateInstallation, TypeInstallation, Commentaires, DureeInstallation, RefProcedureInstalation, Validation, DateValidation, CodeSoftware, Matricule,CodeOS) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement myPrepStat = connect.prepareStatement(SqlInstruction);
 			
 			//IDTABLEINSTALL//
@@ -130,6 +130,7 @@ public class insertNewInstall extends JPanel{
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
 			java.util.Date date = sdf.parse(textDate.getText());
 			myPrepStat.setDate(2, new java.sql.Date(date.getTime()));
+			System.out.println(date);
 			}
 			
 			//COLONNE TYPEINSTALL//
