@@ -9,6 +9,7 @@ import java.util.GregorianCalendar;
 
 import javax.swing.*;
 
+import com.sun.scenario.effect.AbstractShadow.ShadowMode;
 
 import accessBD.AccessBDGen;
 import accessBD.TableModelGen;
@@ -77,9 +78,9 @@ public class insertNewInstall extends JPanel{
 	}
 //fill all combobox
 	public void fillCombo(Connection connect) {
-		comboSoft.removeAllItems();
-		comboMatri.removeAllItems();
-		comboOS.removeAllItems();
+		//comboSoft.removeAllItems();
+		//comboMatri.removeAllItems();
+	//	comboOS.removeAllItems();
 		comboSoft.addItem("Software:");
 		comboMatri.addItem("Network Responsable:");
 		comboOS.addItem("OS:");
@@ -90,9 +91,11 @@ public class insertNewInstall extends JPanel{
 			TableModelGen table1 = AccessBDGen.creerTableModel(prepStatSoft);
 			TableModelGen table2 = AccessBDGen.creerTableModel(prepStatMatri);
 			TableModelGen table3 = AccessBDGen.creerTableModel(prepStatOS);
+			
 			for(int i=0; i <= table1.getRowCount()-1; i++) {
 				comboSoft.addItem(table1.getValueAt(i, 0));
 				}
+			
 			for(int i=0; i <= table2.getRowCount()-1; i++) {
 				comboMatri.addItem(table2.getValueAt(i, 0));
 				}
@@ -254,6 +257,10 @@ public class insertNewInstall extends JPanel{
 		
 		
 	}
+private void ShowMessageDialog(Object object) {
+	// TODO Auto-generated method stub
+	
+}
 //mouse listener
 	private class mouse implements MouseListener,MouseMotionListener{
 		public void mouseClicked(MouseEvent e) {

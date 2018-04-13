@@ -6,6 +6,7 @@ import java.sql.*;
 import javax.swing.*;
 
 public class buttonInsert extends JPanel{
+	public static final Windows Windows = null;
 	private JButton validate, clean;
 	private insertNewInstall pan;
 	private Connection connect;
@@ -32,6 +33,7 @@ public class buttonInsert extends JPanel{
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource()==clean) {
 				pan.fillCombo(connect);
+
 			}
 			if(e.getSource()==validate) {
 				pan.addInstall(connect);

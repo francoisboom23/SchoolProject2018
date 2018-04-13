@@ -19,6 +19,8 @@ public class About extends JFrame{
 		add(author);
 		
 		setVisible(true);
+		
+		
 
 	}
 }
