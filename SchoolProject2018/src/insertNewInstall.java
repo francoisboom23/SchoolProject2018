@@ -117,6 +117,7 @@ public class insertNewInstall extends JPanel{
 		}
 		System.out.println(comboValid.getSelectedItem());
 	}
+//add in DB	
 	public void addInstall(Connection connect) {
 
 		try {
