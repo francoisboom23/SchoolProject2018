@@ -9,7 +9,6 @@ import java.util.GregorianCalendar;
 
 import javax.swing.*;
 
-import com.sun.glass.ui.CommonDialogs.Type;
 
 import accessBD.AccessBDGen;
 import accessBD.TableModelGen;
@@ -91,7 +90,7 @@ public class insertNewInstall extends JPanel{
 			TableModelGen table1 = AccessBDGen.creerTableModel(prepStatSoft);
 			TableModelGen table2 = AccessBDGen.creerTableModel(prepStatMatri);
 			TableModelGen table3 = AccessBDGen.creerTableModel(prepStatOS);
-			for(int i=0; i <= table2.getRowCount()-1; i++) {
+			for(int i=0; i <= table1.getRowCount()-1; i++) {
 				comboSoft.addItem(table1.getValueAt(i, 0));
 				}
 			for(int i=0; i <= table2.getRowCount()-1; i++) {
@@ -287,8 +286,9 @@ public class insertNewInstall extends JPanel{
 				TableModelGen table1 = AccessBDGen.creerTableModel(prepStatSoft);
 				for(int i=0; i <= table1.getRowCount()-1; i++) {
 					count +=1;
+					System.out.println(count);
 					}
-
+				System.out.println(table1.getRowCount());
 			} catch (SQLException e) {
 			}
 		return count;
