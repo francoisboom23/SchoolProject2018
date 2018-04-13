@@ -176,7 +176,7 @@ public class insertNewInstall extends JPanel{
 			
 			if(comboValid.getSelectedItem().equals("planified")) {
 				System.out.println(comboValid.getSelectedItem());
-				myPrepStat.setString(7, (String) comboType.getSelectedItem());
+				myPrepStat.setString(7, (String) comboValid.getSelectedItem());
 				if(!textDatePrevoir.getText().equals("")) {
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
 					java.util.Date date = sdf.parse(textDatePrevoir.getText());
@@ -185,12 +185,12 @@ public class insertNewInstall extends JPanel{
 			}
 			if(comboValid.getSelectedItem().equals("work in progress")) {
 				System.out.println(comboValid.getSelectedItem());
-				myPrepStat.setString(7, (String) comboType.getSelectedItem());
+				myPrepStat.setString(7, (String) comboValid.getSelectedItem());
 				myPrepStat.setNull(8, Types.DATE);
 			}
 			if(comboValid.getSelectedItem().equals("finished")) {
 				System.out.println(comboValid.getSelectedItem());
-				myPrepStat.setString(7, (String) comboType.getSelectedItem());
+				myPrepStat.setString(7, (String) comboValid.getSelectedItem());
 				myPrepStat.setNull(8, Types.DATE);
 			}
 			
