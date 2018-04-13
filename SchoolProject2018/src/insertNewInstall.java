@@ -121,8 +121,8 @@ public class insertNewInstall extends JPanel{
 	public void addInstall(Connection connect) {
 
 		try {
-			String SqlInstruction="INSERT INTO Installation (IdInstallation, DateInstallation, TypeInstallation, Commentaires, DureeInstallation, RefProcedureInstallation, Validation, DateValidation, CodeSoftware, Matricule,CodeOS) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-		//	String SqlInstruction="INSERT INTO Installation VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+			//String SqlInstruction="INSERT INTO Installation (IdInstallation, DateInstallation, TypeInstallation, Commentaires, DureeInstallation, RefProcedureInstallation, Validation, DateValidation, CodeSoftware, Matricule,CodeOS) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+		String SqlInstruction="INSERT INTO Installation VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
 			PreparedStatement myPrepStat = connect.prepareStatement(SqlInstruction);
 			
@@ -187,12 +187,12 @@ public class insertNewInstall extends JPanel{
 			if(comboValid.getSelectedItem().equals("work in progress")) {
 				System.out.println(comboValid.getSelectedItem());
 				myPrepStat.setString(7, (String) comboValid.getSelectedItem());
-				myPrepStat.setNull(8, Types.DATE);
+				myPrepStat.setNull(8, Types.VARCHAR);
 			}
 			if(comboValid.getSelectedItem().equals("finished")) {
 				System.out.println(comboValid.getSelectedItem());
 				myPrepStat.setString(7, (String) comboValid.getSelectedItem());
-				myPrepStat.setNull(8, Types.DATE);
+				myPrepStat.setNull(8, Types.VARCHAR);
 			}
 			
 			//COLONNECODESOFTWARE//
