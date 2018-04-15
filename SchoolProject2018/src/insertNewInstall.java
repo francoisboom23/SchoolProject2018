@@ -23,7 +23,7 @@ public class insertNewInstall extends JPanel{
 	
 	public insertNewInstall(Connection connect) {
 //generale
-		setBounds(150,0,200,380);
+		setBounds(150,10,200,380);
 		setLayout(new GridLayout(10,1,1,1));
 //initialization		
 		comboSoft = new JComboBox();
