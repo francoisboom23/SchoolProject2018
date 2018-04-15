@@ -45,7 +45,9 @@ public class ListPreInstalledSoft extends JPanel {
 				combox.addItem(table2.getValueAt(i, 0));
 				}
 			}
-		catch(SQLException e) {	}		
+		catch(SQLException e) {
+			JOptionPane.showMessageDialog(null,e.getMessage(), "error", JOptionPane.ERROR_MESSAGE);
+		}		
 	}
 //listener refresh button
 	private class Butlistener implements ActionListener{

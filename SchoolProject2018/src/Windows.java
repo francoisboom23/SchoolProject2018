@@ -118,7 +118,7 @@ public class Windows extends JFrame{
 					}
 			}
 			if(e.getSource() == about){
-				About f1 = new About(Windows.this);
+				About f1 = new About();
 			}
 			if(e.getSource() == welcome){
 				Windows.this.dispose();
@@ -164,7 +164,7 @@ public class Windows extends JFrame{
 			connect = AccessBDGen.connecter(nomBD, username, password);
 		}
 		catch(SQLException e) {
-			JOptionPane.showMessageDialog(null, "<html><body><p align=\\\"center\\\">Impossible to connect to DataBase<br>Username or password incorrect</p></body></html>", "failed to connect to DataBase", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null,e.getMessage(), "error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	public Container getCont(){

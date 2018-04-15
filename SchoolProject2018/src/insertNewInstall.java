@@ -9,8 +9,6 @@ import java.util.GregorianCalendar;
 
 import javax.swing.*;
 
-import com.sun.scenario.effect.AbstractShadow.ShadowMode;
-
 import accessBD.AccessBDGen;
 import accessBD.TableModelGen;
 
@@ -39,12 +37,9 @@ public class insertNewInstall extends JPanel{
 		textRef = new JTextField("installation reference:");
 		textDatePrevoir = new JTextField("date planified:");
 		textDatePrevoir.setEnabled(false);
-//		comboSoft.addItem("Software:");
-//		comboMatri.addItem("Network Responsable:");
-//		comboOS.addItem("OS:");
 		fillCombo(connect);
 //tooltips	
-		textDate.setToolTipText("installation date");
+		textDate.setToolTipText("<html><body><p>installation date<br>format:YYYY/MM/DD</p></body></html>");
 		textCommentaire.setToolTipText("commentary");
 		textDuree.setToolTipText("installation duration");
 		textRef.setToolTipText("installation reference");
@@ -106,7 +101,9 @@ public class insertNewInstall extends JPanel{
 				comboOS.addItem(table3.getValueAt(i, 0));
 				}
 		}
-		catch(SQLException e) {	}
+		catch(SQLException e) {
+			JOptionPane.showMessageDialog(null,e.getMessage(), "error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 //clean all jtextfield	
 	public void cleanTextField() {
@@ -262,10 +259,6 @@ public class insertNewInstall extends JPanel{
 		
 		
 	}
-private void ShowMessageDialog(Object object) {
-	// TODO Auto-generated method stub
-	
-}
 //mouse listener
 	private class mouse implements MouseListener,MouseMotionListener{
 		public void mouseClicked(MouseEvent e) {

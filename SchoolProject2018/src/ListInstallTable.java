@@ -19,7 +19,7 @@ public class ListInstallTable extends JPanel{
 		 	JTable table2 = new JTable(table);
 		 	table2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		 	JScrollPane scroll = new JScrollPane (table2) ;
-		 	scroll.setPreferredSize(new Dimension(480, 200));//270,200
+		 	//scroll.setPreferredSize(new Dimension(480, 200));//270,200
 		 	this.add(scroll);
 			}
 		catch(SQLException e) {	}
