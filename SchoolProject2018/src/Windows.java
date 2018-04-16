@@ -13,11 +13,12 @@ public class Windows extends JFrame{
 	private Container cont;
 	private JMenuBar menuBar;
 	private JMenu file, list, insert, delete, help;
-	private JMenuItem welcome,quit,InsertNewInstall,listInstall,deleteInstall,listPreInstall,listSoftSection,wiki,about;
+	private JMenuItem welcome,quit,InsertNewInstall,listInstall,deleteInstall,listPreInstall,listSoftSection,wiki,about,contact;
 	private Connection connect;
 	static final private String nomBD="dbinstallations";
 	static final private String username="root";
 	static final private String password="Tigrou007";
+	private Desktop desktop = Desktop.getDesktop();
 	
 	public Windows(){
 //general
@@ -63,6 +64,7 @@ public class Windows extends JFrame{
 		listSoftSection = new JMenuItem("list installed software for a specific section");
 		wiki = new JMenuItem("wiki");
 		about = new JMenuItem("about this program");
+		contact = new JMenuItem("contact");
 		//add
 		file.add(welcome);
 		file.addSeparator();
@@ -73,6 +75,7 @@ public class Windows extends JFrame{
 		insert.add(InsertNewInstall);
 		delete.add(deleteInstall);
 		help.add(wiki);
+		help.add(contact);
 		help.addSeparator();
 		help.add(about);
 		//listener
@@ -84,6 +87,7 @@ public class Windows extends JFrame{
 		listPreInstall.addActionListener(menuLi);
 		listSoftSection.addActionListener(menuLi);
 		InsertNewInstall.addActionListener(menuLi);
+		contact.addActionListener(menuLi);
 		
 //close program & SQL connection
 		WindowClose w = new WindowClose();
@@ -108,13 +112,20 @@ public class Windows extends JFrame{
 			if(e.getSource() == quit) {
 				System.exit(0);
 			}
-			if(e.getSource() == wiki){
+			if(e.getSource()==contact) {
 				try {//demander a madame
-					Desktop desktop = Desktop.getDesktop();
+					desktop.mail();
+					} 
+				catch (Exception d) {
+					d.printStackTrace();
+					}
+			}
+			if(e.getSource() == wiki){
+				try {
 					desktop.browse(new URI("http://www.google.com"));
 					} 
-				catch (Exception exceptWeb) {
-					exceptWeb.printStackTrace();
+				catch (Exception o) {
+					o.printStackTrace();
 					}
 			}
 			if(e.getSource() == about){
