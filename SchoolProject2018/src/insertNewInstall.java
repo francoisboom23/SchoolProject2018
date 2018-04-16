@@ -140,12 +140,16 @@ public class insertNewInstall extends JPanel{
 			}
 			
 			//COLONNE TYPEINSTALL//
+			if(!comboType.getSelectedItem().equals("Types:")) {
 			if(comboType.getSelectedItem().equals("standard")) {
 				myPrepStat.setBoolean(3, true);
 			}
 			else
 			{
 				myPrepStat.setBoolean(3, false);
+			}}
+			else {
+				JOptionPane.showMessageDialog(null, "Selectionner une valeure","erreure" , ERROR);
 			}
 			
 			//COLONNE COMMENTAIRE//

@@ -60,3 +60,21 @@ on uti.IdAnneeEtude = annee.IdAnneeEtude
 join section sect
 on annee.CodeSection = sect.CodeSection
 where sect.Libelle like 'Informatique de gestion';
+
+
+
+
+-----------------------------------------------------------------------
+
+SUPPRESSION 
+
+
+
+     select * from Installation inst
+     join Software soft
+     on inst.CodeSoftware = soft.CodeSoftware
+     join fournisseur fourn
+     on soft.CodeFourn = fourn.CodeFourn
+     where Designation like 'priminfo';
+     
+     'priminfo' est le getSelectedItem() dans notre code
