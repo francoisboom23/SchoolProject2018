@@ -12,7 +12,7 @@ public class About extends JFrame{
 		super("about this program");
 		setBounds(850,450,300,200);
 		setResizable(false);
-		setLayout(new GridLayout(2, 1,5,5));
+		setLayout(new FlowLayout());
 
 //content
 		author = new JLabel("<html><body><p align=\"center\">Version 1.0<br>Authors:<br>Curé Vincent<br>Devilez François</p></body></html>");
