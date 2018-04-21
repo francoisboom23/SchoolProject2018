@@ -161,9 +161,7 @@ public class Windows extends JFrame{
 			if(e.getSource() == InsertNewInstall) {
 				cont.removeAll();
 				insertNewInstall insertNew = new insertNewInstall (connect);
-				buttonInsert but = new buttonInsert(insertNew,connect);
 				cont.add(insertNew);
-				cont.add(but);
 				cont.repaint();
 				Windows.this.setVisible(true);
 			}
