@@ -20,7 +20,7 @@ public class insertNewInstall extends JPanel{
 	private JTextField textCommentaire,textDuree,textRef;
 	private String[] type = {"Type:","standard","custom"};
 	private String[] valid = {"State:","planified","working on","finished"};
-	private dateCombo datePanel;
+	private dateCombo datePanel,datePlanifiedPanel;
 	private java.util.Date dateSQL;
 	private String dataRecu;
 	
@@ -51,20 +51,19 @@ public class insertNewInstall extends JPanel{
 		comboValid = new JComboBox(valid);
 		fillCombo(connect);
 		
-		//textDate = new JTextField("installation date:");
 		textCommentaire = new JTextField("commentaire:");
 		textDuree = new JTextField("installation duration:");
 		textRef = new JTextField("installation reference:");
 		
 		buttonInsert but = new buttonInsert(this,connect);
 		this.datePanel = new dateCombo();
+		this.datePlanifiedPanel = new dateCombo();
+		datePlanifiedPanel.setVisible(false);
 		
 //tooltips	
-//		textDate.setToolTipText("<html><body><p>installation date<br>format:YYYY/MM/DD</p></body></html>");
 		textCommentaire.setToolTipText("commentary");
 		textDuree.setToolTipText("installation duration");
-		textRef.setToolTipText("installation reference");
-		
+		textRef.setToolTipText("installation reference");	
 
 //add
 		add(softwareLabel);
@@ -86,6 +85,7 @@ public class insertNewInstall extends JPanel{
 		add(refLabel);
 		add(textRef);
 		add(datePlanifiedLabel);
+		add(datePlanifiedPanel);
 		add(space);
 		add(but);
 //listener
@@ -136,7 +136,6 @@ public class insertNewInstall extends JPanel{
 	}
 //clean all jtextfield	
 	public void cleanTextField() {
-//		textDate.setText("installation date:");
 		textCommentaire.setText("commentaire:");
 		textDuree.setText("installation duration:");
 		textRef.setText("installation reference:");
@@ -160,15 +159,15 @@ public class insertNewInstall extends JPanel{
 			
 			//COLONNE TYPEINSTALL//
 			if(!comboType.getSelectedItem().equals("Types:")) {
-			if(comboType.getSelectedItem().equals("standard")) {
-				myPrepStat.setBoolean(3, true);
-			}
-			else
-			{
+				if(comboType.getSelectedItem().equals("standard")) {
+					myPrepStat.setBoolean(3, true);
+				}
+				else{
 				myPrepStat.setBoolean(3, false);
-			}}
+				}
+			}
 			else {
-				JOptionPane.showMessageDialog(null, "Selectionner une valeure","erreure" , ERROR);
+				JOptionPane.showMessageDialog(null, "Installation type not set","error" , ERROR);
 			}
 			
 			//COLONNE COMMENTAIRE//
@@ -204,11 +203,7 @@ public class insertNewInstall extends JPanel{
 			
 			if(comboValid.getSelectedItem().equals("planified")) {
 				myPrepStat.setString(7, (String) comboValid.getSelectedItem());
-				if(!textDatePrevoir.getText().equals("")) {
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
-					java.util.Date date = sdf.parse(textDatePrevoir.getText());
-					myPrepStat.setDate(8, new java.sql.Date(date.getTime()));	
-				}
+				myPrepStat.setDate(8, new java.sql.Date(datePlanifiedPanel.getDate().getTime()));
 			}
 			if(comboValid.getSelectedItem().equals("working on")) {
 				myPrepStat.setString(7, (String) comboValid.getSelectedItem());
@@ -273,7 +268,7 @@ public class insertNewInstall extends JPanel{
 		int nbUpdatesLines = myPrepStat.executeUpdate();
 		}
 			
-		 catch (SQLException | ParseException e) {
+		 catch (SQLException e) {
 			 System.out.println(e.getMessage());
 		}
 		
@@ -290,9 +285,6 @@ public class insertNewInstall extends JPanel{
 			}
 			if(e.getSource()==textRef) {
 				textRef.setText("");
-			}
-			if(e.getSource()==textDatePrevoir && comboValid.getSelectedItem()=="planified") {
-				textDatePrevoir.setText("");
 			}
 		}
 		public void mouseDragged(MouseEvent e) {
@@ -332,13 +324,10 @@ public class insertNewInstall extends JPanel{
 			if(e.getSource()==comboValid) {
 				comboValid.removeItem("State:");
 				if(comboValid.getSelectedItem()=="planified") {
-					textDatePrevoir.setEnabled(true);
-					datePlanifiedLabel.setEnabled(true);
+					datePlanifiedPanel.setVisible(true);
 				}
 				else {
-					textDatePrevoir.setEnabled(false);
-					datePlanifiedLabel.setEnabled(false);
-					textDatePrevoir.setText("date planified:");
+					datePlanifiedPanel.setVisible(false);
 				}
 			}
 		}

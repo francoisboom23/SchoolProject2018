@@ -13,8 +13,8 @@ public class buttonInsert extends JPanel{
 	
 	public buttonInsert(insertNewInstall pan,Connection connect) {
 //generale
-		setBounds(150,400,200,50);
-		setLayout(new GridLayout(1,1,1,1));
+		setBounds(0,0,10,10);
+
 		this.pan=pan;
 		this.connect=connect;
 //initialization
@@ -30,8 +30,6 @@ public class buttonInsert extends JPanel{
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource()==validate) {
 				pan.addInstall(connect);
-				//JOptionPane.showMessageDialog(null,"successfully added");
-				pan.cleanTextField();
 			}
 		}
 	}
