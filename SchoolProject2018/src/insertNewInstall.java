@@ -17,11 +17,12 @@ public class insertNewInstall extends JPanel{
 	
 	private JLabel softwareLabel, netLabel, osLabel,typeLabel,stateLabel,installDateLabel,commentaireLabel,dureeLabel,space,refLabel,datePlanifiedLabel;
 	private JComboBox comboSoft,comboMatri,comboOS,comboType,comboValid;
-	private JTextField textCommentaire,textDuree,textRef,textDatePrevoir;
+	private JTextField textCommentaire,textDuree,textRef;
 	private String[] type = {"Type:","standard","custom"};
 	private String[] valid = {"State:","planified","working on","finished"};
 	private dateCombo datePanel;
-	private java.util.Date date;
+	private java.util.Date dateSQL;
+	private String dataRecu;
 	
 	private static Connection connect;
 	
@@ -54,18 +55,15 @@ public class insertNewInstall extends JPanel{
 		textCommentaire = new JTextField("commentaire:");
 		textDuree = new JTextField("installation duration:");
 		textRef = new JTextField("installation reference:");
-		textDatePrevoir = new JTextField("date planified:");
 		
-		textDatePrevoir.setEnabled(false);
 		buttonInsert but = new buttonInsert(this,connect);
-		dateCombo datePanel = new dateCombo();
+		this.datePanel = new dateCombo();
 		
 //tooltips	
 //		textDate.setToolTipText("<html><body><p>installation date<br>format:YYYY/MM/DD</p></body></html>");
 		textCommentaire.setToolTipText("commentary");
 		textDuree.setToolTipText("installation duration");
 		textRef.setToolTipText("installation reference");
-		textDatePrevoir.setToolTipText("date planified");
 		
 
 //add
@@ -88,7 +86,6 @@ public class insertNewInstall extends JPanel{
 		add(refLabel);
 		add(textRef);
 		add(datePlanifiedLabel);
-		add(textDatePrevoir);
 		add(space);
 		add(but);
 //listener
@@ -97,7 +94,6 @@ public class insertNewInstall extends JPanel{
 		textCommentaire.addMouseListener(m);
 		textDuree.addMouseListener(m);
 		textRef.addMouseListener(m);
-		textDatePrevoir.addMouseListener(m);
 		comboSoft.addActionListener(a);
 		comboMatri.addActionListener(a);
 		comboOS.addActionListener(a);
@@ -144,12 +140,6 @@ public class insertNewInstall extends JPanel{
 		textCommentaire.setText("commentaire:");
 		textDuree.setText("installation duration:");
 		textRef.setText("installation reference:");
-		if(comboValid.getSelectedItem()=="planified") {
-			textDatePrevoir.setText("");
-		}
-		else {
-			textDatePrevoir.setText("date planified:");
-		}
 	}
 //add in DB	
 	public void addInstall(Connection connect) {
@@ -165,10 +155,8 @@ public class insertNewInstall extends JPanel{
 
 			
 			//COLONNE DATE//
-			date=datePanel.getDate();
-			myPrepStat.setDate(2, new java.sql.Date(date.getTime()));
-			System.out.println(date);
-			
+			dateSQL=datePanel.getDate();
+			myPrepStat.setDate(2, new java.sql.Date(dateSQL.getTime()));		
 			
 			//COLONNE TYPEINSTALL//
 			if(!comboType.getSelectedItem().equals("Types:")) {
@@ -215,7 +203,6 @@ public class insertNewInstall extends JPanel{
 			// COLONNE VALIDATION +dateprevoir //
 			
 			if(comboValid.getSelectedItem().equals("planified")) {
-				System.out.println(comboValid.getSelectedItem());
 				myPrepStat.setString(7, (String) comboValid.getSelectedItem());
 				if(!textDatePrevoir.getText().equals("")) {
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
@@ -224,12 +211,10 @@ public class insertNewInstall extends JPanel{
 				}
 			}
 			if(comboValid.getSelectedItem().equals("working on")) {
-				System.out.println(comboValid.getSelectedItem());
 				myPrepStat.setString(7, (String) comboValid.getSelectedItem());
 				myPrepStat.setNull(8, Types.DATE);
 			}
 			if(comboValid.getSelectedItem().equals("finished")) {
-				System.out.println(comboValid.getSelectedItem());
 				myPrepStat.setString(7, (String) comboValid.getSelectedItem());
 				myPrepStat.setNull(8, Types.DATE);
 			}
