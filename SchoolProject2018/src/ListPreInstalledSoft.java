@@ -71,6 +71,7 @@ public class ListPreInstalledSoft extends JPanel {
 				parent.getCont().add(f2,BorderLayout.CENTER);
 				parent.getCont().repaint();
 				parent.getCont().setVisible(true);
+				parent.validate();
 			}
 		}
 	}
