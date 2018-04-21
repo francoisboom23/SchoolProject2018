@@ -67,7 +67,7 @@ public class DelInstall extends JPanel {
 						JOptionPane.showMessageDialog(null, "<html><body><p align=\\\"center\\\">invalid selection</p></body></html>", "error", JOptionPane.ERROR_MESSAGE);
 					}
 					else {
-						sqlRequest = "SELECT * FROM Installation inst"+" JOIN Software soft"+" ON inst.CodeSoftware = soft.CodeSoftware "+"JOIN fournisseur fourn "+"ON soft.CodeFourn = fourn.CodeFourn "+"WHERE Designation LIKE'"+(String)listProvider.getSelectedItem()+"';";
+						sqlRequest = "SELECT * FROM Installation inst"+" JOIN Software soft"+" ON inst.CodeSoftware = soft.CodeSoftware "+"JOIN Fournisseur fourn "+"ON soft.CodeFourn = fourn.CodeFourn "+"WHERE Designation LIKE'"+(String)listProvider.getSelectedItem()+"';";
 						System.out.println(sqlRequest);
 					}
 					//System.out.println(sqlRequest);
