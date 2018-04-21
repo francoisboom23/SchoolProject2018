@@ -48,7 +48,7 @@ public class DelInstall extends JPanel {
 		//fill combobox
 		private void fillCombobox(Connection connect) {
 			try {
-				PreparedStatement prepStat = connect.prepareStatement("SELECT Designation FROM fournisseur;");
+				PreparedStatement prepStat = connect.prepareStatement("SELECT Designation FROM Fournisseur;");
 				TableModelGen table2 = AccessBDGen.creerTableModel(prepStat);
 				for(int i=0; i <= table2.getRowCount()-1; i++) {
 					listProvider.addItem(table2.getValueAt(i, 0));
