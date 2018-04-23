@@ -17,7 +17,9 @@ public class insertNewInstall extends JPanel{
 	
 	private JLabel softwareLabel, netLabel, osLabel,typeLabel,stateLabel,installDateLabel,commentaireLabel,dureeLabel,space,refLabel,datePlanifiedLabel;
 	private JComboBox comboSoft,comboMatri,comboOS,comboType,comboValid;
-	private JTextField textCommentaire,textDuree,textRef;
+	private JTextField textCommentaire,textRef;
+	private JSpinner duree;
+	private SpinnerNumberModel modelSpinner;
 	private String[] type = {"Type:","standard","custom"};
 	private String[] valid = {"State:","planified","working on","finished"};
 	private dateCombo datePanel,datePlanifiedPanel;
@@ -29,20 +31,20 @@ public class insertNewInstall extends JPanel{
 	public insertNewInstall(Connection connect) {
 //generale
 		setBounds(10,10,480,440);
-		setLayout(new GridLayout(11,2,1,1));
+		setLayout(new GridLayout(11,2,5,5));
 //initialization	
 		softwareLabel = new JLabel("Software:");
 		netLabel = new JLabel("Network responsable:");
 		osLabel = new JLabel("Operating system:");
 		typeLabel = new JLabel("Install type:");
 		stateLabel = new JLabel("State:");
-		installDateLabel = new JLabel("Installation date: (format: YYYY/MM/DD)");
+		installDateLabel = new JLabel("Installation date: (YYYY/MM/DD)");
 		commentaireLabel = new JLabel("Commantary:");
-		dureeLabel = new JLabel("Installation duration: (format: minutes)");
+		dureeLabel = new JLabel("Installation duration: (in minutes)");
 		space = new JLabel("");
 		refLabel = new JLabel("Installation reference:");
-		datePlanifiedLabel = new JLabel("Date planified: (format: YYYY/MM/DD)");
-		datePlanifiedLabel.setEnabled(false);
+		datePlanifiedLabel = new JLabel("Date planified: (YYYY/MM/DD)");
+		datePlanifiedLabel.setVisible(false);
 		
 		comboSoft = new JComboBox();
 		comboMatri = new JComboBox();
@@ -52,8 +54,11 @@ public class insertNewInstall extends JPanel{
 		fillCombo(connect);
 		
 		textCommentaire = new JTextField("commentaire:");
-		textDuree = new JTextField("installation duration:");
 		textRef = new JTextField("installation reference:");
+		
+		modelSpinner = new SpinnerNumberModel(0,0,999,1);
+		duree = new JSpinner(modelSpinner);
+		duree.setEditor(new JSpinner.DefaultEditor(duree));
 		
 		buttonInsert but = new buttonInsert(this,connect);
 		this.datePanel = new dateCombo();
@@ -62,7 +67,7 @@ public class insertNewInstall extends JPanel{
 		
 //tooltips	
 		textCommentaire.setToolTipText("commentary");
-		textDuree.setToolTipText("installation duration");
+		duree.setToolTipText("installation duration in minute");
 		textRef.setToolTipText("installation reference");	
 
 //add
@@ -81,7 +86,7 @@ public class insertNewInstall extends JPanel{
 		add(commentaireLabel);
 		add(textCommentaire);
 		add(dureeLabel);
-		add(textDuree);
+		add(duree);
 		add(refLabel);
 		add(textRef);
 		add(datePlanifiedLabel);
@@ -92,7 +97,6 @@ public class insertNewInstall extends JPanel{
 		mouse m = new mouse();
 		comboboxListener a = new comboboxListener();
 		textCommentaire.addMouseListener(m);
-		textDuree.addMouseListener(m);
 		textRef.addMouseListener(m);
 		comboSoft.addActionListener(a);
 		comboMatri.addActionListener(a);
@@ -137,11 +141,11 @@ public class insertNewInstall extends JPanel{
 //clean all jtextfield	
 	public void cleanTextField() {
 		textCommentaire.setText("commentaire:");
-		textDuree.setText("installation duration:");
+		duree.setValue(0);
 		textRef.setText("installation reference:");
 	}
 //add in DB	
-	public void addInstall(Connection connect) {
+	public void addInstall(Connection connect){
 
 		try {
 			//String SqlInstruction="INSERT INTO Installation (IdInstallation, DateInstallation, TypeInstallation, Commentaires, DureeInstallation, RefProcedureInstallation, Validation, DateValidation, CodeSoftware, Matricule,CodeOS) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
@@ -180,16 +184,19 @@ public class insertNewInstall extends JPanel{
 			}
 			
 			//COLONNE DUREINSTALLE//
-			
-			if(!textDuree.getText().equals("")) {
-				int i =Integer.parseInt(textDuree.getText());
-				myPrepStat.setInt(5, i);}
-				else {
-					JOptionPane.showMessageDialog(null," Insert a value");
-				
-
+//			
+//			if(!textDuree.getText().equals("")) {
+//			int i =Integer.parseInt(textDuree.getText());
+//			myPrepStat.setInt(5, i);}
+//			else {
+//				JOptionPane.showMessageDialog(null,"No Installation Time value !");
+//			}
+			if(!duree.getValue().equals(0)) {
+				myPrepStat.setInt(5, (int)duree.getValue());
 			}
-			
+			else {
+				JOptionPane.showMessageDialog(null,"No Installation Time value !");
+			}
 			//COLONNE REFPRO //
 			
 			if (!textRef.getText().equals("")) {
@@ -266,10 +273,12 @@ public class insertNewInstall extends JPanel{
 				myPrepStat.setString(11, "W8ProfFr");
 			}
 		int nbUpdatesLines = myPrepStat.executeUpdate();
+		JOptionPane.showMessageDialog(null, "succesfully added !");
+		cleanTextField();
 		}
 			
-		 catch (SQLException e) {
-			 System.out.println(e.getMessage());
+		 catch (Exception e) {
+			 JOptionPane.showMessageDialog(null, e.getMessage());
 		}
 		
 		
@@ -279,9 +288,6 @@ public class insertNewInstall extends JPanel{
 		public void mouseClicked(MouseEvent e) {
 			if(e.getSource()==textCommentaire) {
 				textCommentaire.setText("");
-			}
-			if(e.getSource()==textDuree) {
-				textDuree.setText("");
 			}
 			if(e.getSource()==textRef) {
 				textRef.setText("");
@@ -324,9 +330,11 @@ public class insertNewInstall extends JPanel{
 			if(e.getSource()==comboValid) {
 				comboValid.removeItem("State:");
 				if(comboValid.getSelectedItem()=="planified") {
+					datePlanifiedLabel.setVisible(true);
 					datePlanifiedPanel.setVisible(true);
 				}
 				else {
+					datePlanifiedLabel.setVisible(false);
 					datePlanifiedPanel.setVisible(false);
 				}
 			}
@@ -340,7 +348,9 @@ public class insertNewInstall extends JPanel{
 			TableModelGen table1 = AccessBDGen.creerTableModel(prepStatSoft);
 			count=table1.getRowCount();
 		} 
-		catch (SQLException e) {}
+		catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+		}
 		return count;
 	}
 }
