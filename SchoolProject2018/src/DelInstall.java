@@ -87,7 +87,7 @@ public class DelInstall extends JPanel {
 				}
 				
 				if(a.getSource()==delButton) {
-			//		int indiceLigneSelection = 
+			///	int indiceLigneSelection = 
 				}
 			}
 		}
