@@ -16,7 +16,6 @@ public class DelInstall extends JPanel {
 	private JComboBox listProvider;
 	private Windows parent;
 	private String sqlRequest;
-
 	
 	public DelInstall (Connection connect, Windows win) {
 		
@@ -63,8 +62,13 @@ public class DelInstall extends JPanel {
 		}
 	//listener refresh button
 		private class Butlistener implements ActionListener{
+			private int indiceLigneSelection ;
 			private TableInstalledSoft f2;
 			public void actionPerformed( ActionEvent a){
+				if(a.getSource()==delButton) {
+					//indiceLigneSelection = f2.getTable2().getSelectionModel().getMinSelectionIndex();		
+					System.out.println(f2.getTable2());
+					}
 				if(a.getSource()==listInstall){
 					if((String)listProvider.getSelectedItem()=="") {
 						sqlRequest="";
@@ -74,10 +78,11 @@ public class DelInstall extends JPanel {
 						sqlRequest = "SELECT inst.IdInstallation, inst.DateInstallation, inst.CodeSoftware, inst.Matricule FROM Installation inst"+" JOIN Software soft"+" ON inst.CodeSoftware = soft.CodeSoftware "+"JOIN Fournisseur fourn "+"ON soft.CodeFourn = fourn.CodeFourn "+"WHERE Designation LIKE'"+(String)listProvider.getSelectedItem()+"';";
 						System.out.println(sqlRequest);
 					}
-					//System.out.println(sqlRequest);
 					f2 = new TableInstalledSoft(parent.getConnect(), sqlRequest);
 					DelInstall listInstallByDesignation= new DelInstall (parent.getConnect(),parent.getWin());
 					listInstallByDesignation.SetBox((String)listProvider.getSelectedItem());
+					
+					parent.getCont().removeAll();
 					parent.getCont().setLayout(new BorderLayout());
 					parent.getCont().add(listInstallByDesignation,BorderLayout.NORTH);
 					parent.getCont().add(f2,BorderLayout.CENTER);
@@ -85,10 +90,6 @@ public class DelInstall extends JPanel {
 					parent.getCont().setVisible(true);
 					parent.validate();
 				}
-				
-				if(a.getSource()==delButton) {
-				int indiceLigneSelection = f2.getTable2().getSelectionModel().getMinSelectionIndex();		
-				System.out.println(indiceLigneSelection);}
 			}
 		}
 		

@@ -11,18 +11,14 @@ import accessBD.AccessBDGen;
 import accessBD.TableModelGen;
 
 public class TableInstalledSoft extends JPanel{
-	
-	private static JTable table2;
+	private JLabel vincent;
 	
 	TableInstalledSoft(Connection connect,String sqlRequest){
 		setBounds(0,0,500,500);	
 		try {
 			PreparedStatement prepStat = connect.prepareStatement(sqlRequest);
 			TableModelGen table = AccessBDGen.creerTableModel(prepStat);
-		 	table2 = new JTable(table);
-		 	///selectionner ligne dans jtable
-		 	table2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		 	//
+		 	JTable table2 = new JTable(table);
 		 	table2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		 	table2.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
 		 	JScrollPane scroll = new JScrollPane (table2) ;
@@ -30,10 +26,7 @@ public class TableInstalledSoft extends JPanel{
 		 	this.add(scroll);
 			}
 		catch(SQLException e) {	}
+//		add(vincent =new JLabel("vincent"));
 		setVisible(true);
 		}
-
-	public static int getTable2 () {
-		return table2.getSelectionModel().getMinSelectionIndex()+1;
-	}
 }

@@ -1,0 +1,80 @@
+use dbinstallations;
+
+select * from installation;
+
+/* POUR LE PREMIER POINT A AFFICHER EN JCOMBOBOX*/
+
+select CodeSoftware from installation; /*lister les codes software pour que l'utilisateurs choisisses*/
+select CodeOS from installation; /*lister les codes des os pour l'utilisateurs */
+Select NomPrenom from responsablereseaux; /*lister les responsables r�seaux */
+
+/* VALEUR DES CHAMPS VALIDATIONS */
+
+/* 1) A prevoir
+   2) Terminee
+   3) En cours 
+   
+   TROUVABLE EN FAISANT select * from installation;
+   */
+      select DateValidation from installation where installation.Validation like 'A prevoir';
+ 
+ /*-----------------------------------------------------------------------------------------------------------------------*/
+ 
+ /* lister la table installation */
+ 
+ select * from installation;
+ 
+ /*-----------------------------------------------------------------------------------------------------------------------*/
+ 
+ /* Afficher les installation par le fournisseur 'Priminfo' afin de la supprimer */
+ 
+ select Designation from fournisseur;
+ select * from Installation inst
+ join software soft 
+ on inst.CodeSoftware = soft.CodeSoftware
+ join fournisseur four
+ on four.CodeFourn = soft.CodeFourn
+ where four.Designation like 'Priminfo';
+ 
+  
+  /* avant dernier point */
+   
+SELECT Description FROM dbinstallations.TypePC;
+
+   select Nom 
+   from Software soft 
+   join SoftwarePreinstalle softpre 
+   on soft.CodeSoftware = softpre.CodeSoftware
+   join TypePC pc 
+   on softpre.IdTypePC = pc.IdTypePC
+   where pc.Description like 'Celeron 530'; /* JCOMBOBOX DES TYPES DE PC */ ->>>>>> Faire attention a la case, chez moi c'est important alors que chez toi non
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------*/   
+/* dernier point , JCOMBOB POUR LES SECTIONS */
+
+
+select Nom from software soft 
+join utilisationsoftware uti 
+on soft.CodeSoftware = uti.CodeSoftware
+join anneeetude annee
+on uti.IdAnneeEtude = annee.IdAnneeEtude
+join section sect
+on annee.CodeSection = sect.CodeSection
+where sect.Libelle like 'Informatique de gestion';
+
+
+
+
+-----------------------------------------------------------------------
+
+SUPPRESSION 
+
+
+
+     select * from Installation inst
+     join Software soft
+     on inst.CodeSoftware = soft.CodeSoftware
+     join fournisseur fourn
+     on soft.CodeFourn = fourn.CodeFourn
+     where Designation like 'priminfo';
+     
+     'priminfo' est le getSelectedItem() dans notre code
