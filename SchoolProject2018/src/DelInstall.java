@@ -12,7 +12,7 @@ import accessBD.TableModelGen;
 
 public class DelInstall extends JPanel {
 	private JLabel providerLabel;
-	private JButton listInstall;
+	private JButton listInstall,delButton; //addDelButton
 	private JComboBox listProvider;
 	private Windows parent;
 	private String sqlRequest;
@@ -32,14 +32,17 @@ public class DelInstall extends JPanel {
 		listProvider = new JComboBox ();
 		listProvider.addItem("");
 		listInstall = new JButton ("List");
+		delButton = new JButton ("Delete Install"); // Ajout boutton
 		add(providerLabel);
 		add(listProvider);
 		add(listInstall);
+		add(delButton);
 		
 		// Listener
 		
 		Butlistener a = new Butlistener();
 		listInstall.addActionListener(a);
+		delButton.addActionListener(a);
 		
 		// SQL Database
 		fillCombobox(connect);
@@ -67,7 +70,7 @@ public class DelInstall extends JPanel {
 						JOptionPane.showMessageDialog(null, "<html><body><p align=\\\"center\\\">invalid selection</p></body></html>", "error", JOptionPane.ERROR_MESSAGE);
 					}
 					else {
-						sqlRequest = "SELECT * FROM Installation inst"+" JOIN Software soft"+" ON inst.CodeSoftware = soft.CodeSoftware "+"JOIN Fournisseur fourn "+"ON soft.CodeFourn = fourn.CodeFourn "+"WHERE Designation LIKE'"+(String)listProvider.getSelectedItem()+"';";
+						sqlRequest = "SELECT inst.IdInstallation, inst.DateInstallation, inst.CodeSoftware, inst.Matricule FROM Installation inst"+" JOIN Software soft"+" ON inst.CodeSoftware = soft.CodeSoftware "+"JOIN Fournisseur fourn "+"ON soft.CodeFourn = fourn.CodeFourn "+"WHERE Designation LIKE'"+(String)listProvider.getSelectedItem()+"';";
 						System.out.println(sqlRequest);
 					}
 					//System.out.println(sqlRequest);
@@ -81,6 +84,10 @@ public class DelInstall extends JPanel {
 					parent.getCont().repaint();
 					parent.getCont().setVisible(true);
 					parent.validate();
+				}
+				
+				if(a.getSource()==delButton) {
+			//		int indiceLigneSelection = 
 				}
 			}
 		}
