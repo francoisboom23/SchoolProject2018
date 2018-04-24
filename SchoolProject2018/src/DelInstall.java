@@ -68,6 +68,14 @@ public class DelInstall extends JPanel {
 			public void actionPerformed( ActionEvent a){
 				if(a.getSource()==delButton) {
 					System.out.println(f2.getTable2());
+					sqlRequest="DELETE FROM Installation WHERE IdInstallation = "+f2.getTable2()+";";
+					try {
+						PreparedStatement prepstat = parent.getConnect().prepareStatement(sqlRequest);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					System.out.println(sqlRequest);
 					}
 				if(a.getSource()==listInstall){
 					if((String)listProvider.getSelectedItem()=="") {
