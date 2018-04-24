@@ -62,11 +62,11 @@ public class DelInstall extends JPanel {
 		}
 	//listener refresh button
 		private class Butlistener implements ActionListener{
-			private int indiceLigneSelection ;
+			private int indiceLigneSelection,index ;
 			private TableInstalledSoft f2;
+			
 			public void actionPerformed( ActionEvent a){
 				if(a.getSource()==delButton) {
-					//indiceLigneSelection = f2.getTable2().getSelectionModel().getMinSelectionIndex();		
 					System.out.println(f2.getTable2());
 					}
 				if(a.getSource()==listInstall){

@@ -20,9 +20,7 @@ public class TableInstalledSoft extends JPanel{
 			PreparedStatement prepStat = connect.prepareStatement(sqlRequest);
 			TableModelGen table = AccessBDGen.creerTableModel(prepStat);
 		 	table2 = new JTable(table);
-		 	///selectionner ligne dans jtable
 		 	table2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		 	//
 		 	table2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		 	table2.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
 		 	JScrollPane scroll = new JScrollPane (table2) ;
@@ -34,6 +32,8 @@ public class TableInstalledSoft extends JPanel{
 		}
 
 	public static int getTable2 () {
-		return table2.getSelectionModel().getMinSelectionIndex()+1;
+		//return table2.getSelectionModel().getMinSelectionIndex()+1;
+		//return table2.getSelectedRow();
+		return (int)table2.getValueAt(table2.getSelectionModel().getMinSelectionIndex(), 0);
 	}
 }
