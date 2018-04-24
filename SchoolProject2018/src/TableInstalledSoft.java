@@ -19,7 +19,7 @@ public class TableInstalledSoft extends JPanel{
 			PreparedStatement prepStat = connect.prepareStatement(sqlRequest);
 			TableModelGen table = AccessBDGen.creerTableModel(prepStat);
 		 	JTable table2 = new JTable(table);
-		 	//selectionner ligne dans jtable
+		 	///selectionner ligne dans jtable
 		 	table2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		 	//
 		 	table2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
