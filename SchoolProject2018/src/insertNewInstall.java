@@ -184,13 +184,6 @@ public class insertNewInstall extends JPanel{
 			}
 			
 			//COLONNE DUREINSTALLE//
-//			
-//			if(!textDuree.getText().equals("")) {
-//			int i =Integer.parseInt(textDuree.getText());
-//			myPrepStat.setInt(5, i);}
-//			else {
-//				JOptionPane.showMessageDialog(null,"No Installation Time value !");
-//			}
 			if(!duree.getValue().equals(0)) {
 				myPrepStat.setInt(5, (int)duree.getValue());
 			}
