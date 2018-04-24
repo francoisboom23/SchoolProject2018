@@ -12,12 +12,14 @@ import accessBD.TableModelGen;
 
 public class TableInstalledSoft extends JPanel{
 	
+	private JTable table2;
+	
 	TableInstalledSoft(Connection connect,String sqlRequest){
 		setBounds(0,0,500,500);	
 		try {
 			PreparedStatement prepStat = connect.prepareStatement(sqlRequest);
 			TableModelGen table = AccessBDGen.creerTableModel(prepStat);
-		 	JTable table2 = new JTable(table);
+		 	table2 = new JTable(table);
 		 	///selectionner ligne dans jtable
 		 	table2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		 	//
@@ -30,4 +32,7 @@ public class TableInstalledSoft extends JPanel{
 		catch(SQLException e) {	}
 		setVisible(true);
 		}
+	public int getSelectedRow() {
+		return table2.getSelectedRow();
+	}
 }

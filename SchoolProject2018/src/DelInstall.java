@@ -80,7 +80,7 @@ public class DelInstall extends JPanel {
 					TableInstalledSoft f2 = new TableInstalledSoft(parent.getConnect(), sqlRequest);
 					DelInstall listInstallByDesignation= new DelInstall (parent.getConnect(),parent.getWin());
 					listInstallByDesignation.SetBox((String)listProvider.getSelectedItem());
-					//selectedRow= f2.
+					selectedRow=f2.getSelectedRow();
 					
 					parent.getCont().removeAll();
 					parent.getCont().setLayout(new BorderLayout());
@@ -92,13 +92,16 @@ public class DelInstall extends JPanel {
 				}
 				
 				if(a.getSource()==delButton) {
-					
+					System.out.println(selectedRow);
 				}
 			}
 		}
 		//set combobox default selection same as selected refresh
 		public void SetBox(String selection){
 			listProvider.setSelectedItem(selection);
+		}
+		public void getSelectedRow() {
+			
 		}
 	}
 	
