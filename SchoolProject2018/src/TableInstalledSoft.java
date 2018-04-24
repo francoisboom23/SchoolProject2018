@@ -32,7 +32,8 @@ public class TableInstalledSoft extends JPanel{
 		catch(SQLException e) {	}
 		setVisible(true);
 		}
-	public int getSelectedRow() {
-		return table2.getSelectedRow();
+
+	public JTable getTable2 () {
+		return table2;
 	}
 }
