@@ -68,17 +68,20 @@ public class DelInstall extends JPanel {
 			public void actionPerformed( ActionEvent a){
 				if(a.getSource()==delButton) {
 					JOptionPane confirmation = new JOptionPane();
-					JOptionPane.showConfirmDialog(null," Are you sure to delete this line ?");
+				int i=	JOptionPane.showConfirmDialog(null," Are you sure to delete this line ?", "Confirm your choice", JOptionPane.YES_NO_OPTION);
 					System.out.println(f2.getTable2());
+					if(i==0) {
 					try {
 						sqlRequest="DELETE FROM Installation WHERE IdInstallation = ?;";
 						PreparedStatement prepstat = parent.getConnect().prepareStatement(sqlRequest);
 						prepstat.setInt(1,f2.getTable2());
 						int nbUpdatedLines = prepstat.executeUpdate(); 
 
-					} catch (SQLException e) {
+					} 
+					catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
+					}
 					}
 					System.out.println(sqlRequest);
 					}
@@ -105,7 +108,7 @@ public class DelInstall extends JPanel {
 				}
 			}
 		}
-		
+
 		
 		public void SetBox(String selection){
 			listProvider.setSelectedItem(selection);
