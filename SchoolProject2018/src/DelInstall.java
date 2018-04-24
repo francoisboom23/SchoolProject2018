@@ -17,6 +17,7 @@ public class DelInstall extends JPanel {
 	private Windows parent;
 	private String sqlRequest;
 
+	private int selectedRow;
 	
 	public DelInstall (Connection connect, Windows win) {
 		
@@ -32,7 +33,9 @@ public class DelInstall extends JPanel {
 		listProvider = new JComboBox ();
 		listProvider.addItem("");
 		listInstall = new JButton ("List");
-		delButton = new JButton ("Delete Install"); // Ajout boutton
+		delButton = new JButton ("Delete Install"); 
+		
+		// Ajout boutton
 		add(providerLabel);
 		add(listProvider);
 		add(listInstall);
@@ -48,7 +51,7 @@ public class DelInstall extends JPanel {
 		fillCombobox(connect);
 		
 	}
-		//fill combobox
+	//fill combobox
 		private void fillCombobox(Connection connect) {
 			try {
 				PreparedStatement prepStat = connect.prepareStatement("SELECT Designation FROM Fournisseur;");
@@ -77,6 +80,8 @@ public class DelInstall extends JPanel {
 					TableInstalledSoft f2 = new TableInstalledSoft(parent.getConnect(), sqlRequest);
 					DelInstall listInstallByDesignation= new DelInstall (parent.getConnect(),parent.getWin());
 					listInstallByDesignation.SetBox((String)listProvider.getSelectedItem());
+					//selectedRow= f2.
+					
 					parent.getCont().removeAll();
 					parent.getCont().setLayout(new BorderLayout());
 					parent.getCont().add(listInstallByDesignation,BorderLayout.NORTH);
@@ -87,12 +92,11 @@ public class DelInstall extends JPanel {
 				}
 				
 				if(a.getSource()==delButton) {
-			////	int indiceLigneSelection = 
+					
 				}
 			}
 		}
-		
-		
+		//set combobox default selection same as selected refresh
 		public void SetBox(String selection){
 			listProvider.setSelectedItem(selection);
 		}

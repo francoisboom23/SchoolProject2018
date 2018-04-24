@@ -64,7 +64,9 @@ public class ListPreInstalledSoft extends JPanel {
 				//System.out.println(sqlRequest);
 				TableInstalledSoft f2 = new TableInstalledSoft(parent.getConnect(), sqlRequest);
 				ListPreInstalledSoft listPreInstalledType= new ListPreInstalledSoft (parent.getConnect(),parent.getWin());
+			//	listPreInstalledType.combox.setSelectedItem((String)combox.getSelectedItem());
 				listPreInstalledType.SetBox((String)combox.getSelectedItem());
+
 				parent.getCont().removeAll();
 				parent.getCont().setLayout(new BorderLayout());
 				parent.getCont().add(listPreInstalledType,BorderLayout.NORTH);
@@ -75,7 +77,7 @@ public class ListPreInstalledSoft extends JPanel {
 			}
 		}
 	}
-//set combobox default selection same as selected refresh
+	//set combobox default selection same as selected refresh
 	public void SetBox(String selection){
 		combox.setSelectedItem(selection);
 	}

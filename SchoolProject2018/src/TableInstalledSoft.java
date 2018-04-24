@@ -11,7 +11,6 @@ import accessBD.AccessBDGen;
 import accessBD.TableModelGen;
 
 public class TableInstalledSoft extends JPanel{
-	private JLabel vincent;
 	
 	TableInstalledSoft(Connection connect,String sqlRequest){
 		setBounds(0,0,500,500);	
@@ -29,7 +28,6 @@ public class TableInstalledSoft extends JPanel{
 		 	this.add(scroll);
 			}
 		catch(SQLException e) {	}
-//		add(vincent =new JLabel("vincent"));
 		setVisible(true);
 		}
 }

@@ -23,7 +23,6 @@ public class insertNewInstall extends JPanel{
 	private String[] type = {"Type:","standard","custom"};
 	private String[] valid = {"State:","planified","working on","finished"};
 	private dateCombo datePanel,datePlanifiedPanel;
-	private java.util.Date dateSQL;
 	private String dataRecu;
 	
 	private static Connection connect;
@@ -61,9 +60,10 @@ public class insertNewInstall extends JPanel{
 		duree.setEditor(new JSpinner.DefaultEditor(duree));
 		
 		buttonInsert but = new buttonInsert(this,connect);
-		this.datePanel = new dateCombo();
-		this.datePlanifiedPanel = new dateCombo();
+		datePanel = new dateCombo();
+		datePlanifiedPanel = new dateCombo();
 		datePlanifiedPanel.setVisible(false);
+		datePanel.print();
 		
 //tooltips	
 		textCommentaire.setToolTipText("commentary");
@@ -158,8 +158,7 @@ public class insertNewInstall extends JPanel{
 
 			
 			//COLONNE DATE//
-			dateSQL=datePanel.getDate();
-			myPrepStat.setDate(2, new java.sql.Date(dateSQL.getTime()));		
+			myPrepStat.setDate(2, new java.sql.Date(datePanel.getDate().getTime()));		
 			
 			//COLONNE TYPEINSTALL//
 			if(!comboType.getSelectedItem().equals("Types:")) {

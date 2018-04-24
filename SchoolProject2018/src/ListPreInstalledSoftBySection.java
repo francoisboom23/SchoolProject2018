@@ -59,10 +59,10 @@ public class ListPreInstalledSoftBySection extends JPanel{
 					SqlInstruction="SELECT DISTINCT Nom FROM Software Soft JOIN UtilisationSoftware Uti ON Soft.CodeSoftware = Uti.CodeSoftware JOIN AnneeEtude Annee on Uti.IdAnneeEtude = Annee.IdAnneeEtude JOIN Section Sect ON Annee.CodeSection = Sect.CodeSection WHERE Sect.Libelle LIKE '"+(String)Combox.getSelectedItem()+"';";
 					System.out.println(SqlInstruction);
 				}
-				//System.out.println(SqlInstruction);
 				TableInstalledSoft f2 = new TableInstalledSoft(parent.getConnect(), SqlInstruction);
 				ListPreInstalledSoftBySection listPreInstalledSection= new ListPreInstalledSoftBySection (parent.getConnect(),parent.getWin());
 				listPreInstalledSection.SetBox((String)Combox.getSelectedItem());
+			
 				parent.getCont().removeAll();
 				parent.getCont().setLayout(new BorderLayout());
 				parent.getCont().add(listPreInstalledSection,BorderLayout.NORTH);
@@ -73,9 +73,8 @@ public class ListPreInstalledSoftBySection extends JPanel{
 				}
 			} 	
 		}
-	
-//set combobox default selection same as selected refresh
-	public void SetBox(String selection){
-		Combox.setSelectedItem(selection);
-	}
+	//set combobox default selection same as selected refresh
+		public void SetBox(String selection){
+			Combox.setSelectedItem(selection);
+		}
 }
