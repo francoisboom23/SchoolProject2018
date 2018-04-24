@@ -67,10 +67,15 @@ public class DelInstall extends JPanel {
 			
 			public void actionPerformed( ActionEvent a){
 				if(a.getSource()==delButton) {
+					JOptionPane confirmation = new JOptionPane();
+					JOptionPane.showConfirmDialog(null," Are you sure to delete this line ?");
 					System.out.println(f2.getTable2());
-					sqlRequest="DELETE FROM Installation WHERE IdInstallation = "+f2.getTable2()+";";
 					try {
+						sqlRequest="DELETE FROM Installation WHERE IdInstallation = ?;";
 						PreparedStatement prepstat = parent.getConnect().prepareStatement(sqlRequest);
+						prepstat.setInt(1,f2.getTable2());
+						int nbUpdatedLines = prepstat.executeUpdate(); 
+
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
