@@ -2,6 +2,7 @@
 
 public class Main {
 	public static void main(String[] args) {	
-		Home f1 = new Home();
+		//Home f1 = new Home();
+		loginScreen f1 = new loginScreen();
 	}
 }

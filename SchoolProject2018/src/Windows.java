@@ -19,15 +19,18 @@ public class Windows extends JFrame{
 	static final private String username="root";
 	static final private String password="Tigrou007";
 	private Desktop desktop = Desktop.getDesktop();
+	private windowsImage i;
+	private loginScreenPanel home;
 	
-	public Windows(){
+	public Windows(loginScreenPanel parent){
 //general
 		super("IESN Calculator Student Pro DVD Architect 2048");
 		cont = getContentPane();
 		//setBounds(0,0,1920,1080);
 		setBounds(710,290,500,500);
 		setResizable(false);
-		setLayout(null);
+		setLayout(new FlowLayout());
+		this.home=parent;
 		
 //connection SQL
 		connection();
@@ -93,6 +96,9 @@ public class Windows extends JFrame{
 //close program & SQL connection
 		WindowClose w = new WindowClose();
 		this.addWindowListener(w);
+//		
+		i = new windowsImage();
+		add(i);
 		
 		setVisible(true);
 	}
@@ -134,7 +140,7 @@ public class Windows extends JFrame{
 			}
 			if(e.getSource() == welcome){
 				Windows.this.dispose();
-				Home f2 = new Home();
+				Home f2 = new Home(home);
 			}
 			if(e.getSource() == listInstall){
 				//change le panel par un autre
@@ -178,7 +184,7 @@ public class Windows extends JFrame{
 //connection to DB
 	private void connection() {
 		try {
-			connect = AccessBDGen.connecter(nomBD, username, password);
+			connect = AccessBDGen.connecter(nomBD, home.getLogin(), home.getPassword());
 		}
 		catch(SQLException e) {
 			JOptionPane.showMessageDialog(null,e.getMessage(), "error", JOptionPane.ERROR_MESSAGE);

@@ -5,12 +5,14 @@ import javax.swing.*;
 public class Home extends JFrame{
 	private JLabel welcomeText;
 	private JButton enter;
+	private loginScreenPanel parent;
 	
-	public Home() {
+	public Home(loginScreenPanel parent) {
 		super("Welcome");
 		setBounds(850,450,300,100);
 		setResizable(false);
 		setLayout(new GridLayout(2,1,5,5));
+		this.parent=parent;
 //content	
 		//walcome
 		welcomeText = new JLabel("IESN Calculator Student Pro DVD Architect 2048");
@@ -33,13 +35,19 @@ public class Home extends JFrame{
 	class WindowClose extends WindowAdapter {
 		public void windowClosing(WindowEvent w) {
 			Home.this.dispose();
-			Windows f1 = new Windows();
+			Windows f1 = new Windows(parent);
 		}
 	}
 	private class Butlistener implements ActionListener{
 		public void actionPerformed( ActionEvent k){
 			Home.this.dispose();
-			Windows f1 = new Windows();
+			Windows f1 = new Windows(parent);
 		}
+	}
+	public String getLogin() {
+		return parent.getLogin();
+	}
+	public String getPassword() {
+		return parent.getPassword();
 	}
 }
