@@ -11,7 +11,7 @@ import accessBD.AccessBDGen;
 import accessBD.TableModelGen;
 
 public class DelInstall extends JPanel {
-	private JLabel providerLabel;
+	private JLabel providerLabel,indication;
 	private JButton listInstall,delButton; //addDelButton
 	private JComboBox listProvider;
 	private Windows parent;
@@ -22,12 +22,15 @@ public class DelInstall extends JPanel {
 		// general
 		
 		//setBounds(0,0,500,500);
+		setLayout(new FlowLayout());
 		parent=win;
 		
 		// controls
 		
 		providerLabel = new JLabel ("Provider :");
 		providerLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		indication = new JLabel("(select item to delete in table)");
+		indication.setHorizontalAlignment(SwingConstants.CENTER);
 		listProvider = new JComboBox ();
 		listProvider.addItem("");
 		listInstall = new JButton ("List");
@@ -107,6 +110,7 @@ public class DelInstall extends JPanel {
 					parent.getCont().setLayout(new BorderLayout());
 					parent.getCont().add(listInstallByDesignation,BorderLayout.NORTH);
 					parent.getCont().add(f2,BorderLayout.CENTER);
+					parent.getCont().add(indication,BorderLayout.SOUTH);
 					parent.getCont().repaint();
 					parent.getCont().setVisible(true);
 					parent.validate();
