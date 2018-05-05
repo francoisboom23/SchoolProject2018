@@ -21,7 +21,7 @@ public class DelInstall extends JPanel {
 		
 		// general
 		
-		setBounds(0,0,500,500);
+		//setBounds(0,0,500,500);
 		parent=win;
 		
 		// controls
@@ -68,7 +68,14 @@ public class DelInstall extends JPanel {
 			public void actionPerformed( ActionEvent a){
 				if(a.getSource()==delButton) {
 					JOptionPane confirmation = new JOptionPane();
-					JOptionPane.showConfirmDialog(null," Are you sure to delete this line ?");
+					if(f2.getTable2()==0) {
+						System.out.println("0");
+					}
+					else {
+						System.out.println("autre");
+					}
+					int input =JOptionPane.showConfirmDialog(null," Are you sure to delete this line ?");
+					if(input == 0) {
 					System.out.println(f2.getTable2());
 					try {
 						sqlRequest="DELETE FROM Installation WHERE IdInstallation = ?;";
@@ -82,6 +89,7 @@ public class DelInstall extends JPanel {
 					}
 					System.out.println(sqlRequest);
 					}
+				}
 				if(a.getSource()==listInstall){
 					if((String)listProvider.getSelectedItem()=="") {
 						sqlRequest="";

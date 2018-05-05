@@ -19,7 +19,7 @@ public class dateCombo  extends JPanel{
 	private java.util.Date dateJava;
 	
 	public dateCombo() {
-		//setBounds(150,400,200,50);
+		setBounds(0,0,20,50);
 		setLayout(new GridLayout(1,3,1,1));
 		day = new JComboBox(dayList);
 		month = new JComboBox(monthListText);

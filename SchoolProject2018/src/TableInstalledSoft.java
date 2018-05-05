@@ -32,8 +32,6 @@ public class TableInstalledSoft extends JPanel{
 		}
 
 	public static int getTable2 () {
-		//return table2.getSelectionModel().getMinSelectionIndex()+1;
-		//return table2.getSelectedRow();
 		return (int)table2.getValueAt(table2.getSelectionModel().getMinSelectionIndex(), 0);
 	}
 }

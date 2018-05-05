@@ -18,6 +18,7 @@ public class loginScreenPanel extends JPanel {
 	private loginScreen parent;
 	private loginScreenPanel ici;
 	private Connection connect;
+	static final private String nomBD="dbinstallations";
 	
 	public loginScreenPanel(loginScreen parent) {
 		//setBounds(850,450,300,140);
@@ -70,23 +71,30 @@ public class loginScreenPanel extends JPanel {
 	public class Butlistener implements ActionListener{
 		public void actionPerformed( ActionEvent a){
 			if(a.getSource()==loginbtn) {
-				System.out.println(login.getText());
-				if(login.getText().equals("root") && password.getText().equals("Tigrou007")) {
-					loginStr=login.getText();
-					passwordStr=password.getText();
+				try {
+					connect = AccessBDGen.connecter(nomBD, login.getText(), password.getText());
 					Home f1 = new Home(ici);
 					parent.dispose();
 				}
-				else {
-					JOptionPane.showMessageDialog(null, "not ok");
+				catch(SQLException e) {
+					JOptionPane.showMessageDialog(null,e.getMessage(), "error", JOptionPane.ERROR_MESSAGE);
 				}
+				
+//				System.out.println(login.getText());
+//				if(login.getText().equals("root") && password.getText().equals("Tigrou007")) {
+//					loginStr=login.getText();
+//					passwordStr=password.getText();
+//					Home f1 = new Home(ici);
+//					//Home f1 = new Home();
+//					parent.dispose();
+//				}
+//				else {
+//					JOptionPane.showMessageDialog(null, "incorrect password");
+//				}
 			}
 		}
 	}
-	public String getLogin() {
-		return login.getText();
-	}
-	public String getPassword() {
-		return password.getText();
+	public Connection getConnect() {
+		return connect;
 	}
 }

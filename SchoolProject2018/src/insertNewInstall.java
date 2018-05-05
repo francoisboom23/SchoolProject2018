@@ -29,8 +29,8 @@ public class insertNewInstall extends JPanel{
 	
 	public insertNewInstall(Connection connect) {
 //generale
-		setBounds(10,10,480,440);
-		setLayout(new GridLayout(11,2,5,5));
+		setBounds(0,0,400,400);
+		setLayout(new GridLayout(11,2,0,0));
 //initialization	
 		softwareLabel = new JLabel("Software:");
 		netLabel = new JLabel("Network responsable:");

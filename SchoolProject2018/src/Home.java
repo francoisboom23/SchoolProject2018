@@ -6,7 +6,6 @@ public class Home extends JFrame{
 	private JLabel welcomeText;
 	private JButton enter;
 	private loginScreenPanel parent;
-	
 	public Home(loginScreenPanel parent) {
 		super("Welcome");
 		setBounds(850,450,300,100);
@@ -43,11 +42,5 @@ public class Home extends JFrame{
 			Home.this.dispose();
 			Windows f1 = new Windows(parent);
 		}
-	}
-	public String getLogin() {
-		return parent.getLogin();
-	}
-	public String getPassword() {
-		return parent.getPassword();
 	}
 }
