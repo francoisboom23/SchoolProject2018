@@ -38,7 +38,7 @@ public class insertNewInstall extends JPanel{
 		typeLabel = new JLabel("Install type*");
 		stateLabel = new JLabel("State*");
 		installDateLabel = new JLabel("Installation date: (YYYY/MM/DD)*");
-		commentaireLabel = new JLabel("Commantary*");
+		commentaireLabel = new JLabel("Commantary");
 		dureeLabel = new JLabel("Installation duration: (in minutes)*");
 		obligatoire = new JLabel("(*mandatory field)");
 		refLabel = new JLabel("Installation reference");
@@ -187,7 +187,7 @@ public class insertNewInstall extends JPanel{
 				myPrepStat.setInt(5, (int)duree.getValue());
 			}
 			else {
-				JOptionPane.showMessageDialog(null,"No Installation Time value !");
+				JOptionPane.showMessageDialog(null,"No Installation Time value selected !","error" , ERROR);
 			}
 			//COLONNE REFPRO //
 			
@@ -214,55 +214,70 @@ public class insertNewInstall extends JPanel{
 			}
 			
 			//COLONNECODESOFTWARE//
-			if(comboSoft.getSelectedItem().equals("Bob50")) {
-				myPrepStat.setString(9, "Bob001");
+			if(comboSoft.getSelectedItem().equals("Software:")) {
+				JOptionPane.showMessageDialog(null,"No software responsable selected !","error" , ERROR);
 			}
-			if(comboSoft.getSelectedItem().equals("NetBeans")) {
-				myPrepStat.setString(9, "NB02");
-			}
-			if(comboSoft.getSelectedItem().equals("Office 2013")) {
-				myPrepStat.setString(9, "Of13");
-			}
-			if(comboSoft.getSelectedItem().equals("Oracle 11g")) {
-				myPrepStat.setString(9, "Or11");
-			}
-			if(comboSoft.getSelectedItem().equals("Visual Studio")) {
-				myPrepStat.setString(9, "Vs12");
+			else {
+				if(comboSoft.getSelectedItem().equals("Bob50")) {
+					myPrepStat.setString(9, "Bob001");
+				}
+				if(comboSoft.getSelectedItem().equals("NetBeans")) {
+					myPrepStat.setString(9, "NB02");
+				}
+				if(comboSoft.getSelectedItem().equals("Office 2013")) {
+					myPrepStat.setString(9, "Of13");
+				}
+				if(comboSoft.getSelectedItem().equals("Oracle 11g")) {
+					myPrepStat.setString(9, "Or11");
+				}
+				if(comboSoft.getSelectedItem().equals("Visual Studio")) {
+					myPrepStat.setString(9, "Vs12");
+				}
 			}
 			
 			
 			//COLONNEADMINRESEAU//
-			if(comboMatri.getSelectedItem().equals("Alexandre Baligant")){
-				myPrepStat.setString(10, "AlBa");
+			if(comboMatri.getSelectedItem().equals("Network Responsable:")) {
+				JOptionPane.showMessageDialog(null,"No network responsable selected !","error" , ERROR);
 			}
-			if(comboMatri.getSelectedItem().equals("André Van Kerrebroeck")){
-				myPrepStat.setString(10, "AVK");
-			}
-			if(comboMatri.getSelectedItem().equals("Marvin Gobin")){
-				myPrepStat.setString(10, "MarGob");
+			else {
+				if(comboMatri.getSelectedItem().equals("Alexandre Baligant")){
+					myPrepStat.setString(10, "AlBa");
+				}
+				if(comboMatri.getSelectedItem().equals("André Van Kerrebroeck")){
+					myPrepStat.setString(10, "AVK");
+				}
+				if(comboMatri.getSelectedItem().equals("Marvin Gobin")){
+					myPrepStat.setString(10, "MarGob");
+				}
 			}
 			
 			//COLONNETABLEOS//
-			if(comboOS.getSelectedItem().equals("Fedora 2012")) {
-				myPrepStat.setString(11, "Fedora");
+			if(comboOS.getSelectedItem().equals("OS:")) {
+				JOptionPane.showMessageDialog(null,"No OS selected !","error" , ERROR);
 			}
-			if(comboOS.getSelectedItem().equals("Linux Mint")) {
-				myPrepStat.setString(11, "Mint");
-			}
-			if(comboOS.getSelectedItem().equals("Red Hat 8 Linux EN")) {
-				myPrepStat.setString(11, "RedHat8");
-			}
-			if(comboOS.getSelectedItem().equals("Ubuntu 2012")) {
-				myPrepStat.setString(11, "Ubuntu");
-			}
-			if(comboOS.getSelectedItem().equals("Windows 7 Professional English")) {
-				myPrepStat.setString(11, "W7ProfEn");
-			}
-			if(comboOS.getSelectedItem().equals("Windows 10 Professional English")) {
-				myPrepStat.setString(11, "W8ProfEn");
-			}
-			if(comboOS.getSelectedItem().equals("Windows 8 Prof Français")) {
-				myPrepStat.setString(11, "W8ProfFr");
+			else {
+				if(comboOS.getSelectedItem().equals("Fedora 2012")) {
+					myPrepStat.setString(11, "Fedora");
+				}
+				if(comboOS.getSelectedItem().equals("Linux Mint")) {
+					myPrepStat.setString(11, "Mint");
+				}
+				if(comboOS.getSelectedItem().equals("Red Hat 8 Linux EN")) {
+					myPrepStat.setString(11, "RedHat8");
+				}
+				if(comboOS.getSelectedItem().equals("Ubuntu 2012")) {
+					myPrepStat.setString(11, "Ubuntu");
+				}
+				if(comboOS.getSelectedItem().equals("Windows 7 Professional English")) {
+					myPrepStat.setString(11, "W7ProfEn");
+				}
+				if(comboOS.getSelectedItem().equals("Windows 10 Professional English")) {
+					myPrepStat.setString(11, "W8ProfEn");
+				}
+				if(comboOS.getSelectedItem().equals("Windows 8 Prof Français")) {
+					myPrepStat.setString(11, "W8ProfFr");
+				}
 			}
 		int nbUpdatesLines = myPrepStat.executeUpdate();
 		JOptionPane.showMessageDialog(null, "succesfully added !");
@@ -270,8 +285,8 @@ public class insertNewInstall extends JPanel{
 		}
 			
 		 catch (Exception e) {
-			 JOptionPane.showMessageDialog(null, e.getMessage());
-		}
+			 System.out.println("error");
+		 }
 		
 		
 	}
