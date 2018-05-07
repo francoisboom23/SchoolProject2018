@@ -15,7 +15,7 @@ import accessBD.TableModelGen;
 public class insertNewInstall extends JPanel{
 //elements: idInstall, date install,type install, commentaires, durée install, ref procedure install,validation,date valid prevue, code soft(FK), matricule(FK),codeOS(FK)
 	
-	private JLabel softwareLabel, netLabel, osLabel,typeLabel,stateLabel,installDateLabel,commentaireLabel,dureeLabel,space,refLabel,datePlanifiedLabel;
+	private JLabel softwareLabel, netLabel, osLabel,typeLabel,stateLabel,installDateLabel,commentaireLabel,dureeLabel,obligatoire,refLabel,datePlanifiedLabel;
 	private JComboBox comboSoft,comboMatri,comboOS,comboType,comboValid;
 	private JTextField textCommentaire,textRef;
 	private JSpinner duree;
@@ -32,17 +32,17 @@ public class insertNewInstall extends JPanel{
 		setBounds(0,0,400,400);
 		setLayout(new GridLayout(11,2,0,0));
 //initialization	
-		softwareLabel = new JLabel("Software:");
-		netLabel = new JLabel("Network responsable:");
-		osLabel = new JLabel("Operating system:");
-		typeLabel = new JLabel("Install type:");
-		stateLabel = new JLabel("State:");
-		installDateLabel = new JLabel("Installation date: (YYYY/MM/DD)");
-		commentaireLabel = new JLabel("Commantary:");
-		dureeLabel = new JLabel("Installation duration: (in minutes)");
-		space = new JLabel("");
-		refLabel = new JLabel("Installation reference:");
-		datePlanifiedLabel = new JLabel("Date planified: (YYYY/MM/DD)");
+		softwareLabel = new JLabel("Software*");
+		netLabel = new JLabel("Network responsable*");
+		osLabel = new JLabel("Operating system*");
+		typeLabel = new JLabel("Install type*");
+		stateLabel = new JLabel("State*");
+		installDateLabel = new JLabel("Installation date: (YYYY/MM/DD)*");
+		commentaireLabel = new JLabel("Commantary*");
+		dureeLabel = new JLabel("Installation duration: (in minutes)*");
+		obligatoire = new JLabel("(*mandatory field)");
+		refLabel = new JLabel("Installation reference");
+		datePlanifiedLabel = new JLabel("Date planified: (YYYY/MM/DD)*");
 		datePlanifiedLabel.setVisible(false);
 		
 		comboSoft = new JComboBox();
@@ -91,7 +91,7 @@ public class insertNewInstall extends JPanel{
 		add(textRef);
 		add(datePlanifiedLabel);
 		add(datePlanifiedPanel);
-		add(space);
+		add(obligatoire);
 		add(but);
 //listener
 		mouse m = new mouse();
@@ -154,7 +154,7 @@ public class insertNewInstall extends JPanel{
 			PreparedStatement myPrepStat = connect.prepareStatement(SqlInstruction);
 			
 			//IDTABLEINSTALL//
-			myPrepStat.setInt(1,idCount(connect));
+			myPrepStat.setInt(1,idCount(connect)+1);
 
 			
 			//COLONNE DATE//
@@ -334,13 +334,10 @@ public class insertNewInstall extends JPanel{
 	}
 //counter id	
 	public int idCount (Connection connect) {
-		TableModelGen table1;
 		int count=0;
-		int a;
-		int k=1;
 		try {
 			PreparedStatement prepStatSoft = connect.prepareStatement("SELECT * FROM dbinstallations.Installation;");
-			table1 = AccessBDGen.creerTableModel(prepStatSoft);
+			TableModelGen table1 = AccessBDGen.creerTableModel(prepStatSoft);
 			count=table1.getRowCount();
 		}	 
 		catch (SQLException e) {

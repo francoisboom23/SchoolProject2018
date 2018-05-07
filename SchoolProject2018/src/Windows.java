@@ -13,7 +13,7 @@ public class Windows extends JFrame{
 	private Container cont;
 	private JMenuBar menuBar;
 	private JMenu file, list, insert, delete, help;
-	private JMenuItem welcome,quit,InsertNewInstall,insertNewUser,listInstall,deleteInstall,listPreInstall,listSoftSection,wiki,about,contact;
+	private JMenuItem welcome,quit,InsertNewInstall,listInstall,deleteInstall,listPreInstall,listSoftSection,wiki,about,contact;
 	private Connection connect;
 	static final private String nomBD="dbinstallations";
 	//static final private String username="root";
@@ -59,7 +59,6 @@ public class Windows extends JFrame{
 		welcome = new JMenuItem("welcome");
 		quit = new JMenuItem("quit");
 		InsertNewInstall = new JMenuItem("Insert a new install");
-		insertNewUser = new JMenuItem("insert new user in db");
 		listInstall = new JMenuItem("list all installed software");
 		deleteInstall = new JMenuItem("delete an install");
 		listPreInstall = new JMenuItem("list pre-installed software");
@@ -75,7 +74,6 @@ public class Windows extends JFrame{
 		list.add(listPreInstall);
 		list.add(listSoftSection);
 		insert.add(InsertNewInstall);
-		insert.add(insertNewUser);
 		delete.add(deleteInstall);
 		help.add(wiki);
 		help.add(contact);
