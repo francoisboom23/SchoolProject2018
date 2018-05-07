@@ -62,7 +62,7 @@ public class ListPreInstalledSoft extends JPanel {
 					System.out.println(sqlRequest);
 				}
 				//System.out.println(sqlRequest);
-				TableInstalledSoft f2 = new TableInstalledSoft(parent.getConnect(), sqlRequest);
+				tableModel f2 = new tableModel(parent.getConnect(), sqlRequest);
 				ListPreInstalledSoft listPreInstalledType= new ListPreInstalledSoft (parent.getConnect(),parent.getWin());
 			//	listPreInstalledType.combox.setSelectedItem((String)combox.getSelectedItem());
 				listPreInstalledType.SetBox((String)combox.getSelectedItem());

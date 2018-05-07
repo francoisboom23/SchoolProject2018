@@ -10,11 +10,11 @@ import javax.swing.*;
 import accessBD.AccessBDGen;
 import accessBD.TableModelGen;
 
-public class TableInstalledSoft extends JPanel{
+public class tableModel extends JPanel{
 	
 	private static JTable table2;
 	
-	TableInstalledSoft(Connection connect,String sqlRequest){
+	tableModel(Connection connect,String sqlRequest){
 		setBounds(0,0,500,500);	
 		try {
 			PreparedStatement prepStat = connect.prepareStatement(sqlRequest);
@@ -32,6 +32,13 @@ public class TableInstalledSoft extends JPanel{
 		}
 
 	public static int getTable2 () {
-		return (int)table2.getValueAt(table2.getSelectionModel().getMinSelectionIndex(), 0);
+		int index=0;		
+		try {
+			index=(int)table2.getValueAt(table2.getSelectionModel().getMinSelectionIndex(), 0);
+		}
+		catch(Exception e) {
+			System.out.println("no valid selection");
+		}
+		return index;
 	}
 }

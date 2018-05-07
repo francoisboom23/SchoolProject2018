@@ -59,7 +59,7 @@ public class ListPreInstalledSoftBySection extends JPanel{
 					SqlInstruction="SELECT DISTINCT Nom FROM Software Soft JOIN UtilisationSoftware Uti ON Soft.CodeSoftware = Uti.CodeSoftware JOIN AnneeEtude Annee on Uti.IdAnneeEtude = Annee.IdAnneeEtude JOIN Section Sect ON Annee.CodeSection = Sect.CodeSection WHERE Sect.Libelle LIKE '"+(String)Combox.getSelectedItem()+"';";
 					System.out.println(SqlInstruction);
 				}
-				TableInstalledSoft f2 = new TableInstalledSoft(parent.getConnect(), SqlInstruction);
+				tableModel f2 = new tableModel(parent.getConnect(), SqlInstruction);
 				ListPreInstalledSoftBySection listPreInstalledSection= new ListPreInstalledSoftBySection (parent.getConnect(),parent.getWin());
 				listPreInstalledSection.SetBox((String)Combox.getSelectedItem());
 			

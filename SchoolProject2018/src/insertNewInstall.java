@@ -334,21 +334,14 @@ public class insertNewInstall extends JPanel{
 	}
 //counter id	
 	public int idCount (Connection connect) {
-		int count=0;
-		Object debut;
-		int taille=0;
-		int i=0;
-		int trou=1;
 		TableModelGen table1;
+		int count=0;
+		int a;
+		int k=1;
 		try {
 			PreparedStatement prepStatSoft = connect.prepareStatement("SELECT * FROM dbinstallations.Installation;");
 			table1 = AccessBDGen.creerTableModel(prepStatSoft);
-			//count=table1.getRowCount();
-			
-			debut=table1.getValueAt(0,0);
-			taille=table1.getRowCount();
-			System.out.println(debut);
-			System.out.println(taille);
+			count=table1.getRowCount();
 		}	 
 		catch (SQLException e) {
 			System.out.println("pas ok");
