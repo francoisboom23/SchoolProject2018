@@ -154,7 +154,7 @@ public class insertNewInstall extends JPanel{
 			PreparedStatement myPrepStat = connect.prepareStatement(SqlInstruction);
 			
 			//IDTABLEINSTALL//
-			myPrepStat.setInt(1,idCount(connect)+1);
+			myPrepStat.setInt(1,idCount(connect));
 
 			
 			//COLONNE DATE//
@@ -333,16 +333,27 @@ public class insertNewInstall extends JPanel{
 		}
 	}
 //counter id	
-	public static int idCount (Connection connect) {
+	public int idCount (Connection connect) {
 		int count=0;
+		Object debut;
+		int taille=0;
+		int i=0;
+		int trou=1;
+		TableModelGen table1;
 		try {
 			PreparedStatement prepStatSoft = connect.prepareStatement("SELECT * FROM dbinstallations.Installation;");
-			TableModelGen table1 = AccessBDGen.creerTableModel(prepStatSoft);
-			count=table1.getRowCount();
-		} 
+			table1 = AccessBDGen.creerTableModel(prepStatSoft);
+			//count=table1.getRowCount();
+			
+			debut=table1.getValueAt(0,0);
+			taille=table1.getRowCount();
+			System.out.println(debut);
+			System.out.println(taille);
+		}	 
 		catch (SQLException e) {
+			System.out.println("pas ok");
 			JOptionPane.showMessageDialog(null, e.getMessage());
-		}
+			}
 		return count;
 	}
 }

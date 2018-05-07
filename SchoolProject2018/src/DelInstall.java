@@ -85,6 +85,7 @@ public class DelInstall extends JPanel {
 						PreparedStatement prepstat = parent.getConnect().prepareStatement(sqlRequest);
 						prepstat.setInt(1,f2.getTable2());
 						int nbUpdatedLines = prepstat.executeUpdate(); 
+						getDelItem(f2.getTable2());
 
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
@@ -121,6 +122,9 @@ public class DelInstall extends JPanel {
 		
 		public void SetBox(String selection){
 			listProvider.setSelectedItem(selection);
+		}
+		public void getDelItem(int item) {
+			System.out.println(item);
 		}
 	}
 	

@@ -43,26 +43,6 @@ public class loginScreenPanel extends JPanel {
 		add(space);
 		add(loginbtn);
 		
-//		//gridbaglayout conf
-//		GridBagConstraints c = new GridBagConstraints();
-//		c.fill = GridBagConstraints.HORIZONTAL;
-//		c.weightx = 1;
-//		c.insets = new Insets(5, 5, 0, 0);
-//		c.gridy=1;
-//		c.gridx=1;
-//		//add
-//		this.add(loginLabel,c);
-//		c.gridy++;
-//		this.add(passwordLabel,c);
-//		c.gridx++;
-//		c.gridy--;
-//		this.add(login,c);
-//		c.gridy++;
-//		this.add(password,c);
-//		c.gridy++;
-//		this.add(loginbtn,c);
-//		//button listener
-		
 		Butlistener a = new Butlistener();
 		loginbtn.addActionListener(a);
 		
@@ -79,18 +59,6 @@ public class loginScreenPanel extends JPanel {
 				catch(SQLException e) {
 					JOptionPane.showMessageDialog(null,e.getMessage(), "error", JOptionPane.ERROR_MESSAGE);
 				}
-				
-//				System.out.println(login.getText());
-//				if(login.getText().equals("root") && password.getText().equals("Tigrou007")) {
-//					loginStr=login.getText();
-//					passwordStr=password.getText();
-//					Home f1 = new Home(ici);
-//					//Home f1 = new Home();
-//					parent.dispose();
-//				}
-//				else {
-//					JOptionPane.showMessageDialog(null, "incorrect password");
-//				}
 			}
 		}
 	}
