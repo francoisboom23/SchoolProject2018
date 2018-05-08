@@ -119,7 +119,7 @@ public class DelInstall extends JPanel {
 				parent.getCont().repaint();
 				parent.getCont().setVisible(true);
 				parent.validate();
-			};
+			}
 		}
 		
 		

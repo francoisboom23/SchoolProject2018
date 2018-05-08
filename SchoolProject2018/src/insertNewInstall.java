@@ -32,17 +32,17 @@ public class insertNewInstall extends JPanel{
 		setBounds(0,0,400,400);
 		setLayout(new GridLayout(11,2,0,0));
 //initialization	
-		softwareLabel = new JLabel("Software*");
-		netLabel = new JLabel("Network responsable*");
-		osLabel = new JLabel("Operating system*");
-		typeLabel = new JLabel("Install type*");
-		stateLabel = new JLabel("State*");
-		installDateLabel = new JLabel("Installation date: (YYYY/MM/DD)*");
-		commentaireLabel = new JLabel("Commantary");
-		dureeLabel = new JLabel("Installation duration: (in minutes)*");
-		obligatoire = new JLabel("(*mandatory field)");
-		refLabel = new JLabel("Installation reference");
-		datePlanifiedLabel = new JLabel("Date planified: (YYYY/MM/DD)*");
+		softwareLabel = new JLabel("Software*", SwingConstants.CENTER);
+		netLabel = new JLabel("Network responsable*", SwingConstants.CENTER);
+		osLabel = new JLabel("Operating system*", SwingConstants.CENTER);
+		typeLabel = new JLabel("Install type*", SwingConstants.CENTER);
+		stateLabel = new JLabel("State*", SwingConstants.CENTER);
+		installDateLabel = new JLabel("Installation date: (YYYY/MM/DD)*", SwingConstants.CENTER);
+		commentaireLabel = new JLabel("Commantary", SwingConstants.CENTER);
+		dureeLabel = new JLabel("Installation duration: (in minutes)*", SwingConstants.CENTER);
+		obligatoire = new JLabel("(*mandatory field)", SwingConstants.CENTER);
+		refLabel = new JLabel("Installation reference", SwingConstants.CENTER);
+		datePlanifiedLabel = new JLabel("Date planified: (YYYY/MM/DD)*", SwingConstants.CENTER);
 		datePlanifiedLabel.setVisible(false);
 		
 		comboSoft = new JComboBox();
@@ -161,16 +161,16 @@ public class insertNewInstall extends JPanel{
 			myPrepStat.setDate(2, new java.sql.Date(datePanel.getDate().getTime()));		
 			
 			//COLONNE TYPEINSTALL//
-			if(!comboType.getSelectedItem().equals("Types:")) {
+			if(comboType.getSelectedItem().equals("Type:")) {
+				JOptionPane.showMessageDialog(null, "Installation type not set","error" , JOptionPane.ERROR_MESSAGE);
+			}
+			else {
 				if(comboType.getSelectedItem().equals("standard")) {
 					myPrepStat.setBoolean(3, true);
 				}
 				else{
 				myPrepStat.setBoolean(3, false);
 				}
-			}
-			else {
-				JOptionPane.showMessageDialog(null, "Installation type not set","error" , ERROR);
 			}
 			
 			//COLONNE COMMENTAIRE//
@@ -187,7 +187,7 @@ public class insertNewInstall extends JPanel{
 				myPrepStat.setInt(5, (int)duree.getValue());
 			}
 			else {
-				JOptionPane.showMessageDialog(null,"No Installation Time value selected !","error" , ERROR);
+				JOptionPane.showMessageDialog(null, "No installation duration selected !","error",JOptionPane.ERROR_MESSAGE);
 			}
 			//COLONNE REFPRO //
 			
@@ -199,8 +199,11 @@ public class insertNewInstall extends JPanel{
 			}
 			
 			// COLONNE VALIDATION +dateprevoir //
-			
-			if(comboValid.getSelectedItem().equals("planified")) {
+			if(comboValid.getSelectedItem().equals("State:")) {
+				JOptionPane.showMessageDialog(null,"No Installation State selected !","error" , JOptionPane.ERROR_MESSAGE);
+			}
+			else {
+				if(comboValid.getSelectedItem().equals("planified")) {
 				myPrepStat.setString(7, (String) comboValid.getSelectedItem());
 				myPrepStat.setDate(8, new java.sql.Date(datePlanifiedPanel.getDate().getTime()));
 			}
@@ -211,11 +214,13 @@ public class insertNewInstall extends JPanel{
 			if(comboValid.getSelectedItem().equals("finished")) {
 				myPrepStat.setString(7, (String) comboValid.getSelectedItem());
 				myPrepStat.setNull(8, Types.DATE);
+				}
 			}
+			
 			
 			//COLONNECODESOFTWARE//
 			if(comboSoft.getSelectedItem().equals("Software:")) {
-				JOptionPane.showMessageDialog(null,"No software responsable selected !","error" , ERROR);
+				JOptionPane.showMessageDialog(null, "No software responsable selected !","error",JOptionPane.ERROR_MESSAGE);
 			}
 			else {
 				if(comboSoft.getSelectedItem().equals("Bob50")) {
@@ -238,7 +243,7 @@ public class insertNewInstall extends JPanel{
 			
 			//COLONNEADMINRESEAU//
 			if(comboMatri.getSelectedItem().equals("Network Responsable:")) {
-				JOptionPane.showMessageDialog(null,"No network responsable selected !","error" , ERROR);
+				JOptionPane.showMessageDialog(null,"No network responsable selected !","error" , JOptionPane.ERROR_MESSAGE);
 			}
 			else {
 				if(comboMatri.getSelectedItem().equals("Alexandre Baligant")){
@@ -254,7 +259,7 @@ public class insertNewInstall extends JPanel{
 			
 			//COLONNETABLEOS//
 			if(comboOS.getSelectedItem().equals("OS:")) {
-				JOptionPane.showMessageDialog(null,"No OS selected !","error" , ERROR);
+				JOptionPane.showMessageDialog(null,"No OS selected !","error" , JOptionPane.ERROR_MESSAGE);
 			}
 			else {
 				if(comboOS.getSelectedItem().equals("Fedora 2012")) {
@@ -285,7 +290,7 @@ public class insertNewInstall extends JPanel{
 		}
 			
 		 catch (Exception e) {
-			 System.out.println("error");
+			 e.printStackTrace();
 		 }
 		
 		

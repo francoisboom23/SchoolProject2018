@@ -24,7 +24,6 @@ public class ListPreInstalledSoftBySection extends JPanel{
 		PreInstalledSoftBySection = new JLabel ("Section :");
 		PreInstalledSoftBySection.setHorizontalAlignment(SwingConstants.RIGHT);
 		Combox = new JComboBox();
-		Combox.addItem("");
 		refresh= new JButton ("refresh");
 		this.add(PreInstalledSoftBySection);
 		this.add(Combox);

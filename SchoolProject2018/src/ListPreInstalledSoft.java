@@ -25,7 +25,6 @@ public class ListPreInstalledSoft extends JPanel {
 		PreInstalledSoftLabel = new JLabel("PC type:");
 		PreInstalledSoftLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		combox = new JComboBox();
-		combox.addItem("");
 		refresh = new JButton("refresh");
 		add(PreInstalledSoftLabel);
 		add(combox);
@@ -33,6 +32,7 @@ public class ListPreInstalledSoft extends JPanel {
 //listener controls
 		Butlistener a = new Butlistener();
 		refresh.addActionListener(a);
+
 //SQL database
 		fillCombobox(connect);
 }
@@ -53,18 +53,10 @@ public class ListPreInstalledSoft extends JPanel {
 	private class Butlistener implements ActionListener{
 		public void actionPerformed( ActionEvent a){
 			if(a.getSource()==refresh){
-				if((String)combox.getSelectedItem()=="") {
-					sqlRequest="";
-					JOptionPane.showMessageDialog(null, "<html><body><p align=\\\"center\\\">invalid selection</p></body></html>", "error", JOptionPane.ERROR_MESSAGE);
-				}
-				else {
-					sqlRequest = "SELECT Nom FROM Software soft JOIN SoftwarePreinstalle softpr ON soft.CodeSoftware = softpr.CodeSoftware JOIN TypePC pc ON softpr.IdTypePC = pc.IdTypePC WHERE pc.Description LIKE '"+(String)combox.getSelectedItem()+"';";
-					System.out.println(sqlRequest);
-				}
-				//System.out.println(sqlRequest);
+				sqlRequest = "SELECT Nom FROM Software soft JOIN SoftwarePreinstalle softpr ON soft.CodeSoftware = softpr.CodeSoftware JOIN TypePC pc ON softpr.IdTypePC = pc.IdTypePC WHERE pc.Description LIKE '"+(String)combox.getSelectedItem()+"';";
+				System.out.println(sqlRequest);
 				tableModel f2 = new tableModel(parent.getConnect(), sqlRequest);
 				ListPreInstalledSoft listPreInstalledType= new ListPreInstalledSoft (parent.getConnect(),parent.getWin());
-			//	listPreInstalledType.combox.setSelectedItem((String)combox.getSelectedItem());
 				listPreInstalledType.SetBox((String)combox.getSelectedItem());
 
 				parent.getCont().removeAll();
