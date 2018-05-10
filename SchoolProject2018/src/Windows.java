@@ -13,7 +13,7 @@ public class Windows extends JFrame{
 	private Container cont;
 	private JMenuBar menuBar;
 	private JMenu file, list, insert, delete, help;
-	private JMenuItem welcome,quit,InsertNewInstall,listInstall,deleteInstall,listPreInstall,listSoftSection,wiki,about,contact;
+	private JMenuItem welcome,quit,InsertNewInstall,listInstall,deleteInstall,listPreInstall,listSoftSection,wiki,about,contact,listTable;
 	private Connection connect;
 	static final private String nomBD="dbinstallations";
 	//static final private String username="root";
@@ -63,6 +63,7 @@ public class Windows extends JFrame{
 		deleteInstall = new JMenuItem("delete an install");
 		listPreInstall = new JMenuItem("list pre-installed software");
 		listSoftSection = new JMenuItem("list installed software for a specific section");
+		listTable = new JMenuItem ("list table");
 		wiki = new JMenuItem("wiki");
 		about = new JMenuItem("about this program");
 		contact = new JMenuItem("contact");
@@ -73,6 +74,7 @@ public class Windows extends JFrame{
 		list.add(listInstall);
 		list.add(listPreInstall);
 		list.add(listSoftSection);
+		list.add(listTable);
 		insert.add(InsertNewInstall);
 		delete.add(deleteInstall);
 		help.add(wiki);
@@ -87,6 +89,7 @@ public class Windows extends JFrame{
 		listInstall.addActionListener(menuLi);
 		listPreInstall.addActionListener(menuLi);
 		listSoftSection.addActionListener(menuLi);
+		listTable.addActionListener(menuLi);
 		InsertNewInstall.addActionListener(menuLi);
 		contact.addActionListener(menuLi);
 		deleteInstall.addActionListener(menuLi);
@@ -163,6 +166,14 @@ public class Windows extends JFrame{
 				cont.add(listPreInstalledSection);
 				cont.repaint();
 				Windows.this.setVisible(true);
+			}
+			if(e.getSource() == listTable) {
+				cont.removeAll();
+				ListTable listTable = new ListTable (connect,Windows.this);
+				cont.add(listTable);
+				cont.repaint();
+				Windows.this.setVisible(true);
+				
 			}
 			if(e.getSource() == InsertNewInstall) {
 				cont.removeAll();
