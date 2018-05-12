@@ -16,16 +16,15 @@ public class insertNewInstall extends JPanel{
 //elements: idInstall, date install,type install, commentaires, durée install, ref procedure install,validation,date valid prevue, code soft(FK), matricule(FK),codeOS(FK)
 	
 	private JLabel softwareLabel, netLabel, osLabel,typeLabel,stateLabel,installDateLabel,commentaireLabel,dureeLabel,obligatoire,refLabel,datePlanifiedLabel;
-	private JComboBox comboSoft,comboMatri,comboOS,comboType,comboValid;
+	private JComboBox comboSoft,comboMatri,comboOS,comboType;
 	private JTextField textCommentaire,textRef;
 	private JSpinner duree;
 	private SpinnerNumberModel modelSpinner;
 	private String[] type = {"Type:","standard","custom"};
 	private String[] valid = {"State:","planified","working on","finished"};
 	private dateCombo datePanel,datePlanifiedPanel;
+	private buttonState butState;
 	private String dataRecu;
-	
-	private static Connection connect;
 	
 	public insertNewInstall(Connection connect) {
 //generale
@@ -49,7 +48,7 @@ public class insertNewInstall extends JPanel{
 		comboMatri = new JComboBox();
 		comboOS = new JComboBox();
 		comboType = new JComboBox(type);
-		comboValid = new JComboBox(valid);
+		butState = new buttonState();
 		fillCombo(connect);
 		
 		textCommentaire = new JTextField("commentaire:");
@@ -80,7 +79,7 @@ public class insertNewInstall extends JPanel{
 		add(typeLabel);
 		add(comboType);
 		add(stateLabel);
-		add(comboValid);
+		add(butState);
 		add(installDateLabel);
 		add(datePanel);
 		add(commentaireLabel);
@@ -102,7 +101,7 @@ public class insertNewInstall extends JPanel{
 		comboMatri.addActionListener(a);
 		comboOS.addActionListener(a);
 		comboType.addActionListener(a);
-		comboValid.addActionListener(a);
+//		comboValid.addActionListener(a);
 		
 		setVisible(true);
 	}
@@ -199,28 +198,23 @@ public class insertNewInstall extends JPanel{
 			}
 			
 			// COLONNE VALIDATION +dateprevoir //
-			if(comboValid.getSelectedItem().equals("State:")) {
-				JOptionPane.showMessageDialog(null,"No Installation State selected !","error" , JOptionPane.ERROR_MESSAGE);
-			}
-			else {
-				if(comboValid.getSelectedItem().equals("planified")) {
-				myPrepStat.setString(7, (String) comboValid.getSelectedItem());
+				if(butState.getBut()==1){
+				myPrepStat.setString(7, "Planified");
 				myPrepStat.setDate(8, new java.sql.Date(datePlanifiedPanel.getDate().getTime()));
 			}
-			if(comboValid.getSelectedItem().equals("working on")) {
-				myPrepStat.setString(7, (String) comboValid.getSelectedItem());
+				if(butState.getBut()==2) {
+				myPrepStat.setString(7, "Working on");
 				myPrepStat.setNull(8, Types.DATE);
 			}
-			if(comboValid.getSelectedItem().equals("finished")) {
-				myPrepStat.setString(7, (String) comboValid.getSelectedItem());
+				if(butState.getBut()==3) {
+				myPrepStat.setString(7, "finished");
 				myPrepStat.setNull(8, Types.DATE);
-				}
 			}
 			
 			
 			//COLONNECODESOFTWARE//
 			if(comboSoft.getSelectedItem().equals("Software:")) {
-				JOptionPane.showMessageDialog(null, "No software responsable selected !","error",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "No software selected !","error",JOptionPane.ERROR_MESSAGE);
 			}
 			else {
 				if(comboSoft.getSelectedItem().equals("Bob50")) {
@@ -339,17 +333,17 @@ public class insertNewInstall extends JPanel{
 			if(e.getSource()==comboType) {
 				comboType.removeItem("Type:");
 			}
-			if(e.getSource()==comboValid) {
-				comboValid.removeItem("State:");
-				if(comboValid.getSelectedItem()=="planified") {
-					datePlanifiedLabel.setVisible(true);
-					datePlanifiedPanel.setVisible(true);
-				}
-				else {
-					datePlanifiedLabel.setVisible(false);
-					datePlanifiedPanel.setVisible(false);
-				}
-			}
+//			if(e.getSource()==comboValid) {
+//				comboValid.removeItem("State:");
+//				if(comboValid.getSelectedItem()=="planified") {
+//					datePlanifiedLabel.setVisible(true);
+//					datePlanifiedPanel.setVisible(true);
+//				}
+//				else {
+//					datePlanifiedLabel.setVisible(false);
+//					datePlanifiedPanel.setVisible(false);
+//				}
+//			}
 		}
 	}
 //counter id	

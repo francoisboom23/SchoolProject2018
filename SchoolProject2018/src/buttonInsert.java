@@ -6,7 +6,6 @@ import java.sql.*;
 import javax.swing.*;
 
 public class buttonInsert extends JPanel{
-	public static final Windows Windows = null;
 	private JButton validate;
 	private insertNewInstall pan;
 	private Connection connect;

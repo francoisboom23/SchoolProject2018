@@ -20,9 +20,6 @@ public class DelInstall extends JPanel {
 	public DelInstall (Connection connect, Windows win) {
 		
 		// general
-		
-		//setBounds(0,0,500,500);
-		setLayout(new FlowLayout());
 		parent=win;
 		
 		// controls
