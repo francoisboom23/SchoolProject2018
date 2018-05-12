@@ -152,7 +152,7 @@ public class insertNewInstall extends JPanel{
 			PreparedStatement myPrepStat = connect.prepareStatement(SqlInstruction);
 			
 			//IDTABLEINSTALL//
-			myPrepStat.setInt(1,idCount(connect)+1);
+			myPrepStat.setInt(1,idCount(connect));
 
 			
 			//COLONNE DATE//
@@ -340,15 +340,21 @@ public class insertNewInstall extends JPanel{
 		try {
 			PreparedStatement prepStatSoft = connect.prepareStatement("SELECT * FROM dbinstallations.Installation;");
 			TableModelGen table1 = AccessBDGen.creerTableModel(prepStatSoft);
-			count=table1.getRowCount();
+			if(table1.getValueAt(0, 0).equals(1)) {
+				count=table1.getRowCount();
+				count++;
+			}
+			else {
+				count=table1.getRowCount();
+				count+=2;
+			}
 		}	 
 		catch (SQLException e) {
 			System.out.println("pas ok");
 			JOptionPane.showMessageDialog(null, e.getMessage());
 			}
+		
+		System.out.println(count);
 		return count;
 	}
-//	public dateCombo getDatePlanifiedPanel() {
-//		return datePlanifiedPanel;
-//	}
 }
