@@ -15,12 +15,13 @@ public class buttonState extends JPanel{
 	private ButtonGroup group1;
 	private int choice;
 	private dateCombo date;
+	private JLabel texte;
 	
-	public buttonState(dateCombo datePanel) {
+	public buttonState(dateCombo datePanel, JLabel datePlanifiedLabel) {
 		setLayout(new GridLayout(1,3,1,1));
-		but1 = new JRadioButton("Planified",true);
+		but1 = new JRadioButton("Planified",false);
 		but2 = new JRadioButton("Working on",false);
-		but3 = new JRadioButton("finished",false);
+		but3 = new JRadioButton("finished",true);
 		add(but1);
 		add(but2);
 		add(but3);
@@ -35,7 +36,7 @@ public class buttonState extends JPanel{
 		but3.addItemListener(g);
 		
 		date = datePanel;
-		date.setVisible(true);
+		texte=datePlanifiedLabel;
 		
 		setVisible(true);
 	}
@@ -46,16 +47,19 @@ public class buttonState extends JPanel{
 			if(t.getSource()==but1 && t.getStateChange()==ItemEvent.SELECTED) {
 				choice=1;
 				date.setVisible(true);
+				texte.setVisible(true);
 				System.out.println("1");
 			}
 			if(t.getSource()==but2 && t.getStateChange()==ItemEvent.SELECTED) {
 				choice=2;
 				date.setVisible(false);
+				texte.setVisible(false);
 				System.out.println("2");
 			}
 			if(t.getSource()==but3 && t.getStateChange()==ItemEvent.SELECTED) {
 				choice=3;
 				date.setVisible(false);
+				texte.setVisible(false);
 				System.out.println("3");
 			}
 		}

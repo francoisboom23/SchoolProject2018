@@ -62,7 +62,7 @@ public class insertNewInstall extends JPanel{
 		datePlanifiedPanel = new dateCombo();
 		datePlanifiedPanel.setVisible(false);
 		
-		butState = new buttonState(datePlanifiedPanel);
+		butState = new buttonState(datePlanifiedPanel,datePlanifiedLabel);
 		
 //tooltips	
 		textCommentaire.setToolTipText("commentary");
