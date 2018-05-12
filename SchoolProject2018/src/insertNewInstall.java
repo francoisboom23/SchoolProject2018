@@ -48,7 +48,6 @@ public class insertNewInstall extends JPanel{
 		comboMatri = new JComboBox();
 		comboOS = new JComboBox();
 		comboType = new JComboBox(type);
-		butState = new buttonState();
 		fillCombo(connect);
 		
 		textCommentaire = new JTextField("commentaire:");
@@ -62,7 +61,8 @@ public class insertNewInstall extends JPanel{
 		datePanel = new dateCombo();
 		datePlanifiedPanel = new dateCombo();
 		datePlanifiedPanel.setVisible(false);
-		datePanel.print();
+		
+		butState = new buttonState(datePlanifiedPanel);
 		
 //tooltips	
 		textCommentaire.setToolTipText("commentary");
@@ -101,7 +101,6 @@ public class insertNewInstall extends JPanel{
 		comboMatri.addActionListener(a);
 		comboOS.addActionListener(a);
 		comboType.addActionListener(a);
-//		comboValid.addActionListener(a);
 		
 		setVisible(true);
 	}
@@ -333,17 +332,6 @@ public class insertNewInstall extends JPanel{
 			if(e.getSource()==comboType) {
 				comboType.removeItem("Type:");
 			}
-//			if(e.getSource()==comboValid) {
-//				comboValid.removeItem("State:");
-//				if(comboValid.getSelectedItem()=="planified") {
-//					datePlanifiedLabel.setVisible(true);
-//					datePlanifiedPanel.setVisible(true);
-//				}
-//				else {
-//					datePlanifiedLabel.setVisible(false);
-//					datePlanifiedPanel.setVisible(false);
-//				}
-//			}
 		}
 	}
 //counter id	
@@ -360,4 +348,7 @@ public class insertNewInstall extends JPanel{
 			}
 		return count;
 	}
+//	public dateCombo getDatePlanifiedPanel() {
+//		return datePlanifiedPanel;
+//	}
 }
