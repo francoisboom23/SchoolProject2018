@@ -35,6 +35,7 @@ public class buttonState extends JPanel{
 		but3.addItemListener(g);
 		
 		date = datePanel;
+		date.setVisible(true);
 		
 		setVisible(true);
 	}
