@@ -346,13 +346,15 @@ public class insertNewInstall extends JPanel{
 			}
 			else {
 				count=table1.getRowCount();
-				count+=2;
+				count+=(int)table1.getValueAt(0, 0);
 			}
 		}	 
 		catch (SQLException e) {
 			System.out.println("pas ok");
 			JOptionPane.showMessageDialog(null, e.getMessage());
 			}
+		
+		
 		
 		System.out.println(count);
 		return count;
