@@ -1,5 +1,8 @@
 //FETCH AVANT TOUS CHANGEMENTS SOUS PEINE DE MORT!
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.*;
 import java.sql.*;
@@ -8,9 +11,10 @@ import accessBD.*;
 
 public class loginScreenPanel extends JPanel {
 	private JTextField login;
-	private JPasswordField  password;
+	private JPasswordField password;
 	private JLabel loginLabel, passwordLabel,space;
 	private JButton loginbtn;
+	private String loginStr,passwordStr;
 	private loginScreen parent;
 	private loginScreenPanel ici;
 	private Connection connect;
