@@ -197,19 +197,32 @@ public class insertNewInstall extends JPanel{
 			}
 			
 			// COLONNE VALIDATION +dateprevoir //
-				if(butState.getBut()==1){
-				myPrepStat.setString(7, "Planified");
-				myPrepStat.setDate(8, new java.sql.Date(datePlanifiedPanel.getDate().getTime()));
+//				if(butState.getBut()==1){
+//				myPrepStat.setString(7, "Planified");
+//				myPrepStat.setDate(8, new java.sql.Date(datePlanifiedPanel.getDate().getTime()));
+//			}
+//				if(butState.getBut()==2) {
+//				myPrepStat.setString(7, "Working on");
+//				myPrepStat.setNull(8, Types.DATE);
+//			}
+//				if(butState.getBut()==3) {
+//				myPrepStat.setString(7, "finished");
+//				myPrepStat.setNull(8, Types.DATE);
+//			}
+			switch(butState.getBut()){
+				case "Planified":
+					myPrepStat.setString(7, butState.getBut());
+					myPrepStat.setDate(8, new java.sql.Date(datePlanifiedPanel.getDate().getTime()));
+					break;
+				case "Working on":
+					myPrepStat.setString(7, butState.getBut());
+					myPrepStat.setNull(8, Types.DATE);
+					break;
+				case "finished":
+					myPrepStat.setString(7, butState.getBut());
+					myPrepStat.setNull(8, Types.DATE);
+					break;
 			}
-				if(butState.getBut()==2) {
-				myPrepStat.setString(7, "Working on");
-				myPrepStat.setNull(8, Types.DATE);
-			}
-				if(butState.getBut()==3) {
-				myPrepStat.setString(7, "finished");
-				myPrepStat.setNull(8, Types.DATE);
-			}
-			
 			
 			//COLONNECODESOFTWARE//
 			if(comboSoft.getSelectedItem().equals("Software:")) {
