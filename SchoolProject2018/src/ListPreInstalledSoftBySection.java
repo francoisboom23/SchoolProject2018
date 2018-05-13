@@ -28,7 +28,6 @@ public class ListPreInstalledSoftBySection extends JPanel{
 		this.add(PreInstalledSoftBySection);
 		this.add(Combox);
 		this.add(refresh);
-		//TEST
 		
 		Butlistener a = new Butlistener();
 		refresh.addActionListener(a);
