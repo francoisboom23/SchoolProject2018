@@ -11,23 +11,22 @@ import accessBD.TableModelGen;
 public class ListPreInstalledSoftBySection extends JPanel{
 	
 	private JLabel PreInstalledSoftBySection;
-	private JComboBox Combox;
+	private JComboBox<String> Combox;
 	private JButton refresh;
 	private String SqlInstruction;
 	private Windows parent;
 	
 	public ListPreInstalledSoftBySection (Connection connect, Windows win) {
 		
-		setBounds(0,0,500,500);
 		parent=win;
 		
 		PreInstalledSoftBySection = new JLabel ("Section :");
 		PreInstalledSoftBySection.setHorizontalAlignment(SwingConstants.RIGHT);
-		Combox = new JComboBox();
+		Combox = new JComboBox<String>();
 		refresh= new JButton ("refresh");
-		this.add(PreInstalledSoftBySection);
-		this.add(Combox);
-		this.add(refresh);
+		add(PreInstalledSoftBySection);
+		add(Combox);
+		add(refresh);
 		
 		Butlistener a = new Butlistener();
 		refresh.addActionListener(a);
@@ -40,14 +39,13 @@ public class ListPreInstalledSoftBySection extends JPanel{
 			PreparedStatement prepStat = connect.prepareStatement("SELECT Libelle FROM Section;");
 			TableModelGen table2 = AccessBDGen.creerTableModel(prepStat);
 			for(int i=0; i <= table2.getRowCount()-1; i++) {
-				Combox.addItem(table2.getValueAt(i, 0));
+				Combox.addItem((String) table2.getValueAt(i, 0));
 			}
 		}
 		catch(SQLException e) {	}		
 	}
 //listener refresh button
 	private class Butlistener implements ActionListener{
-		Connection connect;
 		public void actionPerformed( ActionEvent a){
 			if(a.getSource()==refresh){
 				if((String)Combox.getSelectedItem()=="") {

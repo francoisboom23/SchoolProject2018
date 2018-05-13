@@ -1,7 +1,5 @@
 //FETCH AVANT TOUS CHANGEMENTS SOUS PEINE DE MORT!
 
-import java.awt.*;
-import java.awt.event.*;
 import java.sql.*;
 import javax.swing.*;
 
@@ -11,7 +9,6 @@ import accessBD.TableModelGen;
 public class ListInstallTable extends JPanel{
 
 	ListInstallTable(Connection connect){
-		setBounds(0,0,500,500);
 		
 		try {
 			PreparedStatement prepStat = connect.prepareStatement("select * from Installation;");
