@@ -331,16 +331,9 @@ public class insertNewInstall extends JPanel{
 	public int idCount (Connection connect) {
 		int count=0;
 		try {
-			PreparedStatement prepStatSoft = connect.prepareStatement("SELECT * FROM dbinstallations.Installation;");
+			PreparedStatement prepStatSoft = connect.prepareStatement("SELECT MAX(IdInstallation) FROM dbinstallations.Installation;");
 			TableModelGen table1 = AccessBDGen.creerTableModel(prepStatSoft);
-			if(table1.getValueAt(0, 0).equals(1)) {
-				count=table1.getRowCount();
-				count++;
-			}
-			else {
-				count=table1.getRowCount();
-				count+=(int)table1.getValueAt(0, 0);
-			}
+			count=(int)table1.getValueAt(0, 0)+1;
 		}	 
 		catch (SQLException e) {
 			e.printStackTrace();
