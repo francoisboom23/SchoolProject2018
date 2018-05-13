@@ -140,7 +140,6 @@ public class insertNewInstall extends JPanel{
 	public void addInstall(Connection connect){
 
 		try {
-			//String SqlInstruction="INSERT INTO Installation (IdInstallation, DateInstallation, TypeInstallation, Commentaires, DureeInstallation, RefProcedureInstallation, Validation, DateValidation, CodeSoftware, Matricule,CodeOS) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 		String SqlInstruction="INSERT INTO Installation VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
 			PreparedStatement myPrepStat = connect.prepareStatement(SqlInstruction);

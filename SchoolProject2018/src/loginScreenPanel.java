@@ -21,8 +21,6 @@ public class loginScreenPanel extends JPanel {
 	static final private String nomBD="dbinstallations";
 	
 	public loginScreenPanel(loginScreen parent) {
-		//setBounds(850,450,300,140);
-		//setLayout(new GridBagLayout());
 		setLayout(new GridLayout(3, 3,5,5));
 		//init
 		login = new JTextField();
