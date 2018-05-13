@@ -1,5 +1,4 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.event.*;
 import java.sql.*;
 import javax.swing.*;
@@ -10,7 +9,7 @@ import accessBD.TableModelGen;
 public class ListTable extends JPanel{
 
 	private JLabel ListTableLabel;
-	private JComboBox combox;
+	private JComboBox<String> combox;
 	private JButton refresh;
 	private String sqlRequest;
 	private Windows parent;
@@ -23,7 +22,7 @@ public class ListTable extends JPanel{
 		//controls
 				ListTableLabel = new JLabel("table :");
 				ListTableLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-				combox = new JComboBox();
+				combox = new JComboBox<String>();
 				refresh = new JButton("refresh");
 				add(ListTableLabel);
 				add(combox);
@@ -41,7 +40,7 @@ public class ListTable extends JPanel{
 					PreparedStatement prepStat = connect.prepareStatement("SHOW TABLES");
 					TableModelGen table2 = AccessBDGen.creerTableModel(prepStat);
 					for(int i=0; i <= table2.getRowCount()-1; i++) {
-						combox.addItem(table2.getValueAt(i, 0));
+						combox.addItem((String) table2.getValueAt(i, 0));
 						}
 					}
 				catch(SQLException e) {
