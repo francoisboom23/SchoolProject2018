@@ -1,6 +1,5 @@
 //FETCH AVANT TOUS CHANGEMENTS SOUS PEINE DE MORT!
 
-import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 import javax.swing.*;
@@ -12,8 +11,6 @@ public class buttonInsert extends JPanel{
 	
 	public buttonInsert(insertNewInstall pan,Connection connect) {
 //generale
-		setBounds(0,0,10,10);
-
 		this.pan=pan;
 		this.connect=connect;
 //initialization
