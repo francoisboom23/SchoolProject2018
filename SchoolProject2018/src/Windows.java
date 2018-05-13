@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.net.*;
 import java.sql.*;
-import accessBD.*;
 
 //OS, software, responsable réseau
 
@@ -15,9 +14,6 @@ public class Windows extends JFrame{
 	private JMenu file, list, insert, delete, help;
 	private JMenuItem welcome,quit,InsertNewInstall,listInstall,deleteInstall,listPreInstall,listSoftSection,wiki,about,contact,listTable;
 	private Connection connect;
-	static final private String nomBD="dbinstallations";
-	//static final private String username="root";
-	//static final private String password="Tigrou007";
 	private Desktop desktop = Desktop.getDesktop();
 	private windowsImage i;
 	private loginScreenPanel home;
@@ -142,10 +138,8 @@ public class Windows extends JFrame{
 			if(e.getSource() == welcome){
 				Windows.this.dispose();
 				Home f2 = new Home(home);
-				//Home f2 = new Home();
 			}
 			if(e.getSource() == listInstall){
-				//change le panel par un autre
 				cont.removeAll();
 				ListInstallTable listinstalltable = new ListInstallTable (connect);
 				cont.add(listinstalltable);
@@ -153,7 +147,6 @@ public class Windows extends JFrame{
 				Windows.this.setVisible(true);
 			}
 			if(e.getSource() == listPreInstall){
-				//change le panel par un autre
 				cont.removeAll();
 				ListPreInstalledSoft listPreInstalledType= new ListPreInstalledSoft (connect,Windows.this);
 				cont.add(listPreInstalledType);
@@ -191,16 +184,6 @@ public class Windows extends JFrame{
 			}
 		}
 	}
-//connection to DB
-//	private void connection() {
-//		try {
-//			connect = AccessBDGen.connecter(nomBD, home.getLogin(), home.getPassword());
-//			//connect = AccessBDGen.connecter(nomBD, username, password);
-//		}
-//		catch(SQLException e) {
-//			JOptionPane.showMessageDialog(null,e.getMessage(), "error", JOptionPane.ERROR_MESSAGE);
-//		}
-//	}
 	public Container getCont(){
 		return cont;
 	}
