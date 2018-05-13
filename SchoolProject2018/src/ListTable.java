@@ -17,7 +17,6 @@ public class ListTable extends JPanel{
 	
 	public ListTable (Connection connect,Windows win) {
 		//generale
-				setBounds(0,0,500,500);
 				parent=win;
 		//controls
 				ListTableLabel = new JLabel("table :");
@@ -51,7 +50,6 @@ public class ListTable extends JPanel{
 				public void actionPerformed( ActionEvent a){
 					if(a.getSource()==refresh){
 						sqlRequest = "SELECT * FROM "+(String)combox.getSelectedItem()+";";
-						System.out.println(sqlRequest);
 						tableModel f2 = new tableModel(parent.getConnect(), sqlRequest);
 						ListTable listTable= new ListTable (parent.getConnect(),parent.getWin());
 						listTable.SetBox((String)combox.getSelectedItem());

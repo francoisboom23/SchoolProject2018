@@ -18,7 +18,6 @@ public class ListPreInstalledSoft extends JPanel {
 	
 	public ListPreInstalledSoft(Connection connect,Windows win) {
 //generale
-		setBounds(0,0,500,500);
 		parent=win;
 //controls
 		PreInstalledSoftLabel = new JLabel("PC type:");

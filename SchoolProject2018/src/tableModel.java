@@ -12,7 +12,6 @@ public class tableModel extends JPanel{
 	private static JTable table2;
 	
 	tableModel(Connection connect,String sqlRequest){
-		setBounds(0,0,500,500);	
 		try {
 			PreparedStatement prepStat = connect.prepareStatement(sqlRequest);
 			TableModelGen table = AccessBDGen.creerTableModel(prepStat);
@@ -21,7 +20,7 @@ public class tableModel extends JPanel{
 		 	table2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		 	table2.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
 		 	JScrollPane scroll = new JScrollPane (table2) ;
-		 	scroll.setPreferredSize(new Dimension(400, 200));//270,200
+		 	scroll.setPreferredSize(new Dimension(400, 200));
 		 	this.add(scroll);
 			}
 		catch(SQLException e) {	}
@@ -34,7 +33,7 @@ public class tableModel extends JPanel{
 			index=(int)table2.getValueAt(table2.getSelectionModel().getMinSelectionIndex(), 0);
 		}
 		catch(Exception e) {
-			System.out.println("no valid selection");
+			e.printStackTrace();
 		}
 		return index;
 	}

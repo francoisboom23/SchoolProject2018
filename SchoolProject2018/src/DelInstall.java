@@ -76,7 +76,6 @@ public class DelInstall extends JPanel {
 								PreparedStatement prepstat = parent.getConnect().prepareStatement(sqlRequest);
 								prepstat.setInt(1,tableModel.getTable2());
 								prepstat.executeUpdate(); 
-								getDelItem(tableModel.getTable2());
 								refresh();
 
 							} catch (SQLException e) {
@@ -117,9 +116,7 @@ public class DelInstall extends JPanel {
 		public void SetBox(String selection){
 			listProvider.setSelectedItem(selection);
 		}
-		public void getDelItem(int item) {
-			System.out.println(item);
-		}
+
 	}
 	
 	
