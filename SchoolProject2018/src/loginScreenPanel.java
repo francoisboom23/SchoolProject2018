@@ -17,8 +17,10 @@ public class loginScreenPanel extends JPanel {
 	static final private String nomBD="dbinstallations";
 	
 	public loginScreenPanel(loginScreen parent) {
+//generale
 		setLayout(new GridLayout(3, 3,5,5));
-		//init
+		setVisible(true);
+//init
 		login = new JTextField();
 		password = new JPasswordField();
 		loginbtn = new JButton("login");
@@ -29,18 +31,16 @@ public class loginScreenPanel extends JPanel {
 		passwordLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		this.parent=parent;
 		ici=this;
-		
+//add		
 		add(loginLabel);
 		add(login);
 		add(passwordLabel);
 		add(password);
 		add(space);
 		add(loginbtn);
-		
+//listener		
 		Butlistener a = new Butlistener();
 		loginbtn.addActionListener(a);
-		
-		setVisible(true);
 	}
 	public class Butlistener implements ActionListener{
 		public void actionPerformed( ActionEvent a){
