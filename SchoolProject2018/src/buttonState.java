@@ -13,7 +13,7 @@ public class buttonState extends JPanel{
 	
 	private JRadioButton but1,but2,but3;
 	private ButtonGroup group1;
-	private int choice;
+	private int choice=3;
 	private dateCombo date;
 	private JLabel texte;
 	
