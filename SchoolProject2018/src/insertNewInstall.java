@@ -343,13 +343,12 @@ public class insertNewInstall extends JPanel{
 			}
 		}	 
 		catch (SQLException e) {
-			System.out.println("pas ok");
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e.getMessage());
 			}
 		
 		
 		
-		System.out.println(count);
 		return count;
 	}
 }
