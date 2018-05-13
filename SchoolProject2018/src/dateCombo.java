@@ -33,7 +33,7 @@ public class dateCombo  extends JPanel{
 	
 	public Date getDate() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		String dateText = (String)year.getSelectedItem()+0+(month.getSelectedIndex()+1)+(String)day.getSelectedItem();
+		String dateText = year.getSelectedItem()+"0"+(month.getSelectedIndex()+1)+day.getSelectedItem();
 		try {
 			dateJava = sdf.parse(dateText);
 		} catch (ParseException e) {
