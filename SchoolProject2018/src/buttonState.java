@@ -1,12 +1,7 @@
 //FETCH AVANT TOUS CHANGEMENTS SOUS PEINE DE MORT!
 
-import java.awt.Button;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.*;
-import java.sql.*;
 import javax.swing.*;
 
 public class buttonState extends JPanel{

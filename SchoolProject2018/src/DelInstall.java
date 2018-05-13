@@ -1,9 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
+
 
 import javax.swing.*;
 
@@ -11,9 +9,10 @@ import accessBD.AccessBDGen;
 import accessBD.TableModelGen;
 
 public class DelInstall extends JPanel {
+	
 	private JLabel providerLabel,indication;
-	private JButton listInstall,delButton; //addDelButton
-	private JComboBox listProvider;
+	private JButton listInstall,delButton;
+	private JComboBox<String> listProvider;
 	private Windows parent;
 	private String sqlRequest;
 	
@@ -26,11 +25,11 @@ public class DelInstall extends JPanel {
 		
 		providerLabel = new JLabel ("Provider :");
 		providerLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		indication = new JLabel("(select item to delete in table)");
+		indication = new JLabel("(select item to delete in the table)");
 		indication.setHorizontalAlignment(SwingConstants.CENTER);
 		listProvider = new JComboBox ();
 		listInstall = new JButton ("List");
-		delButton = new JButton ("Delete Install"); // Ajout boutton
+		delButton = new JButton ("Delete Install");
 		add(providerLabel);
 		add(listProvider);
 		add(listInstall);
@@ -52,7 +51,7 @@ public class DelInstall extends JPanel {
 				PreparedStatement prepStat = connect.prepareStatement("SELECT Designation FROM Fournisseur;");
 				TableModelGen table2 = AccessBDGen.creerTableModel(prepStat);
 				for(int i=0; i <= table2.getRowCount()-1; i++) {
-					listProvider.addItem(table2.getValueAt(i, 0));
+					listProvider.addItem((String) table2.getValueAt(i, 0));
 					}
 				}
 			catch(SQLException e) {
@@ -61,7 +60,6 @@ public class DelInstall extends JPanel {
 		}
 	//listener refresh button
 		private class Butlistener implements ActionListener{
-			private int indiceLigneSelection,index ;
 			private tableModel f2;
 			
 			public void actionPerformed( ActionEvent a){
