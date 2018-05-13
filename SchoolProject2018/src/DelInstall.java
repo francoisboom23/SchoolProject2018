@@ -27,7 +27,7 @@ public class DelInstall extends JPanel {
 		providerLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		indication = new JLabel("(select item to delete in the table)");
 		indication.setHorizontalAlignment(SwingConstants.CENTER);
-		listProvider = new JComboBox ();
+		listProvider = new JComboBox<String> ();
 		listInstall = new JButton ("List");
 		delButton = new JButton ("Delete Install");
 		add(providerLabel);
@@ -64,8 +64,7 @@ public class DelInstall extends JPanel {
 			
 			public void actionPerformed( ActionEvent a){
 				if(a.getSource()==delButton) {
-					JOptionPane confirmation = new JOptionPane();
-					if(f2.getTable2()==0) {
+					if(tableModel.getTable2()==0) {
 						JOptionPane.showMessageDialog(null,"no valid selection");
 					}
 					else {
@@ -75,16 +74,14 @@ public class DelInstall extends JPanel {
 							try {
 								sqlRequest="DELETE FROM Installation WHERE IdInstallation = ?;";
 								PreparedStatement prepstat = parent.getConnect().prepareStatement(sqlRequest);
-								prepstat.setInt(1,f2.getTable2());
-								int nbUpdatedLines = prepstat.executeUpdate(); 
-								getDelItem(f2.getTable2());
+								prepstat.setInt(1,tableModel.getTable2());
+								prepstat.executeUpdate(); 
+								getDelItem(tableModel.getTable2());
 								refresh();
 
 							} catch (SQLException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
-							System.out.println(sqlRequest);
 							}
 					}
 				}
@@ -99,8 +96,7 @@ public class DelInstall extends JPanel {
 				}
 			}
 			public void refresh() {
-				sqlRequest = "SELECT inst.IdInstallation, inst.DateInstallation, inst.CodeSoftware, inst.Matricule FROM Installation inst"+" JOIN Software soft"+" ON inst.CodeSoftware = soft.CodeSoftware "+"JOIN Fournisseur fourn "+"ON soft.CodeFourn = fourn.CodeFourn "+"WHERE Designation LIKE'"+(String)listProvider.getSelectedItem()+"';";
-				System.out.println(sqlRequest);
+				sqlRequest = "SELECT inst.IdInstallation, inst.DateInstallation, inst.CodeSoftware, inst.Matricule FROM Installation inst JOIN Software soft ON inst.CodeSoftware = soft.CodeSoftware JOIN Fournisseur fourn ON soft.CodeFourn = fourn.CodeFourn WHERE Designation LIKE'"+(String)listProvider.getSelectedItem()+"';";
 				
 				f2 = new tableModel(parent.getConnect(), sqlRequest);
 				DelInstall listInstallByDesignation= new DelInstall (parent.getConnect(),parent.getWin());

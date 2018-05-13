@@ -3,9 +3,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
 
 import javax.swing.*;
 
@@ -16,19 +13,16 @@ public class insertNewInstall extends JPanel{
 //elements: idInstall, date install,type install, commentaires, durée install, ref procedure install,validation,date valid prevue, code soft(FK), matricule(FK),codeOS(FK)
 	
 	private JLabel softwareLabel, netLabel, osLabel,typeLabel,stateLabel,installDateLabel,commentaireLabel,dureeLabel,obligatoire,refLabel,datePlanifiedLabel;
-	private JComboBox comboSoft,comboMatri,comboOS,comboType;
+	private JComboBox<String> comboSoft,comboMatri,comboOS,comboType;
 	private JTextField textCommentaire,textRef;
 	private JSpinner duree;
 	private SpinnerNumberModel modelSpinner;
 	private String[] type = {"Type:","standard","custom"};
-	private String[] valid = {"State:","planified","working on","finished"};
 	private dateCombo datePanel,datePlanifiedPanel;
 	private buttonState butState;
-	private String dataRecu;
 	
 	public insertNewInstall(Connection connect) {
 //generale
-		setBounds(0,0,400,400);
 		setLayout(new GridLayout(11,2,0,0));
 //initialization	
 		softwareLabel = new JLabel("Software*", SwingConstants.CENTER);
@@ -44,10 +38,10 @@ public class insertNewInstall extends JPanel{
 		datePlanifiedLabel = new JLabel("Date planified: (YYYY/MM/DD)*", SwingConstants.CENTER);
 		datePlanifiedLabel.setVisible(false);
 		
-		comboSoft = new JComboBox();
-		comboMatri = new JComboBox();
-		comboOS = new JComboBox();
-		comboType = new JComboBox(type);
+		comboSoft = new JComboBox<String>();
+		comboMatri = new JComboBox<String>();
+		comboOS = new JComboBox<String>();
+		comboType = new JComboBox<String>(type);
 		fillCombo(connect);
 		
 		textCommentaire = new JTextField("commentaire:");
@@ -113,23 +107,23 @@ public class insertNewInstall extends JPanel{
 		comboMatri.addItem("Network Responsable:");
 		comboOS.addItem("OS:");
 		try {
-			PreparedStatement prepStatSoft = connect.prepareStatement("SELECT Nom FROM dbinstallations.Software;");
-			PreparedStatement prepStatMatri = connect.prepareStatement("SELECT NomPrenom FROM dbinstallations.ResponsableReseaux;");
-			PreparedStatement prepStatOS = connect.prepareStatement("SELECT Libelle FROM dbinstallations.OS;");
+			PreparedStatement prepStatSoft = connect.prepareStatement("SELECT Nom FROM Software;");
+			PreparedStatement prepStatMatri = connect.prepareStatement("SELECT NomPrenom FROM ResponsableReseaux;");
+			PreparedStatement prepStatOS = connect.prepareStatement("SELECT Libelle FROM OS;");
 			TableModelGen table1 = AccessBDGen.creerTableModel(prepStatSoft);
 			TableModelGen table2 = AccessBDGen.creerTableModel(prepStatMatri);
 			TableModelGen table3 = AccessBDGen.creerTableModel(prepStatOS);
 			
 			for(int i=0; i <= table1.getRowCount()-1; i++) {
-				comboSoft.addItem(table1.getValueAt(i, 0));
+				comboSoft.addItem((String) table1.getValueAt(i, 0));
 				}
 			
 			for(int i=0; i <= table2.getRowCount()-1; i++) {
-				comboMatri.addItem(table2.getValueAt(i, 0));
+				comboMatri.addItem((String) table2.getValueAt(i, 0));
 				}
 			
 			for(int i=0; i <= table3.getRowCount()-1; i++) {
-				comboOS.addItem(table3.getValueAt(i, 0));
+				comboOS.addItem((String) table3.getValueAt(i, 0));
 				}
 		}
 		catch(SQLException e) {
@@ -196,19 +190,6 @@ public class insertNewInstall extends JPanel{
 				myPrepStat.setNull(6, Types.VARCHAR);
 			}
 			
-			// COLONNE VALIDATION +dateprevoir //
-//				if(butState.getBut()==1){
-//				myPrepStat.setString(7, "Planified");
-//				myPrepStat.setDate(8, new java.sql.Date(datePlanifiedPanel.getDate().getTime()));
-//			}
-//				if(butState.getBut()==2) {
-//				myPrepStat.setString(7, "Working on");
-//				myPrepStat.setNull(8, Types.DATE);
-//			}
-//				if(butState.getBut()==3) {
-//				myPrepStat.setString(7, "finished");
-//				myPrepStat.setNull(8, Types.DATE);
-//			}
 			switch(butState.getBut()){
 				case "Planified":
 					myPrepStat.setString(7, butState.getBut());
@@ -290,7 +271,7 @@ public class insertNewInstall extends JPanel{
 					myPrepStat.setString(11, "W8ProfFr");
 				}
 			}
-		int nbUpdatesLines = myPrepStat.executeUpdate();
+			myPrepStat.executeUpdate();
 		JOptionPane.showMessageDialog(null, "succesfully added !");
 		cleanTextField();
 		}
