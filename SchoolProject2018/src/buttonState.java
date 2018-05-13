@@ -13,7 +13,7 @@ public class buttonState extends JPanel{
 	
 	private JRadioButton but1,but2,but3;
 	private ButtonGroup group1;
-	private int choice;
+	private String choice="finished";
 	private dateCombo date;
 	private JLabel texte;
 	
@@ -45,26 +45,23 @@ public class buttonState extends JPanel{
 		
 		public void itemStateChanged(ItemEvent t) {
 			if(t.getSource()==but1 && t.getStateChange()==ItemEvent.SELECTED) {
-				choice=1;
+				choice=but1.getText();;
 				date.setVisible(true);
-				texte.setVisible(true);
-				System.out.println("1");
+				texte.setVisible(true);;
 			}
 			if(t.getSource()==but2 && t.getStateChange()==ItemEvent.SELECTED) {
-				choice=2;
+				choice=but2.getText();
 				date.setVisible(false);
 				texte.setVisible(false);
-				System.out.println("2");
 			}
 			if(t.getSource()==but3 && t.getStateChange()==ItemEvent.SELECTED) {
-				choice=3;
+				choice=but3.getText();
 				date.setVisible(false);
 				texte.setVisible(false);
-				System.out.println("3");
 			}
 		}
 	}
-	public int getBut() {
+	public String getBut() {
 		return choice;
 	}
 }
